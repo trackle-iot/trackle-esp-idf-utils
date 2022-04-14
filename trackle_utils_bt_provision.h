@@ -101,6 +101,8 @@ void trackle_utils_bt_provision_loop()
         xEventGroupClearBits(s_wifi_event_group, START_PROVISIONING);
         xEventGroupSetBits(s_wifi_event_group, IS_PROVISIONING);
 
+        esp_wifi_set_ps(WIFI_PS_MIN_MODEM); // enable powersave
+
         // Configuration for the provisioning manager
         wifi_prov_mgr_config_t config = {
             .scheme = wifi_prov_scheme_ble,
