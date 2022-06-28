@@ -37,8 +37,8 @@ typedef struct
     uint8_t level;
 } Notification_t;
 
-static Notification_t notifications[MAX_NOTIFICATIONS_NUM] = {0}; // Array holding the notifications created by the user.
-static int numNotificationsCreated = 0;                           // Number of the notifications created (aka next notification ID available)
+static Notification_t notifications[TRACKLE_MAX_NOTIFICATIONS_NUM] = {0}; // Array holding the notifications created by the user.
+static int numNotificationsCreated = 0;                                   // Number of the notifications created (aka next notification ID available)
 
 static bool makeMessageStringFromNotification(char *messageBuffer, int notificationIndex)
 {
@@ -126,7 +126,7 @@ bool Trackle_Notifications_startTask()
 
 Trackle_NotificationID_t Trackle_Notification_create(const char *name, const char *eventName, const char *format, uint16_t scale, uint8_t numDecimals, bool sign)
 {
-    if (numNotificationsCreated < MAX_NOTIFICATIONS_NUM)
+    if (numNotificationsCreated < TRACKLE_MAX_NOTIFICATIONS_NUM)
     {
         const int newNotificationIndex = numNotificationsCreated;
         for (int aIdx = 0; aIdx < numNotificationsCreated; aIdx++)

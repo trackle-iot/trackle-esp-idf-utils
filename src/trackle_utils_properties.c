@@ -67,7 +67,7 @@ bool Trackle_PropGroup_addProp(Trackle_PropID_t propId, Trackle_PropGroupID_t pr
 {
     const int propIndex = propId - 1;           // Convert property ID to internal property index by decrementing it.
     const int propGroupIndex = propGroupId - 1; // Convert property group ID to internal property group index by decrementing it.
-    if (propGroupIndex >= 0 && propGroupIndex < numPropGroupsCreated && propIndex < numPropsCreated && propIndex >= 0 && propGroups[propGroupId].propsWithin < MAX_PROPS_NUM - 1)
+    if (propGroupIndex >= 0 && propGroupIndex < numPropGroupsCreated && propIndex < numPropsCreated && propIndex >= 0 && propGroups[propGroupId].propsWithin < TRACKLE_MAX_PROPS_NUM - 1)
     {
         const int propsWithin = propGroups[propGroupIndex].propsWithin;
         for (int i = 0; i < propsWithin; i++)
