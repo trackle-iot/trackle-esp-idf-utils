@@ -1,0 +1,43 @@
+\hypertarget{trackle__utils_8h_source}{}\doxysection{trackle\+\_\+utils.\+h}
+\mbox{\hyperlink{trackle__utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TRACKLE\_UTILS\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TRACKLE\_UTILS\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}freertos/FreeRTOS.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}freertos/task.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}freertos/event\_groups.h"{}}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <sys/time.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{comment}{// commons bits definitions}}
+\DoxyCodeLine{13 \textcolor{keyword}{extern} EventGroupHandle\_t \mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}};}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#define WIFI\_CONNECTED\_BIT BIT0}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define WIFI\_TO\_CONNECT\_BIT BIT1}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#define START\_PROVISIONING BIT2}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#define IS\_PROVISIONING BIT3}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#define RESTART BIT4}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#define OTA\_UPDATING BIT5}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{comment}{// metodo che ritorno i ms passati dall'avvio del firmware}}
+\DoxyCodeLine{25 \textcolor{keyword}{static} uint32\_t millis(\textcolor{keywordtype}{void})}
+\DoxyCodeLine{26 \{}
+\DoxyCodeLine{27     \textcolor{keyword}{struct }timeval tp;}
+\DoxyCodeLine{28     gettimeofday(\&tp, NULL);}
+\DoxyCodeLine{29     \textcolor{keywordflow}{return} (uint32\_t)(tp.tv\_sec * 1000 + tp.tv\_usec / 1000);}
+\DoxyCodeLine{30 \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keywordtype}{void} \mbox{\hyperlink{trackle__utils_8h_a53c860f31c2a9cf04a1b2720359a9dd8}{hexToString}}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *in, \textcolor{keywordtype}{size\_t} insz, \textcolor{keywordtype}{char} *out, \textcolor{keywordtype}{size\_t} outz);}
+\DoxyCodeLine{33 \textcolor{keywordtype}{int} \mbox{\hyperlink{trackle__utils_8h_a1fc69e2dc8816830c378eb4881ac25f2}{stringToHex}}(\textcolor{keywordtype}{char} *hex\_str, \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *byte\_array, \textcolor{keywordtype}{int} byte\_array\_max);}
+\DoxyCodeLine{34 \textcolor{keywordtype}{int} \mbox{\hyperlink{trackle__utils_8h_aa4389eec9f363a491d4b5679b26e3c3d}{splitString}}(\textcolor{keywordtype}{char} *value, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *separator, \textcolor{keywordtype}{char} *results[], \textcolor{keywordtype}{size\_t} max\_results);}
+\DoxyCodeLine{35 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils_8h_af49a6825496d4c442f75572b1ce2a84e}{isValid}}(\textcolor{keywordtype}{char} *input, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *op, \textcolor{keywordtype}{int} b);}
+\DoxyCodeLine{36 time\_t \mbox{\hyperlink{trackle__utils_8h_aba0bed0e1689801a1985fab37e0d6602}{getGmTimestamp}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

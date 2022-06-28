@@ -1,0 +1,45 @@
+\hypertarget{trackle__utils__properties_8h_source}{}\doxysection{trackle\+\_\+utils\+\_\+properties.\+h}
+\mbox{\hyperlink{trackle__utils__properties_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TRACKLE\_UTILS\_PROPERTIES\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TRACKLE\_UTILS\_PROPERTIES\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <esp\_types.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <esp\_timer.h>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#define TRACKLE\_MAX\_PROP\_NAME\_LENGTH 20}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#define TRACKLE\_MAX\_PROPGROUPS\_NUM 10}}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#define TRACKLE\_MAX\_PROPS\_NUM 30}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#define Trackle\_PropGroupID\_ERROR -\/1}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{62 \textcolor{preprocessor}{\#define Trackle\_PropID\_ERROR -\/1}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{67 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{trackle__utils__properties_8h_a25827b24834b1715c9273f8284320480}{Trackle\_PropGroupID\_t}};}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{72 \textcolor{keyword}{typedef} \textcolor{keywordtype}{int} \mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}};}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{80 \mbox{\hyperlink{trackle__utils__properties_8h_a25827b24834b1715c9273f8284320480}{Trackle\_PropGroupID\_t}} \mbox{\hyperlink{trackle__utils__properties_8h_aa9d1943c7c82f5c2e8c986d5eead2dc7}{Trackle\_PropGroup\_create}}(uint32\_t periodMs, \textcolor{keywordtype}{bool} onlyIfChanged);}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{88 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils__properties_8h_a112541983423fb247ab6f6a05900863a}{Trackle\_PropGroup\_addProp}}(\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} propId, \mbox{\hyperlink{trackle__utils__properties_8h_a25827b24834b1715c9273f8284320480}{Trackle\_PropGroupID\_t}} propGroupId);}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{98 \mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} \mbox{\hyperlink{trackle__utils__properties_8h_a12988fbba8c3a1d91a11995df93a1a88}{Trackle\_Prop\_create}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *name, uint16\_t scale, uint8\_t numDecimals, \textcolor{keywordtype}{bool} sign);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{106 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils__properties_8h_a68fcb7261bbd540c5b3962f5b1a2c484}{Trackle\_Prop\_update}}(\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} propID, \textcolor{keywordtype}{int} newValue);}
+\DoxyCodeLine{107 }
+\DoxyCodeLine{114 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils__properties_8h_a1e2666ce5302c14db1f2b59b400e404f}{Trackle\_Prop\_setDisabled}}(\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} propID, \textcolor{keywordtype}{bool} isDisabled);}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{121 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils__properties_8h_aa2cda38ef648b2e542e3195b02b2a9f2}{Trackle\_Prop\_isDisabled}}(\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} propID);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{128 \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{trackle__utils__properties_8h_a41d724633a18f6080593878cea161267}{Trackle\_Prop\_getKey}}(\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} propID);}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{135 int32\_t \mbox{\hyperlink{trackle__utils__properties_8h_adbd17beb656e85995284dc1c7ac50607}{Trackle\_Prop\_getValue}}(\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\_PropID\_t}} propID);}
+\DoxyCodeLine{136 }
+\DoxyCodeLine{141 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils__properties_8h_a12db7e4d66706a3c4053c73ca2812071}{Trackle\_Props\_startTask}}();}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

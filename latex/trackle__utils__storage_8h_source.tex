@@ -1,0 +1,102 @@
+\hypertarget{trackle__utils__storage_8h_source}{}\doxysection{trackle\+\_\+utils\+\_\+storage.\+h}
+\mbox{\hyperlink{trackle__utils__storage_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TRACKLE\_UTILS\_STORAGE\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TRACKLE\_UTILS\_STORAGE\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}nvs\_flash.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trackle__utils_8h}{trackle\_utils.h}}"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{static} uint8\_t device\_id[12];}
+\DoxyCodeLine{8 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} \mbox{\hyperlink{trackle__utils__storage_8h_ab6b5ac028f4c25b0f2a6bbd659886bd2}{private\_key}}[122];}
+\DoxyCodeLine{9 \textcolor{keywordtype}{char} \mbox{\hyperlink{trackle__utils__storage_8h_a2f5c2bd285ab79cac4981636defa0a2b}{string\_device\_id}}[12 * 2 + 1];}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define CONFIG\_PARTITION "{}nvs"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define FACTORY\_PARTITION "{}factory\_data"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define OLD\_FACTORY\_PARTITION "{}factory"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *STORAGE\_TAG = \textcolor{stringliteral}{"{}storage"{}};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 nvs\_handle\_t \mbox{\hyperlink{trackle__utils__storage_8h_acdf2eff792e17c6a1b318200e3f67256}{config\_handle}};}
+\DoxyCodeLine{18 nvs\_handle\_t \mbox{\hyperlink{trackle__utils__storage_8h_a0bed4fde91aa06d674981f7d371f6db5}{device\_handle}};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keywordtype}{int} \mbox{\hyperlink{trackle__utils__storage_8h_a26f189aafb239b1f2e5636b1af9704f2}{initStorage}}(\textcolor{keywordtype}{bool} has\_config\_partition)}
+\DoxyCodeLine{21 \{}
+\DoxyCodeLine{22     esp\_err\_t err = nvs\_flash\_init\_partition(\mbox{\hyperlink{trackle__utils__storage_8h_ae29cb94d96a265f4d02aa98992aa1d08}{FACTORY\_PARTITION}});}
+\DoxyCodeLine{23     \textcolor{keywordflow}{if} (err == ESP\_OK)}
+\DoxyCodeLine{24     \{ \textcolor{comment}{// FACTORY\_PARTITION extists, try to read}}
+\DoxyCodeLine{25         err = nvs\_open\_from\_partition(\mbox{\hyperlink{trackle__utils__storage_8h_ae29cb94d96a265f4d02aa98992aa1d08}{FACTORY\_PARTITION}}, \textcolor{stringliteral}{"{}device"{}}, NVS\_READONLY, \&\mbox{\hyperlink{trackle__utils__storage_8h_a0bed4fde91aa06d674981f7d371f6db5}{device\_handle}});}
+\DoxyCodeLine{26         \textcolor{keywordflow}{if} (err != ESP\_OK)}
+\DoxyCodeLine{27         \{}
+\DoxyCodeLine{28             \textcolor{keywordflow}{return} -\/2;}
+\DoxyCodeLine{29         \}}
+\DoxyCodeLine{30         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{31         \{}
+\DoxyCodeLine{32             ESP\_LOGI(STORAGE\_TAG, \textcolor{stringliteral}{"{}FACTORY\_PARTITION found"{}});}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{36     \{ \textcolor{comment}{// on error try with old factor partition named "{}factory"{}}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         err = nvs\_flash\_init\_partition(\mbox{\hyperlink{trackle__utils__storage_8h_a7dc3f76e51d5ac24ce330ace7bd75b2d}{OLD\_FACTORY\_PARTITION}});}
+\DoxyCodeLine{39         \textcolor{keywordflow}{if} (err == ESP\_OK)}
+\DoxyCodeLine{40         \{ \textcolor{comment}{// OLD\_FACTORY\_PARTITION extists, try to read}}
+\DoxyCodeLine{41             err = nvs\_open\_from\_partition(\mbox{\hyperlink{trackle__utils__storage_8h_a7dc3f76e51d5ac24ce330ace7bd75b2d}{OLD\_FACTORY\_PARTITION}}, \textcolor{stringliteral}{"{}device"{}}, NVS\_READONLY, \&\mbox{\hyperlink{trackle__utils__storage_8h_a0bed4fde91aa06d674981f7d371f6db5}{device\_handle}});}
+\DoxyCodeLine{42             \textcolor{keywordflow}{if} (err != ESP\_OK)}
+\DoxyCodeLine{43             \{}
+\DoxyCodeLine{44                 \textcolor{keywordflow}{return} -\/2;}
+\DoxyCodeLine{45             \}}
+\DoxyCodeLine{46             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{47             \{}
+\DoxyCodeLine{48                 ESP\_LOGI(STORAGE\_TAG, \textcolor{stringliteral}{"{}OLD\_FACTORY\_PARTITION found"{}});}
+\DoxyCodeLine{49             \}}
+\DoxyCodeLine{50         \}}
+\DoxyCodeLine{51         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{52         \{ \textcolor{comment}{// no factory or factory data partition defined}}
+\DoxyCodeLine{53             ESP\_LOGE(STORAGE\_TAG, \textcolor{stringliteral}{"{}no factory partition found"{}});}
+\DoxyCodeLine{54             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{55         \}}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{keywordflow}{if} (has\_config\_partition)}
+\DoxyCodeLine{59     \{}
+\DoxyCodeLine{60         err = nvs\_flash\_init\_partition(\mbox{\hyperlink{trackle__utils__storage_8h_a40c4e2a99b7bfa526944446e2489cd8c}{CONFIG\_PARTITION}});}
+\DoxyCodeLine{61         \textcolor{keywordflow}{if} (err != ESP\_OK)}
+\DoxyCodeLine{62             \textcolor{keywordflow}{return} -\/3;}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         err = nvs\_open\_from\_partition(\mbox{\hyperlink{trackle__utils__storage_8h_a40c4e2a99b7bfa526944446e2489cd8c}{CONFIG\_PARTITION}}, \textcolor{stringliteral}{"{}machine"{}}, NVS\_READWRITE, \&\mbox{\hyperlink{trackle__utils__storage_8h_acdf2eff792e17c6a1b318200e3f67256}{config\_handle}});}
+\DoxyCodeLine{65         \textcolor{keywordflow}{if} (err != ESP\_OK)}
+\DoxyCodeLine{66             \textcolor{keywordflow}{return} -\/4;}
+\DoxyCodeLine{67     \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{70 \}}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72 esp\_err\_t \mbox{\hyperlink{trackle__utils__storage_8h_acc2356381872d16b92c5fe484ab5f567}{readDeviceInfoFromStorage}}()}
+\DoxyCodeLine{73 \{}
+\DoxyCodeLine{74     \textcolor{keywordtype}{size\_t} required\_size = 12;}
+\DoxyCodeLine{75     esp\_err\_t err = nvs\_get\_blob(\mbox{\hyperlink{trackle__utils__storage_8h_a0bed4fde91aa06d674981f7d371f6db5}{device\_handle}}, \textcolor{stringliteral}{"{}device\_id"{}}, device\_id, \&required\_size);}
+\DoxyCodeLine{76     \mbox{\hyperlink{trackle__utils_8h_a53c860f31c2a9cf04a1b2720359a9dd8}{hexToString}}((\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *)device\_id, 12, \mbox{\hyperlink{trackle__utils__storage_8h_a2f5c2bd285ab79cac4981636defa0a2b}{string\_device\_id}}, 25);}
+\DoxyCodeLine{77     required\_size = 121;}
+\DoxyCodeLine{78     err += nvs\_get\_blob(\mbox{\hyperlink{trackle__utils__storage_8h_a0bed4fde91aa06d674981f7d371f6db5}{device\_handle}}, \textcolor{stringliteral}{"{}private\_key"{}}, \mbox{\hyperlink{trackle__utils__storage_8h_ab6b5ac028f4c25b0f2a6bbd659886bd2}{private\_key}}, \&required\_size);}
+\DoxyCodeLine{79     \textcolor{keywordflow}{return} err;}
+\DoxyCodeLine{80 \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82 esp\_err\_t \mbox{\hyperlink{trackle__utils__storage_8h_a4c74614bb8cadb981faf5d5b724ee97d}{readConfigFromStorage}}(\textcolor{keywordtype}{void} *out\_value, \textcolor{keywordtype}{size\_t} out\_size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *key)}
+\DoxyCodeLine{83 \{}
+\DoxyCodeLine{84     esp\_err\_t err = nvs\_get\_blob(\mbox{\hyperlink{trackle__utils__storage_8h_acdf2eff792e17c6a1b318200e3f67256}{config\_handle}}, key, out\_value, \&out\_size);}
+\DoxyCodeLine{85     ESP\_LOGI(STORAGE\_TAG, \textcolor{stringliteral}{"{}reading config from nvs datastore for key \%s"{}}, key);}
+\DoxyCodeLine{86     \textcolor{keywordflow}{return} err;}
+\DoxyCodeLine{87 \}}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89 esp\_err\_t \mbox{\hyperlink{trackle__utils__storage_8h_aecf0c1df31c97b01b55382f718019ed3}{writeConfigToStorage}}(\textcolor{keywordtype}{void} *out\_value, \textcolor{keywordtype}{size\_t} out\_size, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *key)}
+\DoxyCodeLine{90 \{}
+\DoxyCodeLine{91     esp\_err\_t err = nvs\_set\_blob(\mbox{\hyperlink{trackle__utils__storage_8h_acdf2eff792e17c6a1b318200e3f67256}{config\_handle}}, key, out\_value, out\_size);}
+\DoxyCodeLine{92     nvs\_commit(\mbox{\hyperlink{trackle__utils__storage_8h_acdf2eff792e17c6a1b318200e3f67256}{config\_handle}});}
+\DoxyCodeLine{93     ESP\_LOGI(STORAGE\_TAG, \textcolor{stringliteral}{"{}writing config in nvs datastore for key \%s: \%d bytes"{}}, key, out\_size);}
+\DoxyCodeLine{94     \textcolor{keywordflow}{return} err;}
+\DoxyCodeLine{95 \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

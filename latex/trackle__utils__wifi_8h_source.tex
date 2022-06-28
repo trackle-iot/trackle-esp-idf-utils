@@ -1,0 +1,152 @@
+\hypertarget{trackle__utils__wifi_8h_source}{}\doxysection{trackle\+\_\+utils\+\_\+wifi.\+h}
+\mbox{\hyperlink{trackle__utils__wifi_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TRACKLE\_UTILS\_WIFI\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TRACKLE\_UTILS\_WIFI\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}esp\_wifi.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trackle__utils_8h}{trackle\_utils.h}}"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#define WIFI\_ESP\_MAXIMUM\_RETRY 5}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define CHECK\_WIFI\_TIMEOUT 5000}}
+\DoxyCodeLine{11 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{trackle__utils__wifi_8h_a4761d43b92b1ef8b6e00519d3d589ecf}{timeout\_connect\_wifi}} = 0;}
+\DoxyCodeLine{12 \textcolor{keyword}{static} \textcolor{keywordtype}{int} s\_retry\_num = 0;}
+\DoxyCodeLine{13 esp\_netif\_t *\mbox{\hyperlink{trackle__utils__wifi_8h_a8475209c3d16d25790fc4b67e18f3f57}{sta\_netif}};}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *WIFI\_TAG = \textcolor{stringliteral}{"{}trackle-\/utils-\/wifi"{}};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{comment}{// return ESP\_OK if wisi is provisioned (strlen ssid > 0), else ESP\_FAIL}}
+\DoxyCodeLine{18 esp\_err\_t \mbox{\hyperlink{trackle__utils__wifi_8h_a070e7458bd4670954a7512f1e1f2b201}{wifi\_is\_provisioned}}()}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20     \textcolor{comment}{/* Get Wi-\/Fi Station configuration */}}
+\DoxyCodeLine{21     wifi\_config\_t wifi\_cfg;}
+\DoxyCodeLine{22     \textcolor{keywordflow}{if} (esp\_wifi\_get\_config(WIFI\_IF\_STA, \&wifi\_cfg) != ESP\_OK)}
+\DoxyCodeLine{23     \{}
+\DoxyCodeLine{24         \textcolor{keywordflow}{return} ESP\_FAIL;}
+\DoxyCodeLine{25     \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keywordflow}{if} (strlen((\textcolor{keyword}{const} \textcolor{keywordtype}{char} *)wifi\_cfg.sta.ssid))}
+\DoxyCodeLine{28     \{}
+\DoxyCodeLine{29         ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}Wi-\/Fi SSID     : \%s"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *)wifi\_cfg.sta.ssid);}
+\DoxyCodeLine{30         ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}Wi-\/Fi Password : \%s"{}}, (\textcolor{keyword}{const} \textcolor{keywordtype}{char} *)wifi\_cfg.sta.password);}
+\DoxyCodeLine{31         \textcolor{keywordflow}{return} ESP\_OK;}
+\DoxyCodeLine{32     \}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keywordflow}{return} ESP\_FAIL;}
+\DoxyCodeLine{35 \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{static} \textcolor{keywordtype}{void} event\_handler(\textcolor{keywordtype}{void} *arg, esp\_event\_base\_t event\_base,}
+\DoxyCodeLine{38                           int32\_t event\_id, \textcolor{keywordtype}{void} *event\_data)}
+\DoxyCodeLine{39 \{}
+\DoxyCodeLine{40     \textcolor{keywordflow}{if} (event\_base == WIFI\_EVENT \&\& event\_id == WIFI\_EVENT\_STA\_START)}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}Wifi started....."{}});}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44         wifi\_mode\_t currentMode;}
+\DoxyCodeLine{45         esp\_wifi\_get\_mode(\&currentMode);}
+\DoxyCodeLine{46         \textcolor{keywordflow}{if} (currentMode == WIFI\_MODE\_STA)}
+\DoxyCodeLine{47         \{}
+\DoxyCodeLine{48             ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}Connecting to the AP"{}});}
+\DoxyCodeLine{49             xEventGroupSetBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}}, \mbox{\hyperlink{trackle__utils_8h_a6b9162dc5c1626c8b075c6c60dfc4132}{WIFI\_TO\_CONNECT\_BIT}}); \textcolor{comment}{// connettiti}}
+\DoxyCodeLine{50             \textcolor{comment}{// esp\_wifi\_connect();}}
+\DoxyCodeLine{51             \mbox{\hyperlink{trackle__utils__wifi_8h_a4761d43b92b1ef8b6e00519d3d589ecf}{timeout\_connect\_wifi}} = millis();}
+\DoxyCodeLine{52         \}}
+\DoxyCodeLine{53         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (currentMode == WIFI\_MODE\_APSTA)}
+\DoxyCodeLine{54         \{}
+\DoxyCodeLine{55             ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}APMode, not connecting...."{}});}
+\DoxyCodeLine{56             xEventGroupClearBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}}, \mbox{\hyperlink{trackle__utils_8h_a6b9162dc5c1626c8b075c6c60dfc4132}{WIFI\_TO\_CONNECT\_BIT}}); \textcolor{comment}{// non cercare di riconnetterti}}
+\DoxyCodeLine{57         \}}
+\DoxyCodeLine{58     \}}
+\DoxyCodeLine{59     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (event\_base == WIFI\_EVENT \&\& event\_id == WIFI\_EVENT\_STA\_DISCONNECTED)}
+\DoxyCodeLine{60     \{}
+\DoxyCodeLine{61         wifi\_event\_sta\_disconnected\_t *\textcolor{keyword}{event} = (wifi\_event\_sta\_disconnected\_t *)event\_data;}
+\DoxyCodeLine{62         ESP\_LOGW(WIFI\_TAG, \textcolor{stringliteral}{"{}Wifi disconnection event: \%d..."{}}, event-\/>reason);}
+\DoxyCodeLine{63         \textcolor{comment}{// wifi\_err\_reason\_t}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{comment}{// esp\_wifi\_connect();}}
+\DoxyCodeLine{66         \mbox{\hyperlink{trackle__utils__wifi_8h_a4761d43b92b1ef8b6e00519d3d589ecf}{timeout\_connect\_wifi}} = millis() + \mbox{\hyperlink{trackle__utils__wifi_8h_af18659fe29b775619edd93608c136f7f}{CHECK\_WIFI\_TIMEOUT}};}
+\DoxyCodeLine{67         xEventGroupClearBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}}, \mbox{\hyperlink{trackle__utils_8h_ad552e7688532cbbecd3967538ced06ac}{WIFI\_CONNECTED\_BIT}});}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (event\_base == IP\_EVENT \&\& event\_id == IP\_EVENT\_STA\_GOT\_IP)}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         ip\_event\_got\_ip\_t *\textcolor{keyword}{event} = (ip\_event\_got\_ip\_t *)event\_data;}
+\DoxyCodeLine{72         ESP\_LOGW(WIFI\_TAG, \textcolor{stringliteral}{"{}Got ip:"{}} IPSTR, IP2STR(\&event-\/>ip\_info.ip));}
+\DoxyCodeLine{73         s\_retry\_num = 0;}
+\DoxyCodeLine{74         xEventGroupSetBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}}, \mbox{\hyperlink{trackle__utils_8h_ad552e7688532cbbecd3967538ced06ac}{WIFI\_CONNECTED\_BIT}});}
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76 \}}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78 \textcolor{keywordtype}{void} \mbox{\hyperlink{trackle__utils__wifi_8h_af67410a15ecc24ecef0e5abce0c5b30c}{wifi\_init}}()}
+\DoxyCodeLine{79 \{}
+\DoxyCodeLine{80     ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}wifi\_init...."{}});}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{// init event group}}
+\DoxyCodeLine{83     \mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}} = xEventGroupCreate();}
+\DoxyCodeLine{84     ESP\_ERROR\_CHECK(esp\_netif\_init());}
+\DoxyCodeLine{85     ESP\_ERROR\_CHECK(esp\_event\_loop\_create\_default());}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \textcolor{comment}{// Register our event handler for Wi-\/Fi, IP and Provisioning related events}}
+\DoxyCodeLine{88     ESP\_ERROR\_CHECK(esp\_event\_handler\_register(WIFI\_EVENT, ESP\_EVENT\_ANY\_ID, \&event\_handler, NULL));}
+\DoxyCodeLine{89     ESP\_ERROR\_CHECK(esp\_event\_handler\_register(IP\_EVENT, IP\_EVENT\_STA\_GOT\_IP, \&event\_handler, NULL));}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \mbox{\hyperlink{trackle__utils__wifi_8h_a8475209c3d16d25790fc4b67e18f3f57}{sta\_netif}} = esp\_netif\_create\_default\_wifi\_sta();}
+\DoxyCodeLine{92     wifi\_init\_config\_t cfg = WIFI\_INIT\_CONFIG\_DEFAULT();}
+\DoxyCodeLine{93     ESP\_ERROR\_CHECK(esp\_wifi\_init(\&cfg));}
+\DoxyCodeLine{94     esp\_wifi\_set\_storage(WIFI\_STORAGE\_FLASH);}
+\DoxyCodeLine{95 \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{comment}{/*static void reinit\_wifi()}}
+\DoxyCodeLine{98 \textcolor{comment}{\{}}
+\DoxyCodeLine{99 \textcolor{comment}{    ESP\_LOGI(WIFI\_TAG, "{}esp\_wifi\_deinit....."{});}}
+\DoxyCodeLine{100 \textcolor{comment}{    //disconnect\_cb();}}
+\DoxyCodeLine{101 \textcolor{comment}{}}
+\DoxyCodeLine{102 \textcolor{comment}{    xEventGroupClearBits(s\_wifi\_event\_group, WIFI\_CONNECTED\_BIT);}}
+\DoxyCodeLine{103 \textcolor{comment}{    xEventGroupClearBits(s\_wifi\_event\_group, WIFI\_TO\_CONNECT\_BIT);}}
+\DoxyCodeLine{104 \textcolor{comment}{}}
+\DoxyCodeLine{105 \textcolor{comment}{    esp\_wifi\_stop();}}
+\DoxyCodeLine{106 \textcolor{comment}{    vTaskDelay(1000 / portTICK\_PERIOD\_MS);}}
+\DoxyCodeLine{107 \textcolor{comment}{    ESP\_LOGI(WIFI\_TAG, "{}esp\_wifi\_stop....."{});}}
+\DoxyCodeLine{108 \textcolor{comment}{    esp\_wifi\_start();}}
+\DoxyCodeLine{109 \textcolor{comment}{    ESP\_LOGI(WIFI\_TAG, "{}esp\_wifi\_start....."{});}}
+\DoxyCodeLine{110 \textcolor{comment}{\}*/}}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112 \textcolor{keywordtype}{void} \mbox{\hyperlink{trackle__utils__wifi_8h_aaf48dd31815d6c6e4a94cebfb63e56a3}{wifi\_init\_sta}}()}
+\DoxyCodeLine{113 \{}
+\DoxyCodeLine{114     ESP\_ERROR\_CHECK(esp\_wifi\_set\_mode(WIFI\_MODE\_STA));}
+\DoxyCodeLine{115     ESP\_ERROR\_CHECK(esp\_wifi\_start());}
+\DoxyCodeLine{116     esp\_wifi\_set\_ps(WIFI\_PS\_NONE); \textcolor{comment}{// Disable powersave}}
+\DoxyCodeLine{117     ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}wifi\_init\_sta finished."{}});}
+\DoxyCodeLine{118 \}}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{keywordtype}{void} \mbox{\hyperlink{trackle__utils__wifi_8h_a7e0c1523bc1ca08e141060a7c8635f0a}{trackle\_utils\_wifi\_loop}}()}
+\DoxyCodeLine{121 \{}
+\DoxyCodeLine{122     EventBits\_t bits = xEventGroupGetBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}});}
+\DoxyCodeLine{123     uint32\_t loop\_millis = millis();}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{comment}{// check connessione wifi}}
+\DoxyCodeLine{126     \textcolor{keywordflow}{if} (\mbox{\hyperlink{trackle__utils__wifi_8h_a4761d43b92b1ef8b6e00519d3d589ecf}{timeout\_connect\_wifi}} > 0 \&\& \mbox{\hyperlink{trackle__utils__wifi_8h_a4761d43b92b1ef8b6e00519d3d589ecf}{timeout\_connect\_wifi}} < loop\_millis)}
+\DoxyCodeLine{127     \{}
+\DoxyCodeLine{128         \mbox{\hyperlink{trackle__utils__wifi_8h_a4761d43b92b1ef8b6e00519d3d589ecf}{timeout\_connect\_wifi}} = 0;}
+\DoxyCodeLine{129         \textcolor{keywordflow}{if} ((bits \& \mbox{\hyperlink{trackle__utils_8h_a6b9162dc5c1626c8b075c6c60dfc4132}{WIFI\_TO\_CONNECT\_BIT}}))}
+\DoxyCodeLine{130         \{}
+\DoxyCodeLine{131             \textcolor{keywordflow}{if} (s\_retry\_num < \mbox{\hyperlink{trackle__utils__wifi_8h_a32ab833044cac5b9f250886a3ec00400}{WIFI\_ESP\_MAXIMUM\_RETRY}})}
+\DoxyCodeLine{132             \{}
+\DoxyCodeLine{133                 s\_retry\_num++;}
+\DoxyCodeLine{134                 ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}Trying to connect to the AP, \%d of \%d"{}}, s\_retry\_num, \mbox{\hyperlink{trackle__utils__wifi_8h_a32ab833044cac5b9f250886a3ec00400}{WIFI\_ESP\_MAXIMUM\_RETRY}});}
+\DoxyCodeLine{135                 esp\_wifi\_connect();}
+\DoxyCodeLine{136             \}}
+\DoxyCodeLine{137             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{138             \{}
+\DoxyCodeLine{139                 ESP\_LOGI(WIFI\_TAG, \textcolor{stringliteral}{"{}Restarting......"{}});}
+\DoxyCodeLine{140                 s\_retry\_num = 0;}
+\DoxyCodeLine{141                 \textcolor{comment}{// reinit\_wifi(); //TODO check if necessary}}
+\DoxyCodeLine{142             \}}
+\DoxyCodeLine{143         \}}
+\DoxyCodeLine{144     \}}
+\DoxyCodeLine{145 \}}
+\DoxyCodeLine{146 }
+\DoxyCodeLine{147 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

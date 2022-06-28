@@ -1,0 +1,222 @@
+\hypertarget{trackle__utils__notifications_8h}{}\doxysection{trackle\+\_\+utils\+\_\+notifications.\+h File Reference}
+\label{trackle__utils__notifications_8h}\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+
+
+Datatypes and functions for working with notifications. Read the full description to learn about notifications.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+types.\+h$>$}\newline
+{\ttfamily \#include $<$esp\+\_\+timer.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{trackle__utils__notifications_8h_a0086e55aa5fbe53265f96bd7afbc8d92}{TRACKLE\+\_\+\+MAX\+\_\+\+NOTIFICATIONS\+\_\+\+NUM}}~20
+\begin{DoxyCompactList}\small\item\em Max number of notifications that can be created. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{trackle__utils__notifications_8h_a853eccf40a39d485f2fd59c78bdc2bb9}{Trackle\+\_\+\+Notification\+ID\+\_\+\+ERROR}}~-\/1
+\begin{DoxyCompactList}\small\item\em Value returned on error by functions returning \mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int \mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Type of the ID of an notification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}} \mbox{\hyperlink{trackle__utils__notifications_8h_a921414f16a2958bf73395ecfff985219}{Trackle\+\_\+\+Notification\+\_\+create}} (const char $\ast$name, const char $\ast$event\+Name, const char $\ast$format, uint16\+\_\+t scale, uint8\+\_\+t num\+Decimals, bool sign)
+\begin{DoxyCompactList}\small\item\em Create a new notification. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{trackle__utils__notifications_8h_a1bab5f153b8d7a9ec19930c540174a8f}{Trackle\+\_\+\+Notification\+\_\+update}} (\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}} notification\+ID, uint8\+\_\+t new\+Level, int value)
+\begin{DoxyCompactList}\small\item\em Update the value of an notification. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{trackle__utils__notifications_8h_a07321b8cf8a072a1711a3689ee8529c1}{Trackle\+\_\+\+Notifications\+\_\+start\+Task}} ()
+\begin{DoxyCompactList}\small\item\em Start the task that publishes periodically the notifications created. \end{DoxyCompactList}\item 
+const char $\ast$ \mbox{\hyperlink{trackle__utils__notifications_8h_a6f90c0fc9384ac01d7efe17e1d890d48}{Trackle\+\_\+\+Notification\+\_\+get\+Key}} (\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}} notification\+ID)
+\begin{DoxyCompactList}\small\item\em Get key of an notification. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{trackle__utils__notifications_8h_ad9d1c25687ac8b98b96d639e79149fc5}{Trackle\+\_\+\+Notification\+\_\+get\+Level}} (\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}} notification\+ID)
+\begin{DoxyCompactList}\small\item\em Get level of an notification. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{trackle__utils__notifications_8h_a5228600a852cc31b11c864d59fd3f349}{Trackle\+\_\+\+Notification\+\_\+get\+Value}} (\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}} notification\+ID)
+\begin{DoxyCompactList}\small\item\em Get value of an notification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Datatypes and functions for working with notifications. Read the full description to learn about notifications. 
+
+Notifications are a construct that allows to let the cloud know that an event has happened.
+
+Every notification is characterized by two elements\+:
+\begin{DoxyItemize}
+\item A (human readable) name that identifies the notification;
+\item An event name that will be displayed by the Trackle platform when the notification is received.
+\end{DoxyItemize}
+
+Moreover, at runtime, every notification has\+:
+\begin{DoxyItemize}
+\item A level, that is an unsigned int;
+\item A value, that can be a signed or unsigned int, or a floating point.
+\end{DoxyItemize}
+
+When the level of the notification changes, the event is published to the cloud, along with the actual value of the notification. The value\textquotesingle{}s purpose is to give some context about the cause that triggered the change of the notification\textquotesingle{}s level.
+
+In order to create notifications, one must follow these steps\+:
+\begin{DoxyEnumerate}
+\item Declare a variable of type \mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}};
+\item Assign the result of \mbox{\hyperlink{trackle__utils__notifications_8h_a921414f16a2958bf73395ecfff985219}{Trackle\+\_\+\+Notification\+\_\+create}} to this variable;
+\item Repeat the steps from 1 to 2 for all the notifications that must be created;
+\item Call \mbox{\hyperlink{trackle__utils__notifications_8h_a07321b8cf8a072a1711a3689ee8529c1}{Trackle\+\_\+\+Notifications\+\_\+start\+Task}} to start the notifications task.
+\end{DoxyEnumerate}
+
+Now, one can work with notifications (update, read, etc.) by using the remaining functions exposed by this file. 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a0086e55aa5fbe53265f96bd7afbc8d92}\label{trackle__utils__notifications_8h_a0086e55aa5fbe53265f96bd7afbc8d92}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!TRACKLE\_MAX\_NOTIFICATIONS\_NUM@{TRACKLE\_MAX\_NOTIFICATIONS\_NUM}}
+\index{TRACKLE\_MAX\_NOTIFICATIONS\_NUM@{TRACKLE\_MAX\_NOTIFICATIONS\_NUM}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{TRACKLE\_MAX\_NOTIFICATIONS\_NUM}{TRACKLE\_MAX\_NOTIFICATIONS\_NUM}}
+{\footnotesize\ttfamily \#define TRACKLE\+\_\+\+MAX\+\_\+\+NOTIFICATIONS\+\_\+\+NUM~20}
+
+
+
+Max number of notifications that can be created. 
+
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a853eccf40a39d485f2fd59c78bdc2bb9}\label{trackle__utils__notifications_8h_a853eccf40a39d485f2fd59c78bdc2bb9}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_NotificationID\_ERROR@{Trackle\_NotificationID\_ERROR}}
+\index{Trackle\_NotificationID\_ERROR@{Trackle\_NotificationID\_ERROR}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_NotificationID\_ERROR}{Trackle\_NotificationID\_ERROR}}
+{\footnotesize\ttfamily \#define Trackle\+\_\+\+Notification\+ID\+\_\+\+ERROR~-\/1}
+
+
+
+Value returned on error by functions returning \mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}. 
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}\label{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_NotificationID\_t@{Trackle\_NotificationID\_t}}
+\index{Trackle\_NotificationID\_t@{Trackle\_NotificationID\_t}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_NotificationID\_t}{Trackle\_NotificationID\_t}}
+{\footnotesize\ttfamily typedef int \mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}}
+
+
+
+Type of the ID of an notification. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a921414f16a2958bf73395ecfff985219}\label{trackle__utils__notifications_8h_a921414f16a2958bf73395ecfff985219}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_Notification\_create@{Trackle\_Notification\_create}}
+\index{Trackle\_Notification\_create@{Trackle\_Notification\_create}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Notification\_create()}{Trackle\_Notification\_create()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}} Trackle\+\_\+\+Notification\+\_\+create (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{const char $\ast$}]{event\+Name,  }\item[{const char $\ast$}]{format,  }\item[{uint16\+\_\+t}]{scale,  }\item[{uint8\+\_\+t}]{num\+Decimals,  }\item[{bool}]{sign }\end{DoxyParamCaption})}
+
+
+
+Create a new notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name/key to be assigned to the notification. \\
+\hline
+{\em event\+Name} & Name of the event where to publish the notification (e.\+g. \char`\"{}machine/speed\char`\"{}) \\
+\hline
+{\em format} & Printf style format for the message. It must contain, in order\+: s for the notification key, u for the level, and s for the value. \\
+\hline
+{\em scale} & Divider to be applied to values used to update the notification (notification\+Value = new\+Value / scale) \\
+\hline
+{\em num\+Decimals} & Number of decimal digits to be used when publishing the notification value to the cloud. It\textquotesingle{}s used only if scale differs from 1 (otherwise the notification\textquotesingle{}s value is an integer and it doesn\textquotesingle{}t make sense). \\
+\hline
+{\em sign} & If true, the notification\textquotesingle{}s value is signed, otherwise it\textquotesingle{}s unsigned. It\textquotesingle{}s used only if scale equals 1 (otherwise the notification\textquotesingle{}s value is a floating point number and is signed by default). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ID associated with the new created notification, or \mbox{\hyperlink{trackle__utils__notifications_8h_a853eccf40a39d485f2fd59c78bdc2bb9}{Trackle\+\_\+\+Notification\+ID\+\_\+\+ERROR}} on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a6f90c0fc9384ac01d7efe17e1d890d48}\label{trackle__utils__notifications_8h_a6f90c0fc9384ac01d7efe17e1d890d48}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_Notification\_getKey@{Trackle\_Notification\_getKey}}
+\index{Trackle\_Notification\_getKey@{Trackle\_Notification\_getKey}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Notification\_getKey()}{Trackle\_Notification\_getKey()}}
+{\footnotesize\ttfamily const char $\ast$ Trackle\+\_\+\+Notification\+\_\+get\+Key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}}]{notification\+ID }\end{DoxyParamCaption})}
+
+
+
+Get key of an notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em notification\+ID} & ID of the notification. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the name/key of the notification (empty string if notification\+ID doesn\textquotesingle{}t identify a valid notification) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_ad9d1c25687ac8b98b96d639e79149fc5}\label{trackle__utils__notifications_8h_ad9d1c25687ac8b98b96d639e79149fc5}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_Notification\_getLevel@{Trackle\_Notification\_getLevel}}
+\index{Trackle\_Notification\_getLevel@{Trackle\_Notification\_getLevel}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Notification\_getLevel()}{Trackle\_Notification\_getLevel()}}
+{\footnotesize\ttfamily int32\+\_\+t Trackle\+\_\+\+Notification\+\_\+get\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}}]{notification\+ID }\end{DoxyParamCaption})}
+
+
+
+Get level of an notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em notification\+ID} & ID of the notification. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Actual level of the notification (-\/1 if notification\+ID doesn\textquotesingle{}t identify a valid notification) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a5228600a852cc31b11c864d59fd3f349}\label{trackle__utils__notifications_8h_a5228600a852cc31b11c864d59fd3f349}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_Notification\_getValue@{Trackle\_Notification\_getValue}}
+\index{Trackle\_Notification\_getValue@{Trackle\_Notification\_getValue}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Notification\_getValue()}{Trackle\_Notification\_getValue()}}
+{\footnotesize\ttfamily int32\+\_\+t Trackle\+\_\+\+Notification\+\_\+get\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}}]{notification\+ID }\end{DoxyParamCaption})}
+
+
+
+Get value of an notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em notification\+ID} & ID of the notification. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value of the notification (-\/1 if notification\+ID doesn\textquotesingle{}t identify a valid notification) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a1bab5f153b8d7a9ec19930c540174a8f}\label{trackle__utils__notifications_8h_a1bab5f153b8d7a9ec19930c540174a8f}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_Notification\_update@{Trackle\_Notification\_update}}
+\index{Trackle\_Notification\_update@{Trackle\_Notification\_update}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Notification\_update()}{Trackle\_Notification\_update()}}
+{\footnotesize\ttfamily bool Trackle\+\_\+\+Notification\+\_\+update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__notifications_8h_a899e05cc33fea8c942c6562a8dbc2e13}{Trackle\+\_\+\+Notification\+ID\+\_\+t}}}]{notification\+ID,  }\item[{uint8\+\_\+t}]{new\+Level,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Update the value of an notification. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em notification\+ID} & ID of the notification to be updated. \\
+\hline
+{\em new\+Level} & Unsigned integer representing the level of the notification. \\
+\hline
+{\em value} & New value of the notification. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if update was successful, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__notifications_8h_a07321b8cf8a072a1711a3689ee8529c1}\label{trackle__utils__notifications_8h_a07321b8cf8a072a1711a3689ee8529c1}} 
+\index{trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}!Trackle\_Notifications\_startTask@{Trackle\_Notifications\_startTask}}
+\index{Trackle\_Notifications\_startTask@{Trackle\_Notifications\_startTask}!trackle\_utils\_notifications.h@{trackle\_utils\_notifications.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Notifications\_startTask()}{Trackle\_Notifications\_startTask()}}
+{\footnotesize\ttfamily bool Trackle\+\_\+\+Notifications\+\_\+start\+Task (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Start the task that publishes periodically the notifications created. 
+
+\begin{DoxyReturn}{Returns}
+true if task started successfully, false otherwise. 
+\end{DoxyReturn}

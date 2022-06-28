@@ -1,0 +1,102 @@
+\hypertarget{trackle__utils__ota_8h_source}{}\doxysection{trackle\+\_\+utils\+\_\+ota.\+h}
+\mbox{\hyperlink{trackle__utils__ota_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#ifndef TRACKLE\_UTILS\_OTA\_H}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#define TRACKLE\_UTILS\_OTA\_H}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}esp\_ota\_ops.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}esp\_http\_client.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}esp\_https\_ota.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}cJSON.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{trackle__utils_8h}{trackle\_utils.h}}"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *OTA\_TAG = \textcolor{stringliteral}{"{}trackle-\/utils-\/ota"{}};}
+\DoxyCodeLine{12 \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{char} *OTA\_EVENT\_NAME = \textcolor{stringliteral}{"{}trackle/device/update/status"{}};}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keywordtype}{char} \mbox{\hyperlink{trackle__utils__ota_8h_a79646eaa928ba247387a11eb7360e5e8}{ota\_url}}[256];}
+\DoxyCodeLine{15 \textcolor{keywordtype}{bool} \mbox{\hyperlink{trackle__utils__ota_8h_a855291fb065f80e9a0f8f93de3f25978}{safe\_ota}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 esp\_err\_t \mbox{\hyperlink{trackle__utils__ota_8h_ae7c4f5057d30a650919c74c7f9e7d67c}{\_http\_event\_handler}}(esp\_http\_client\_event\_t *evt)}
+\DoxyCodeLine{18 \{}
+\DoxyCodeLine{19     \textcolor{keywordflow}{switch} (evt-\/>event\_id)}
+\DoxyCodeLine{20     \{}
+\DoxyCodeLine{21     \textcolor{keywordflow}{case} HTTP\_EVENT\_ERROR:}
+\DoxyCodeLine{22         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_ERROR"{}});}
+\DoxyCodeLine{23         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{24     \textcolor{keywordflow}{case} HTTP\_EVENT\_ON\_CONNECTED:}
+\DoxyCodeLine{25         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_ON\_CONNECTED"{}});}
+\DoxyCodeLine{26         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{27     \textcolor{keywordflow}{case} HTTP\_EVENT\_HEADER\_SENT:}
+\DoxyCodeLine{28         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_HEADER\_SENT"{}});}
+\DoxyCodeLine{29         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{30     \textcolor{keywordflow}{case} HTTP\_EVENT\_ON\_HEADER:}
+\DoxyCodeLine{31         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_ON\_HEADER, key=\%s, value=\%s"{}}, evt-\/>header\_key, evt-\/>header\_value);}
+\DoxyCodeLine{32         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{33     \textcolor{keywordflow}{case} HTTP\_EVENT\_ON\_DATA:}
+\DoxyCodeLine{34         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_ON\_DATA, len=\%d"{}}, evt-\/>data\_len);}
+\DoxyCodeLine{35         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{36     \textcolor{keywordflow}{case} HTTP\_EVENT\_ON\_FINISH:}
+\DoxyCodeLine{37         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_ON\_FINISH"{}});}
+\DoxyCodeLine{38         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{39     \textcolor{keywordflow}{case} HTTP\_EVENT\_DISCONNECTED:}
+\DoxyCodeLine{40         ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}HTTP\_EVENT\_DISCONNECTED"{}});}
+\DoxyCodeLine{41         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43     \textcolor{keywordflow}{return} ESP\_OK;}
+\DoxyCodeLine{44 \}}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keywordtype}{void} \mbox{\hyperlink{trackle__utils__ota_8h_ab11284ede385340cba8278bbc2df3f8e}{simple\_ota\_task}}(\textcolor{keywordtype}{void} *pvParameter)}
+\DoxyCodeLine{47 \{}
+\DoxyCodeLine{48     ESP\_LOGW(OTA\_TAG, \textcolor{stringliteral}{"{}Starting OTA \%s"{}}, \mbox{\hyperlink{trackle__utils__ota_8h_a79646eaa928ba247387a11eb7360e5e8}{ota\_url}});}
+\DoxyCodeLine{49     tracklePublishSecure(OTA\_EVENT\_NAME, \textcolor{stringliteral}{"{}started"{}});}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     xEventGroupSetBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}}, \mbox{\hyperlink{trackle__utils_8h_aff8a44b6213dfe96816a60cb03c2dc78}{OTA\_UPDATING}}); \textcolor{comment}{//updating}}
+\DoxyCodeLine{52     vTaskDelay(1000 / portTICK\_PERIOD\_MS);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     esp\_http\_client\_config\_t config = \{}
+\DoxyCodeLine{55         .url = \mbox{\hyperlink{trackle__utils__ota_8h_a79646eaa928ba247387a11eb7360e5e8}{ota\_url}},}
+\DoxyCodeLine{56         .event\_handler = \mbox{\hyperlink{trackle__utils__ota_8h_ae7c4f5057d30a650919c74c7f9e7d67c}{\_http\_event\_handler}},}
+\DoxyCodeLine{57     \};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     esp\_err\_t ret = esp\_https\_ota(\&config);}
+\DoxyCodeLine{60     \textcolor{keywordflow}{if} (ret == ESP\_OK)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         ESP\_LOGW(OTA\_TAG, \textcolor{stringliteral}{"{}OTA completed, now restarting...."{}});}
+\DoxyCodeLine{63         tracklePublishSecure(OTA\_EVENT\_NAME, \textcolor{stringliteral}{"{}success"{}});}
+\DoxyCodeLine{64         vTaskDelay(1000 / portTICK\_PERIOD\_MS);}
+\DoxyCodeLine{65         esp\_restart();}
+\DoxyCodeLine{66     \}}
+\DoxyCodeLine{67     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{68     \{}
+\DoxyCodeLine{69         tracklePublishSecure(OTA\_EVENT\_NAME, \textcolor{stringliteral}{"{}failed"{}});}
+\DoxyCodeLine{70         xEventGroupClearBits(\mbox{\hyperlink{trackle__utils_8h_a6aaca350cca4b3d105d88a6f399cb381}{s\_wifi\_event\_group}}, \mbox{\hyperlink{trackle__utils_8h_aff8a44b6213dfe96816a60cb03c2dc78}{OTA\_UPDATING}}); \textcolor{comment}{//stop updating}}
+\DoxyCodeLine{71         vTaskDelete(NULL);}
+\DoxyCodeLine{72     \}}
+\DoxyCodeLine{73 \}}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75 \textcolor{comment}{// callback a cui viene inviata la richiesta di ota da url}}
+\DoxyCodeLine{76 \textcolor{keywordtype}{void} \mbox{\hyperlink{trackle__utils__ota_8h_ac2e187542a74410e3d1eabae0a6708c4}{firmware\_ota\_url}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *data)}
+\DoxyCodeLine{77 \{}
+\DoxyCodeLine{78     ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}firmware\_ota\_url \%s"{}}, data);}
+\DoxyCodeLine{79     cJSON *json = cJSON\_Parse(data);}
+\DoxyCodeLine{80     \textcolor{keywordtype}{int} result = -\/1;}
+\DoxyCodeLine{81     \textcolor{keywordflow}{if} (json != NULL)}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         cJSON *url = cJSON\_GetObjectItemCaseSensitive(json, \textcolor{stringliteral}{"{}url"{}});}
+\DoxyCodeLine{84         \textcolor{keywordflow}{if} (cJSON\_IsString(url) \&\& (url-\/>valuestring != NULL))}
+\DoxyCodeLine{85         \{}
+\DoxyCodeLine{86             \textcolor{keywordtype}{size\_t} n = strlen(url-\/>valuestring);}
+\DoxyCodeLine{87             strcpy(\mbox{\hyperlink{trackle__utils__ota_8h_a79646eaa928ba247387a11eb7360e5e8}{ota\_url}}, url-\/>valuestring);}
+\DoxyCodeLine{88             \mbox{\hyperlink{trackle__utils__ota_8h_a79646eaa928ba247387a11eb7360e5e8}{ota\_url}}[n] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{89             xTaskCreate(\&\mbox{\hyperlink{trackle__utils__ota_8h_ab11284ede385340cba8278bbc2df3f8e}{simple\_ota\_task}}, \textcolor{stringliteral}{"{}simple\_ota\_task"{}}, 8192, NULL, 5, NULL);}
+\DoxyCodeLine{90             result = 1;}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93     cJSON\_Delete(json);}
+\DoxyCodeLine{94     ESP\_LOGI(OTA\_TAG, \textcolor{stringliteral}{"{}firmware\_ota\_url result \%d"{}}, result);}
+\DoxyCodeLine{95 \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
