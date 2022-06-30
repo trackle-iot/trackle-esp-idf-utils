@@ -122,6 +122,7 @@ static void tracklePropertiesTaskCode(void *arg)
     jsonBuffer[0] = '\0';
 
     TickType_t latestWakeTime = xTaskGetTickCount();
+    bool first_run = true;
 
     // Consider this instant as 0 in the time of the properties
     for (int pgIdx = 0; pgIdx < numPropGroupsCreated; pgIdx++)
@@ -131,67 +132,71 @@ static void tracklePropertiesTaskCode(void *arg)
 
     for (;;)
     {
-
         bool propsToPublish = false;
 
         vTaskDelayUntil(&latestWakeTime, TRACKLE_PROPERTIES_TASK_PERIOD_MS / portTICK_PERIOD_MS);
         const uint32_t nowMs = xTaskGetTickCount() * portTICK_PERIOD_MS;
 
-        // For each group...
-        for (int pgIdx = 0; pgIdx < numPropGroupsCreated; pgIdx++)
+        if (trackleConnected(trackle_s))
         {
-
-            const int propsWithin = propGroups[pgIdx].propsWithin;
-            const bool onlyIfChanged = propGroups[pgIdx].onlyIfChanged;
-
-            // ... if its period is elapsed ...
-            if ((nowMs >= propGroups[pgIdx].latestWakeTimeMs && nowMs - propGroups[pgIdx].latestWakeTimeMs >= propGroups[pgIdx].periodMs) ||
-                (nowMs < propGroups[pgIdx].latestWakeTimeMs && UINT32_MAX - propGroups[pgIdx].latestWakeTimeMs + nowMs >= propGroups[pgIdx].periodMs))
+            // For each group...
+            for (int pgIdx = 0; pgIdx < numPropGroupsCreated; pgIdx++)
             {
 
-                propGroups[pgIdx].latestWakeTimeMs = nowMs;
+                const int propsWithin = propGroups[pgIdx].propsWithin;
+                const bool onlyIfChanged = propGroups[pgIdx].onlyIfChanged;
 
-                // ... for each property in the group ...
-                for (int i = 0; i < propsWithin; i++)
+                // ... if its period is elapsed ...
+                if ((nowMs >= propGroups[pgIdx].latestWakeTimeMs && nowMs - propGroups[pgIdx].latestWakeTimeMs >= propGroups[pgIdx].periodMs) ||
+                    (nowMs < propGroups[pgIdx].latestWakeTimeMs && UINT32_MAX - propGroups[pgIdx].latestWakeTimeMs + nowMs >= propGroups[pgIdx].periodMs) ||
+                    first_run)
                 {
-                    const int propIdx = propGroups[pgIdx].propsIndexes[i];
 
-                    // ... if it's changed or it must be published anyway ...
-                    if (!props[propIdx].disabled && (props[propIdx].changed || !onlyIfChanged))
+                    propGroups[pgIdx].latestWakeTimeMs = nowMs;
+
+                    // ... for each property in the group ...
+                    for (int i = 0; i < propsWithin; i++)
                     {
-                        // ... add it to JSON string to publish.
-                        if (!propsToPublish)
+                        const int propIdx = propGroups[pgIdx].propsIndexes[i];
+
+                        // ... if it's changed or it must be published anyway ...
+                        if (!props[propIdx].disabled && (props[propIdx].changed || !onlyIfChanged))
                         {
-                            propsToPublish = true;
-                            strcat(jsonBuffer, "{");
+                            // ... add it to JSON string to publish.
+                            if (!propsToPublish)
+                            {
+                                propsToPublish = true;
+                                strcat(jsonBuffer, "{");
+                            }
+                            appendPropertyToJsonString(jsonBuffer, propIdx);
+                            props[propIdx].setToPublish = true;
                         }
-                        appendPropertyToJsonString(jsonBuffer, propIdx);
-                        props[propIdx].setToPublish = true;
                     }
                 }
             }
-        }
 
-        // If there is at least a property in the JSON string to publish, publish it.
-        if (propsToPublish)
-        {
-            strcat(jsonBuffer, "}");
-            bool publishedSuccessfully = tracklePublishPropertiesSecure(jsonBuffer);
-            if (publishedSuccessfully)
+            // If there is at least a property in the JSON string to publish, publish it.
+            if (propsToPublish)
             {
+                strcat(jsonBuffer, "}");
+                bool publishedSuccessfully = tracklePublishPropertiesSecure(jsonBuffer);
+                if (publishedSuccessfully)
+                {
+                    for (int pIdx = 0; pIdx < numPropsCreated; pIdx++)
+                    {
+                        if (props[pIdx].setToPublish)
+                        {
+                            props[pIdx].changed = false;
+                        }
+                    }
+                    first_run = false;
+                }
                 for (int pIdx = 0; pIdx < numPropsCreated; pIdx++)
                 {
-                    if (props[pIdx].setToPublish)
-                    {
-                        props[pIdx].changed = false;
-                    }
+                    props[pIdx].setToPublish = false;
                 }
+                jsonBuffer[0] = '\0';
             }
-            for (int pIdx = 0; pIdx < numPropsCreated; pIdx++)
-            {
-                props[pIdx].setToPublish = false;
-            }
-            jsonBuffer[0] = '\0';
         }
     }
 }
@@ -241,12 +246,12 @@ Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t n
         {
             return Trackle_PropID_ERROR;
         }
-        props[newPropIndex].value = -1;
+        props[newPropIndex].value = 0;
         props[newPropIndex].scale = scale;
         props[newPropIndex].sign = sign;
         props[newPropIndex].numDecimals = numDecimals;
         props[newPropIndex].disabled = false;
-        props[newPropIndex].changed = false;
+        props[newPropIndex].changed = true;
         props[newPropIndex].setToPublish = false;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
