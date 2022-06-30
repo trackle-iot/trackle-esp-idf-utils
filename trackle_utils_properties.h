@@ -135,6 +135,27 @@ const char *Trackle_Prop_getKey(Trackle_PropID_t propID);
 int32_t Trackle_Prop_getValue(Trackle_PropID_t propID);
 
 /**
+ * @brief Get scale of a property.
+ * @param propID ID of the property.
+ * @return Scale of the property (0 if \ref propID doesn't identify a valid property)
+ */
+uint16_t Trackle_Prop_getScale(Trackle_PropID_t propID);
+
+/**
+ * @brief Get number of decimals of a property.
+ * @param propID ID of the property.
+ * @return Number of decimals of the property (0 if \ref propID doesn't identify a valid property)
+ */
+uint8_t Trackle_Prop_getNumberOfDecimals(Trackle_PropID_t propID);
+
+/**
+ * @brief Tells if a property is signed.
+ * @param propID ID of the property.
+ * @return True if property is signed, false otherwise. False also if property doesn't exist.
+ */
+bool Trackle_Prop_isSigned(Trackle_PropID_t propID);
+
+/**
  * @brief Start the task that publishes periodically the properties contained in every property group.
  * @return true if task started successfully, false otherwise.
  */

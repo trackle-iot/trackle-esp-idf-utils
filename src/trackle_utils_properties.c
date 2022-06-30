@@ -310,3 +310,33 @@ int32_t Trackle_Prop_getValue(Trackle_PropID_t propID)
     }
     return -1;
 }
+
+uint16_t Trackle_Prop_getScale(Trackle_PropID_t propID)
+{
+    const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
+    if (propIndex >= 0 && propIndex < numPropsCreated)
+    {
+        return props[propIndex].scale;
+    }
+    return 0;
+}
+
+uint8_t Trackle_Prop_getNumberOfDecimals(Trackle_PropID_t propID)
+{
+    const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
+    if (propIndex >= 0 && propIndex < numPropsCreated)
+    {
+        return props[propIndex].numDecimals;
+    }
+    return 0;
+}
+
+bool Trackle_Prop_isSigned(Trackle_PropID_t propID)
+{
+    const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
+    if (propIndex >= 0 && propIndex < numPropsCreated)
+    {
+        return props[propIndex].sign;
+    }
+    return false;
+}
