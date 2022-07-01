@@ -221,6 +221,11 @@ bool Trackle_Props_startTask()
     return false;
 }
 
+int Trackle_Props_getNumber()
+{
+    return numPropsCreated;
+}
+
 Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t numDecimals, bool sign)
 {
     if (numPropsCreated < TRACKLE_MAX_PROPS_NUM)

@@ -161,4 +161,10 @@ bool Trackle_Prop_isSigned(Trackle_PropID_t propID);
  */
 bool Trackle_Props_startTask();
 
+/**
+ * @brief Get the number of the properties created so far.
+ * @return Number of properties created.
+ */
+int Trackle_Props_getNumber();
+
 #endif
