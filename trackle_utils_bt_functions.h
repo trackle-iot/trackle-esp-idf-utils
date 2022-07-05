@@ -6,7 +6,7 @@
 
 #include <stdbool.h>
 
-#include <esp_types.h>
+#include <esp_err.h>
 
 bool Trackle_BtFunction_add(const char *name, int (*function)(const char *));
 
