@@ -4,6 +4,7 @@
 #include "nvs_flash.h"
 
 #include "trackle_utils_wifi.h"
+#include "trackle_utils_bt_functions.h"
 #include "trackle_utils.h"
 
 #include <wifi_provisioning/manager.h>
@@ -112,6 +113,8 @@ void trackle_utils_bt_provision_loop()
         // Initialize provisioning manager
         wifi_prov_mgr_init(config);
 
+        btFunctionsEndpointsCreate();
+
         char service_name[14];
         get_device_service_name(service_name, sizeof(service_name));
 
@@ -123,6 +126,7 @@ void trackle_utils_bt_provision_loop()
 
         esp_err_t prov_err = wifi_prov_mgr_start_provisioning(security, NULL, service_name, service_key);
         ESP_LOGI(BT_TAG, "wifi_prov_mgr_start_provisioning %d", prov_err);
+        btFunctionsEndpointsRegister();
     }
 }
 
