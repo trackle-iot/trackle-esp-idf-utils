@@ -66,14 +66,16 @@ static esp_err_t btFunctionCallHandler(uint32_t session_id, const uint8_t *inbuf
     // Deallocate string used as arg
     free(args);
 
-    // Return SUCCESS, if there is still memory for its string
-    char response[] = "SUCCESS";
-    *outbuf = (uint8_t *)strdup(response);
-    if (*outbuf == NULL)
+    // Return string containing function return code, if there is still memory for its string
+    char *funResStr = malloc(sizeof(char) * 20);
+    if (funResStr == NULL)
     {
         return ESP_ERR_NO_MEM;
     }
-    *outlen = strlen(response) + 1;
+    funResStr[0] = '\0';
+    sprintf(funResStr, "%d", funRes);
+    *outbuf = (uint8_t *)funResStr;
+    *outlen = strlen(funResStr) + 1;
     return ESP_OK;
 }
 
