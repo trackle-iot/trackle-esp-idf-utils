@@ -1,5 +1,7 @@
 #include "trackle_utils_bt_functions.h"
 
+#include <string.h>
+
 #include <wifi_provisioning/manager.h>
 
 typedef struct
