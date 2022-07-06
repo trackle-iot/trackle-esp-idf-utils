@@ -38,9 +38,42 @@ bool Trackle_BtFunction_add(const char *name, int (*function)(const char *))
 
 static esp_err_t btFunctionCallHandler(uint32_t session_id, const uint8_t *inbuf, ssize_t inlen, uint8_t **outbuf, ssize_t *outlen, void *priv_data)
 {
+    // If no input buffer passed, use empty string as arg, else add null character at end of passed string.
+    char *args = NULL;
+    if (inbuf == NULL)
+    {
+        args = strdup("");
+        if (args == NULL)
+        {
+            return ESP_ERR_NO_MEM;
+        }
+    }
+    else
+    {
+        args = malloc(sizeof(uint8_t) * inlen + 1);
+        if (args == NULL)
+        {
+            return ESP_ERR_NO_MEM;
+        }
+        memcpy(args, inbuf, inlen);
+        args[inlen] = '\0';
+    }
+
     const int btFunIdx = *((int *)&priv_data); // Interpret pointer as an integer representing the index of the function of interest.
     int (*function)(const char *) = btFunctions[btFunIdx].function;
-    const int funRes = function((const char *)inbuf); // TODO: return funRes in some way to the user (outbuf?).
+    const int funRes = function(args); // TODO: return funRes in some way to the user (outbuf?).
+
+    // Deallocate string used as arg
+    free(args);
+
+    // Return SUCCESS, if there is still memory for its string
+    char response[] = "SUCCESS";
+    *outbuf = (uint8_t *)strdup(response);
+    if (*outbuf == NULL)
+    {
+        return ESP_ERR_NO_MEM;
+    }
+    *outlen = strlen(response) + 1;
     return ESP_OK;
 }
 
