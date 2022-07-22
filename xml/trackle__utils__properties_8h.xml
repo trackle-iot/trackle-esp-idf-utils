@@ -1,0 +1,693 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="trackle__utils__properties_8h" kind="file" language="C++">
+    <compoundname>trackle_utils_properties.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includes local="no">esp_types.h</includes>
+    <includes local="no">esp_timer.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>trackle_utils_properties.h</label>
+        <link refid="trackle__utils__properties_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>esp_timer.h</label>
+      </node>
+      <node id="3">
+        <label>esp_types.h</label>
+      </node>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="trackle__utils__properties_8h_1a2d3c4b76bb28ee1100e74abaa875c11e" prot="public" static="no">
+        <name>TRACKLE_MAX_PROP_NAME_LENGTH</name>
+        <initializer>20</initializer>
+        <briefdescription>
+<para>Max number of characters allowed in properties name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="42" column="9" bodyfile="trackle_utils_properties.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="trackle__utils__properties_8h_1a1d037af2fe5beb33289e805a2f165350" prot="public" static="no">
+        <name>TRACKLE_MAX_PROPGROUPS_NUM</name>
+        <initializer>10</initializer>
+        <briefdescription>
+<para>Max number of properties groups that can be created. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="47" column="9" bodyfile="trackle_utils_properties.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="trackle__utils__properties_8h_1a56f27812d909211d812a5317bf45f2d1" prot="public" static="no">
+        <name>TRACKLE_MAX_PROPS_NUM</name>
+        <initializer>30</initializer>
+        <briefdescription>
+<para>Max number of properties that can be created. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="52" column="9" bodyfile="trackle_utils_properties.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="trackle__utils__properties_8h_1ac61d688a0b3061cc29b5966b2748879c" prot="public" static="no">
+        <name>Trackle_PropGroupID_ERROR</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+<para>Value returned on error by functions returning <ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="57" column="9" bodyfile="trackle_utils_properties.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="trackle__utils__properties_8h_1a5a699c85d3dc5d43421debe67cd94e39" prot="public" static="no">
+        <name>Trackle_PropID_ERROR</name>
+        <initializer>-1</initializer>
+        <briefdescription>
+<para>Value returned on error by functions returning <ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="62" column="9" bodyfile="trackle_utils_properties.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" prot="public" static="no">
+        <type>int</type>
+        <definition>typedef int Trackle_PropGroupID_t</definition>
+        <argsstring></argsstring>
+        <name>Trackle_PropGroupID_t</name>
+        <briefdescription>
+<para>Type of the ID of a property group. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="67" column="13" bodyfile="trackle_utils_properties.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" prot="public" static="no">
+        <type>int</type>
+        <definition>typedef int Trackle_PropID_t</definition>
+        <argsstring></argsstring>
+        <name>Trackle_PropID_t</name>
+        <briefdescription>
+<para>Type of the ID of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="72" column="13" bodyfile="trackle_utils_properties.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="trackle__utils__properties_8h_1aa9d1943c7c82f5c2e8c986d5eead2dc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref></type>
+        <definition>Trackle_PropGroupID_t Trackle_PropGroup_create</definition>
+        <argsstring>(uint32_t periodMs, bool onlyIfChanged)</argsstring>
+        <name>Trackle_PropGroup_create</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>periodMs</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>onlyIfChanged</declname>
+        </param>
+        <briefdescription>
+<para>Create a new properties group, grouping properties that must be published with the same period. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>periodMs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Period for the publication of the properties belonging to the group [ms] </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>onlyIfChanged</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, the properties in the group will be published after a period only if they were changed since last publication. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ID associated with the new created properties group, or <ref refid="trackle__utils__properties_8h_1ac61d688a0b3061cc29b5966b2748879c" kindref="member">Trackle_PropGroupID_ERROR</ref> on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="80" column="23" declfile="trackle_utils_properties.h" declline="80" declcolumn="23"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a112541983423fb247ab6f6a05900863a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Trackle_PropGroup_addProp</definition>
+        <argsstring>(Trackle_PropID_t propId, Trackle_PropGroupID_t propGroupId)</argsstring>
+        <name>Trackle_PropGroup_addProp</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propId</declname>
+        </param>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref></type>
+          <declname>propGroupId</declname>
+        </param>
+        <briefdescription>
+<para>Add a property to a group. Note that a single property can be added to more than one group by calling this function multiple times. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property to be added to the group. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>propGroupId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the group where to add the specified property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if property was added successfully to the group, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="88" column="6" declfile="trackle_utils_properties.h" declline="88" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a12988fbba8c3a1d91a11995df93a1a88" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+        <definition>Trackle_PropID_t Trackle_Prop_create</definition>
+        <argsstring>(const char *name, uint16_t scale, uint8_t numDecimals, bool sign)</argsstring>
+        <name>Trackle_Prop_create</name>
+        <param>
+          <type>const char *</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>uint16_t</type>
+          <declname>scale</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>numDecimals</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>sign</declname>
+        </param>
+        <briefdescription>
+<para>Create a new property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Name/key to be assigned to the property. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>scale</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Divider to be applied to values used to update the property (propValue = newValue / scale) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>numDecimals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of decimal digits to be used when publishing the property to the cloud. It&apos;s used only if scale differs from 1 (otherwise the property is an integer and it doesn&apos;t make sense). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sign</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, the property is signed, otherwise it&apos;s unsigned. It&apos;s used only if scale equals 1 (otherwise the property is a floating point number and is signed by default). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ID associated with the new created property, or <ref refid="trackle__utils__properties_8h_1a5a699c85d3dc5d43421debe67cd94e39" kindref="member">Trackle_PropID_ERROR</ref> on failure. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="98" column="18" declfile="trackle_utils_properties.h" declline="98" declcolumn="18"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a68fcb7261bbd540c5b3962f5b1a2c484" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Trackle_Prop_update</definition>
+        <argsstring>(Trackle_PropID_t propID, int newValue)</argsstring>
+        <name>Trackle_Prop_update</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>newValue</declname>
+        </param>
+        <briefdescription>
+<para>Update the value of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property to be updated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>New value of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if update was successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="106" column="6" declfile="trackle_utils_properties.h" declline="106" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a1e2666ce5302c14db1f2b59b400e404f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Trackle_Prop_setDisabled</definition>
+        <argsstring>(Trackle_PropID_t propID, bool isDisabled)</argsstring>
+        <name>Trackle_Prop_setDisabled</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isDisabled</declname>
+        </param>
+        <briefdescription>
+<para>Set the abilitation of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isDisabled</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>If true, the property is disabled, otherwise it&apos;s enabled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if setting was successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="114" column="6" declfile="trackle_utils_properties.h" declline="114" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1aa2cda38ef648b2e542e3195b02b2a9f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Trackle_Prop_isDisabled</definition>
+        <argsstring>(Trackle_PropID_t propID)</argsstring>
+        <name>Trackle_Prop_isDisabled</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <briefdescription>
+<para>Get abilitation of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if property is disabled, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="121" column="6" declfile="trackle_utils_properties.h" declline="121" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a41d724633a18f6080593878cea161267" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * Trackle_Prop_getKey</definition>
+        <argsstring>(Trackle_PropID_t propID)</argsstring>
+        <name>Trackle_Prop_getKey</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <briefdescription>
+<para>Get key of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Pointer to the name/key of the property (empty string if propID doesn&apos;t identify a valid property) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="128" column="12" declfile="trackle_utils_properties.h" declline="128" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1adbd17beb656e85995284dc1c7ac50607" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int32_t</type>
+        <definition>int32_t Trackle_Prop_getValue</definition>
+        <argsstring>(Trackle_PropID_t propID)</argsstring>
+        <name>Trackle_Prop_getValue</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <briefdescription>
+<para>Get value of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Value of the property (-1 if propID doesn&apos;t identify a valid property) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="135" column="9" declfile="trackle_utils_properties.h" declline="135" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a8209f02b26e0df422e6db8e8b8e731fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint16_t</type>
+        <definition>uint16_t Trackle_Prop_getScale</definition>
+        <argsstring>(Trackle_PropID_t propID)</argsstring>
+        <name>Trackle_Prop_getScale</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <briefdescription>
+<para>Get scale of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Scale of the property (0 if propID doesn&apos;t identify a valid property) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="142" column="10" declfile="trackle_utils_properties.h" declline="142" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a3287008546352371d36608fc0f18ff00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t Trackle_Prop_getNumberOfDecimals</definition>
+        <argsstring>(Trackle_PropID_t propID)</argsstring>
+        <name>Trackle_Prop_getNumberOfDecimals</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <briefdescription>
+<para>Get number of decimals of a property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Number of decimals of the property (0 if propID doesn&apos;t identify a valid property) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="149" column="9" declfile="trackle_utils_properties.h" declline="149" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a03afdedb789d15c4199d5cb021dc582e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Trackle_Prop_isSigned</definition>
+        <argsstring>(Trackle_PropID_t propID)</argsstring>
+        <name>Trackle_Prop_isSigned</name>
+        <param>
+          <type><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref></type>
+          <declname>propID</declname>
+        </param>
+        <briefdescription>
+<para>Tells if a property is signed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>propID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ID of the property. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if property is signed, false otherwise. False also if property doesn&apos;t exist. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="156" column="6" declfile="trackle_utils_properties.h" declline="156" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a12db7e4d66706a3c4053c73ca2812071" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool Trackle_Props_startTask</definition>
+        <argsstring>()</argsstring>
+        <name>Trackle_Props_startTask</name>
+        <briefdescription>
+<para>Start the task that publishes periodically the properties contained in every property group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if task started successfully, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="162" column="6" declfile="trackle_utils_properties.h" declline="162" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a392d54ce5a1d73405de4eff3e6e7aade" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int Trackle_Props_getNumber</definition>
+        <argsstring>()</argsstring>
+        <name>Trackle_Props_getNumber</name>
+        <briefdescription>
+<para>Get the number of the properties created so far. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>Number of properties created. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="168" column="5" declfile="trackle_utils_properties.h" declline="168" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__properties_8h_1a9cc1dd90ec67bc9420c1f49f186c63ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Trackle_Prop_setDefaults</definition>
+        <argsstring>(int32_t value, bool changed)</argsstring>
+        <name>Trackle_Prop_setDefaults</name>
+        <param>
+          <type>int32_t</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>changed</declname>
+        </param>
+        <briefdescription>
+<para>Set dafault value and changed of a new property. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default value of a property </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>changed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Default changed value of a property </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_properties.h" line="175" column="6" declfile="trackle_utils_properties.h" declline="175" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Datatypes and functions for working with properties. Read the full description to learn about properties. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>There are two concepts when it comes to working with properties:<itemizedlist>
+<listitem><para>Properties;</para>
+</listitem><listitem><para>Properties groups.</para>
+</listitem></itemizedlist>
+</para>
+<para>Properties are variables that are periodically published to the cloud with their name (key).</para>
+<para>Properties groups are groups of properties that are published with the same time period.</para>
+<para>Only properties that are inside a group are published to the cloud.</para>
+<para>Properties groups are created as follows:<orderedlist>
+<listitem><para>Declare a variable of type <ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref>;</para>
+</listitem><listitem><para>Assign the result of <ref refid="trackle__utils__properties_8h_1aa9d1943c7c82f5c2e8c986d5eead2dc7" kindref="member">Trackle_PropGroup_create</ref> to this variable;</para>
+</listitem><listitem><para>Repeat the steps from 1 to 2 for all the properties groups that must be created;</para>
+</listitem></orderedlist>
+</para>
+<para>Then, in order to create properties, one must follow these steps:<orderedlist>
+<listitem><para>Declare a variable of type <ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref>;</para>
+</listitem><listitem><para>Assign the result of <ref refid="trackle__utils__properties_8h_1a12988fbba8c3a1d91a11995df93a1a88" kindref="member">Trackle_Prop_create</ref> to this variable;</para>
+</listitem><listitem><para>Add the created property to one or more groups with <ref refid="trackle__utils__properties_8h_1a112541983423fb247ab6f6a05900863a" kindref="member">Trackle_PropGroup_addProp</ref>;</para>
+</listitem><listitem><para>Repeat the steps from 1 to 3 for all the properties that must be created;</para>
+</listitem><listitem><para>Call <ref refid="trackle__utils__properties_8h_1a12db7e4d66706a3c4053c73ca2812071" kindref="member">Trackle_Props_startTask</ref> to start the properties task.</para>
+</listitem></orderedlist>
+</para>
+<para>Now, one can work with properties (update, read, etc.) by using the remaining functions exposed by this file. </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>TRACKLE_UTILS_PROPERTIES_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRACKLE_UTILS_PROPERTIES_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;esp_types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;esp_timer.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="trackle__utils__properties_8h_1a2d3c4b76bb28ee1100e74abaa875c11e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRACKLE_MAX_PROP_NAME_LENGTH<sp/>20</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="trackle__utils__properties_8h_1a1d037af2fe5beb33289e805a2f165350" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRACKLE_MAX_PROPGROUPS_NUM<sp/>10</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="trackle__utils__properties_8h_1a56f27812d909211d812a5317bf45f2d1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRACKLE_MAX_PROPS_NUM<sp/>30</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="trackle__utils__properties_8h_1ac61d688a0b3061cc29b5966b2748879c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>Trackle_PropGroupID_ERROR<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="trackle__utils__properties_8h_1a5a699c85d3dc5d43421debe67cd94e39" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>Trackle_PropID_ERROR<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref>;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref>;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="trackle__utils__properties_8h_1aa9d1943c7c82f5c2e8c986d5eead2dc7" refkind="member"><highlight class="normal"><ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref><sp/><ref refid="trackle__utils__properties_8h_1aa9d1943c7c82f5c2e8c986d5eead2dc7" kindref="member">Trackle_PropGroup_create</ref>(uint32_t<sp/>periodMs,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>onlyIfChanged);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88" refid="trackle__utils__properties_8h_1a112541983423fb247ab6f6a05900863a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a112541983423fb247ab6f6a05900863a" kindref="member">Trackle_PropGroup_addProp</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propId,<sp/><ref refid="trackle__utils__properties_8h_1a25827b24834b1715c9273f8284320480" kindref="member">Trackle_PropGroupID_t</ref><sp/>propGroupId);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="trackle__utils__properties_8h_1a12988fbba8c3a1d91a11995df93a1a88" refkind="member"><highlight class="normal"><ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/><ref refid="trackle__utils__properties_8h_1a12988fbba8c3a1d91a11995df93a1a88" kindref="member">Trackle_Prop_create</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name,<sp/>uint16_t<sp/>scale,<sp/>uint8_t<sp/>numDecimals,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>sign);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106" refid="trackle__utils__properties_8h_1a68fcb7261bbd540c5b3962f5b1a2c484" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a68fcb7261bbd540c5b3962f5b1a2c484" kindref="member">Trackle_Prop_update</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>newValue);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="trackle__utils__properties_8h_1a1e2666ce5302c14db1f2b59b400e404f" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a1e2666ce5302c14db1f2b59b400e404f" kindref="member">Trackle_Prop_setDisabled</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isDisabled);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="trackle__utils__properties_8h_1aa2cda38ef648b2e542e3195b02b2a9f2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1aa2cda38ef648b2e542e3195b02b2a9f2" kindref="member">Trackle_Prop_isDisabled</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="trackle__utils__properties_8h_1a41d724633a18f6080593878cea161267" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="trackle__utils__properties_8h_1a41d724633a18f6080593878cea161267" kindref="member">Trackle_Prop_getKey</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="trackle__utils__properties_8h_1adbd17beb656e85995284dc1c7ac50607" refkind="member"><highlight class="normal">int32_t<sp/><ref refid="trackle__utils__properties_8h_1adbd17beb656e85995284dc1c7ac50607" kindref="member">Trackle_Prop_getValue</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="trackle__utils__properties_8h_1a8209f02b26e0df422e6db8e8b8e731fb" refkind="member"><highlight class="normal">uint16_t<sp/><ref refid="trackle__utils__properties_8h_1a8209f02b26e0df422e6db8e8b8e731fb" kindref="member">Trackle_Prop_getScale</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149" refid="trackle__utils__properties_8h_1a3287008546352371d36608fc0f18ff00" refkind="member"><highlight class="normal">uint8_t<sp/><ref refid="trackle__utils__properties_8h_1a3287008546352371d36608fc0f18ff00" kindref="member">Trackle_Prop_getNumberOfDecimals</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="trackle__utils__properties_8h_1a03afdedb789d15c4199d5cb021dc582e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a03afdedb789d15c4199d5cb021dc582e" kindref="member">Trackle_Prop_isSigned</ref>(<ref refid="trackle__utils__properties_8h_1a44a453fbe529a53629bcf4d40c8595de" kindref="member">Trackle_PropID_t</ref><sp/>propID);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162" refid="trackle__utils__properties_8h_1a12db7e4d66706a3c4053c73ca2812071" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a12db7e4d66706a3c4053c73ca2812071" kindref="member">Trackle_Props_startTask</ref>();</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168" refid="trackle__utils__properties_8h_1a392d54ce5a1d73405de4eff3e6e7aade" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a392d54ce5a1d73405de4eff3e6e7aade" kindref="member">Trackle_Props_getNumber</ref>();</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175" refid="trackle__utils__properties_8h_1a9cc1dd90ec67bc9420c1f49f186c63ad" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__properties_8h_1a9cc1dd90ec67bc9420c1f49f186c63ad" kindref="member">Trackle_Prop_setDefaults</ref>(int32_t<sp/>value,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>changed);</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="trackle_utils_properties.h"/>
+  </compounddef>
+</doxygen>

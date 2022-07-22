@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getgmtimestamp_0',['getGmTimestamp',['../trackle__utils_8h.html#aba0bed0e1689801a1985fab37e0d6602',1,'trackle_utils.h']]]
+  ['firmware_5fota_5furl_0',['firmware_ota_url',['../trackle__utils__ota_8h.html#ac2e187542a74410e3d1eabae0a6708c4',1,'trackle_utils_ota.h']]]
 ];

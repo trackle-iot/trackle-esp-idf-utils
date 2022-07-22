@@ -1,0 +1,389 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="trackle__utils__wifi_8h" kind="file" language="C++">
+    <compoundname>trackle_utils_wifi.h</compoundname>
+    <includes local="no">string.h</includes>
+    <includes local="yes">esp_wifi.h</includes>
+    <includes refid="trackle__utils_8h" local="yes">trackle_utils.h</includes>
+    <includedby refid="trackle__utils__bt__provision_8h" local="yes">trackle_utils_bt_provision.h</includedby>
+    <incdepgraph>
+      <node id="4">
+        <label>trackle_utils.h</label>
+        <link refid="trackle__utils_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>trackle_utils_wifi.h</label>
+        <link refid="trackle__utils__wifi_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>esp_wifi.h</label>
+      </node>
+      <node id="5">
+        <label>freertos/FreeRTOS.h</label>
+      </node>
+      <node id="7">
+        <label>freertos/event_groups.h</label>
+      </node>
+      <node id="6">
+        <label>freertos/task.h</label>
+      </node>
+      <node id="9">
+        <label>stdio.h</label>
+      </node>
+      <node id="2">
+        <label>string.h</label>
+      </node>
+      <node id="8">
+        <label>sys/time.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>trackle_utils_bt_provision.h</label>
+        <link refid="trackle__utils__bt__provision_8h"/>
+      </node>
+      <node id="1">
+        <label>trackle_utils_wifi.h</label>
+        <link refid="trackle__utils__wifi_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="trackle__utils__wifi_8h_1a32ab833044cac5b9f250886a3ec00400" prot="public" static="no">
+        <name>WIFI_ESP_MAXIMUM_RETRY</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="9" column="9" bodyfile="trackle_utils_wifi.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="trackle__utils__wifi_8h_1af18659fe29b775619edd93608c136f7f" prot="public" static="no">
+        <name>CHECK_WIFI_TIMEOUT</name>
+        <initializer>5000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="10" column="9" bodyfile="trackle_utils_wifi.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" prot="public" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long timeout_connect_wifi</definition>
+        <argsstring></argsstring>
+        <name>timeout_connect_wifi</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="11" column="15" bodyfile="trackle_utils_wifi.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trackle__utils__wifi_8h_1ae4da33fdcdaa6688ed25dab508ed5592" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int s_retry_num</definition>
+        <argsstring></argsstring>
+        <name>s_retry_num</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="12" column="12" bodyfile="trackle_utils_wifi.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trackle__utils__wifi_8h_1a8475209c3d16d25790fc4b67e18f3f57" prot="public" static="no" mutable="no">
+        <type>esp_netif_t *</type>
+        <definition>esp_netif_t* sta_netif</definition>
+        <argsstring></argsstring>
+        <name>sta_netif</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="13" column="13" bodyfile="trackle_utils_wifi.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trackle__utils__wifi_8h_1a8d0ed7cf21994faa03659c8b634a71fd" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* WIFI_TAG</definition>
+        <argsstring></argsstring>
+        <name>WIFI_TAG</name>
+        <initializer>= &quot;trackle-utils-wifi&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="15" column="19" bodyfile="trackle_utils_wifi.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="trackle__utils__wifi_8h_1a070e7458bd4670954a7512f1e1f2b201" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>esp_err_t</type>
+        <definition>esp_err_t wifi_is_provisioned</definition>
+        <argsstring>()</argsstring>
+        <name>wifi_is_provisioned</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="18" column="11" bodyfile="trackle_utils_wifi.h" bodystart="18" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__wifi_8h_1ab89f8a7d7357e4fb0e466836024c7f9c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void event_handler</definition>
+        <argsstring>(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data)</argsstring>
+        <name>event_handler</name>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <param>
+          <type>esp_event_base_t</type>
+          <declname>event_base</declname>
+        </param>
+        <param>
+          <type>int32_t</type>
+          <declname>event_id</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>event_data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="37" column="13" bodyfile="trackle_utils_wifi.h" bodystart="37" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__wifi_8h_1af67410a15ecc24ecef0e5abce0c5b30c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void wifi_init</definition>
+        <argsstring>()</argsstring>
+        <name>wifi_init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="78" column="6" bodyfile="trackle_utils_wifi.h" bodystart="78" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__wifi_8h_1aaf48dd31815d6c6e4a94cebfb63e56a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void wifi_init_sta</definition>
+        <argsstring>()</argsstring>
+        <name>wifi_init_sta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="112" column="6" bodyfile="trackle_utils_wifi.h" bodystart="112" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__wifi_8h_1a7e0c1523bc1ca08e141060a7c8635f0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void trackle_utils_wifi_loop</definition>
+        <argsstring>()</argsstring>
+        <name>trackle_utils_wifi_loop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_wifi.h" line="120" column="6" bodyfile="trackle_utils_wifi.h" bodystart="120" bodyend="145"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>TRACKLE_UTILS_WIFI_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRACKLE_UTILS_WIFI_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;esp_wifi.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trackle__utils_8h" kindref="compound">trackle_utils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="trackle__utils__wifi_8h_1a32ab833044cac5b9f250886a3ec00400" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>WIFI_ESP_MAXIMUM_RETRY<sp/>5</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="trackle__utils__wifi_8h_1af18659fe29b775619edd93608c136f7f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CHECK_WIFI_TIMEOUT<sp/>5000</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11" refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" kindref="member">timeout_connect_wifi</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>s_retry_num<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="13" refid="trackle__utils__wifi_8h_1a8475209c3d16d25790fc4b67e18f3f57" refkind="member"><highlight class="normal">esp_netif_t<sp/>*<ref refid="trackle__utils__wifi_8h_1a8475209c3d16d25790fc4b67e18f3f57" kindref="member">sta_netif</ref>;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*WIFI_TAG<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;trackle-utils-wifi&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>return<sp/>ESP_OK<sp/>if<sp/>wisi<sp/>is<sp/>provisioned<sp/>(strlen<sp/>ssid<sp/>&gt;<sp/>0),<sp/>else<sp/>ESP_FAIL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="trackle__utils__wifi_8h_1a070e7458bd4670954a7512f1e1f2b201" refkind="member"><highlight class="normal">esp_err_t<sp/><ref refid="trackle__utils__wifi_8h_1a070e7458bd4670954a7512f1e1f2b201" kindref="member">wifi_is_provisioned</ref>()</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Get<sp/>Wi-Fi<sp/>Station<sp/>configuration<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>wifi_config_t<sp/>wifi_cfg;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(esp_wifi_get_config(WIFI_IF_STA,<sp/>&amp;wifi_cfg)<sp/>!=<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ESP_FAIL;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(strlen((</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)wifi_cfg.sta.ssid))</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Wi-Fi<sp/>SSID<sp/><sp/><sp/><sp/><sp/>:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)wifi_cfg.sta.ssid);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Wi-Fi<sp/>Password<sp/>:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*)wifi_cfg.sta.password);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ESP_OK;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ESP_FAIL;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>event_handler(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*arg,<sp/>esp_event_base_t<sp/>event_base,</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int32_t<sp/>event_id,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*event_data)</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(event_base<sp/>==<sp/>WIFI_EVENT<sp/>&amp;&amp;<sp/>event_id<sp/>==<sp/>WIFI_EVENT_STA_START)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Wifi<sp/>started.....&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>wifi_mode_t<sp/>currentMode;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>esp_wifi_get_mode(&amp;currentMode);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(currentMode<sp/>==<sp/>WIFI_MODE_STA)</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Connecting<sp/>to<sp/>the<sp/>AP&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>xEventGroupSetBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>,<sp/><ref refid="trackle__utils_8h_1a6b9162dc5c1626c8b075c6c60dfc4132" kindref="member">WIFI_TO_CONNECT_BIT</ref>);<sp/></highlight><highlight class="comment">//<sp/>connettiti</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>esp_wifi_connect();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" kindref="member">timeout_connect_wifi</ref><sp/>=<sp/>millis();</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(currentMode<sp/>==<sp/>WIFI_MODE_APSTA)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;APMode,<sp/>not<sp/>connecting....&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>xEventGroupClearBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>,<sp/><ref refid="trackle__utils_8h_1a6b9162dc5c1626c8b075c6c60dfc4132" kindref="member">WIFI_TO_CONNECT_BIT</ref>);<sp/></highlight><highlight class="comment">//<sp/>non<sp/>cercare<sp/>di<sp/>riconnetterti</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(event_base<sp/>==<sp/>WIFI_EVENT<sp/>&amp;&amp;<sp/>event_id<sp/>==<sp/>WIFI_EVENT_STA_DISCONNECTED)</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>wifi_event_sta_disconnected_t<sp/>*</highlight><highlight class="keyword">event</highlight><highlight class="normal"><sp/>=<sp/>(wifi_event_sta_disconnected_t<sp/>*)event_data;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGW(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Wifi<sp/>disconnection<sp/>event:<sp/>%d...&quot;</highlight><highlight class="normal">,<sp/>event-&gt;reason);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>wifi_err_reason_t</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>esp_wifi_connect();</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" kindref="member">timeout_connect_wifi</ref><sp/>=<sp/>millis()<sp/>+<sp/><ref refid="trackle__utils__wifi_8h_1af18659fe29b775619edd93608c136f7f" kindref="member">CHECK_WIFI_TIMEOUT</ref>;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>xEventGroupClearBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>,<sp/><ref refid="trackle__utils_8h_1ad552e7688532cbbecd3967538ced06ac" kindref="member">WIFI_CONNECTED_BIT</ref>);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(event_base<sp/>==<sp/>IP_EVENT<sp/>&amp;&amp;<sp/>event_id<sp/>==<sp/>IP_EVENT_STA_GOT_IP)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ip_event_got_ip_t<sp/>*</highlight><highlight class="keyword">event</highlight><highlight class="normal"><sp/>=<sp/>(ip_event_got_ip_t<sp/>*)event_data;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGW(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Got<sp/>ip:&quot;</highlight><highlight class="normal"><sp/>IPSTR,<sp/>IP2STR(&amp;event-&gt;ip_info.ip));</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s_retry_num<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>xEventGroupSetBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>,<sp/><ref refid="trackle__utils_8h_1ad552e7688532cbbecd3967538ced06ac" kindref="member">WIFI_CONNECTED_BIT</ref>);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78" refid="trackle__utils__wifi_8h_1af67410a15ecc24ecef0e5abce0c5b30c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__wifi_8h_1af67410a15ecc24ecef0e5abce0c5b30c" kindref="member">wifi_init</ref>()</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;wifi_init....&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>init<sp/>event<sp/>group</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref><sp/>=<sp/>xEventGroupCreate();</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_netif_init());</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_event_loop_create_default());</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Register<sp/>our<sp/>event<sp/>handler<sp/>for<sp/>Wi-Fi,<sp/>IP<sp/>and<sp/>Provisioning<sp/>related<sp/>events</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT,<sp/>ESP_EVENT_ANY_ID,<sp/>&amp;event_handler,<sp/>NULL));</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT,<sp/>IP_EVENT_STA_GOT_IP,<sp/>&amp;event_handler,<sp/>NULL));</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="trackle__utils__wifi_8h_1a8475209c3d16d25790fc4b67e18f3f57" kindref="member">sta_netif</ref><sp/>=<sp/>esp_netif_create_default_wifi_sta();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>wifi_init_config_t<sp/>cfg<sp/>=<sp/>WIFI_INIT_CONFIG_DEFAULT();</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_wifi_init(&amp;cfg));</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_wifi_set_storage(WIFI_STORAGE_FLASH);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="comment">/*static<sp/>void<sp/>reinit_wifi()</highlight></codeline>
+<codeline lineno="98"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/>&quot;esp_wifi_deinit.....&quot;);</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/>//disconnect_cb();</highlight></codeline>
+<codeline lineno="101"><highlight class="comment"></highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/>xEventGroupClearBits(s_wifi_event_group,<sp/>WIFI_CONNECTED_BIT);</highlight></codeline>
+<codeline lineno="103"><highlight class="comment"><sp/><sp/><sp/><sp/>xEventGroupClearBits(s_wifi_event_group,<sp/>WIFI_TO_CONNECT_BIT);</highlight></codeline>
+<codeline lineno="104"><highlight class="comment"></highlight></codeline>
+<codeline lineno="105"><highlight class="comment"><sp/><sp/><sp/><sp/>esp_wifi_stop();</highlight></codeline>
+<codeline lineno="106"><highlight class="comment"><sp/><sp/><sp/><sp/>vTaskDelay(1000<sp/>/<sp/>portTICK_PERIOD_MS);</highlight></codeline>
+<codeline lineno="107"><highlight class="comment"><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/>&quot;esp_wifi_stop.....&quot;);</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/><sp/><sp/><sp/>esp_wifi_start();</highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/>&quot;esp_wifi_start.....&quot;);</highlight></codeline>
+<codeline lineno="110"><highlight class="comment">}*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="trackle__utils__wifi_8h_1aaf48dd31815d6c6e4a94cebfb63e56a3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__wifi_8h_1aaf48dd31815d6c6e4a94cebfb63e56a3" kindref="member">wifi_init_sta</ref>()</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_ERROR_CHECK(esp_wifi_start());</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_wifi_set_ps(WIFI_PS_NONE);<sp/></highlight><highlight class="comment">//<sp/>Disable<sp/>powersave</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;wifi_init_sta<sp/>finished.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120" refid="trackle__utils__wifi_8h_1a7e0c1523bc1ca08e141060a7c8635f0a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__wifi_8h_1a7e0c1523bc1ca08e141060a7c8635f0a" kindref="member">trackle_utils_wifi_loop</ref>()</highlight></codeline>
+<codeline lineno="121"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>EventBits_t<sp/>bits<sp/>=<sp/>xEventGroupGetBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>uint32_t<sp/>loop_millis<sp/>=<sp/>millis();</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>check<sp/>connessione<sp/>wifi</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" kindref="member">timeout_connect_wifi</ref><sp/>&gt;<sp/>0<sp/>&amp;&amp;<sp/><ref refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" kindref="member">timeout_connect_wifi</ref><sp/>&lt;<sp/>loop_millis)</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trackle__utils__wifi_8h_1a4761d43b92b1ef8b6e00519d3d589ecf" kindref="member">timeout_connect_wifi</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((bits<sp/>&amp;<sp/><ref refid="trackle__utils_8h_1a6b9162dc5c1626c8b075c6c60dfc4132" kindref="member">WIFI_TO_CONNECT_BIT</ref>))</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(s_retry_num<sp/>&lt;<sp/><ref refid="trackle__utils__wifi_8h_1a32ab833044cac5b9f250886a3ec00400" kindref="member">WIFI_ESP_MAXIMUM_RETRY</ref>)</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s_retry_num++;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Trying<sp/>to<sp/>connect<sp/>to<sp/>the<sp/>AP,<sp/>%d<sp/>of<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>s_retry_num,<sp/><ref refid="trackle__utils__wifi_8h_1a32ab833044cac5b9f250886a3ec00400" kindref="member">WIFI_ESP_MAXIMUM_RETRY</ref>);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>esp_wifi_connect();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(WIFI_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Restarting......&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>s_retry_num<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>reinit_wifi();<sp/>//TODO<sp/>check<sp/>if<sp/>necessary</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="trackle_utils_wifi.h"/>
+  </compounddef>
+</doxygen>

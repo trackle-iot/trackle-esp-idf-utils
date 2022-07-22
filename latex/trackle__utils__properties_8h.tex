@@ -47,8 +47,18 @@ const char $\ast$ \mbox{\hyperlink{trackle__utils__properties_8h_a41d724633a18f6
 \begin{DoxyCompactList}\small\item\em Get key of a property. \end{DoxyCompactList}\item 
 int32\+\_\+t \mbox{\hyperlink{trackle__utils__properties_8h_adbd17beb656e85995284dc1c7ac50607}{Trackle\+\_\+\+Prop\+\_\+get\+Value}} (\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}} prop\+ID)
 \begin{DoxyCompactList}\small\item\em Get value of a property. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{trackle__utils__properties_8h_a8209f02b26e0df422e6db8e8b8e731fb}{Trackle\+\_\+\+Prop\+\_\+get\+Scale}} (\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}} prop\+ID)
+\begin{DoxyCompactList}\small\item\em Get scale of a property. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{trackle__utils__properties_8h_a3287008546352371d36608fc0f18ff00}{Trackle\+\_\+\+Prop\+\_\+get\+Number\+Of\+Decimals}} (\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}} prop\+ID)
+\begin{DoxyCompactList}\small\item\em Get number of decimals of a property. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{trackle__utils__properties_8h_a03afdedb789d15c4199d5cb021dc582e}{Trackle\+\_\+\+Prop\+\_\+is\+Signed}} (\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}} prop\+ID)
+\begin{DoxyCompactList}\small\item\em Tells if a property is signed. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{trackle__utils__properties_8h_a12db7e4d66706a3c4053c73ca2812071}{Trackle\+\_\+\+Props\+\_\+start\+Task}} ()
-\begin{DoxyCompactList}\small\item\em Start the task that publishes periodically the properties contained in every property group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Start the task that publishes periodically the properties contained in every property group. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{trackle__utils__properties_8h_a392d54ce5a1d73405de4eff3e6e7aade}{Trackle\+\_\+\+Props\+\_\+get\+Number}} ()
+\begin{DoxyCompactList}\small\item\em Get the number of the properties created so far. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{trackle__utils__properties_8h_a9cc1dd90ec67bc9420c1f49f186c63ad}{Trackle\+\_\+\+Prop\+\_\+set\+Defaults}} (int32\+\_\+t value, bool changed)
+\begin{DoxyCompactList}\small\item\em Set dafault value and changed of a new property. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -203,6 +213,42 @@ Get key of a property.
 \begin{DoxyReturn}{Returns}
 Pointer to the name/key of the property (empty string if prop\+ID doesn\textquotesingle{}t identify a valid property) 
 \end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__properties_8h_a3287008546352371d36608fc0f18ff00}\label{trackle__utils__properties_8h_a3287008546352371d36608fc0f18ff00}} 
+\index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Prop\_getNumberOfDecimals@{Trackle\_Prop\_getNumberOfDecimals}}
+\index{Trackle\_Prop\_getNumberOfDecimals@{Trackle\_Prop\_getNumberOfDecimals}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Prop\_getNumberOfDecimals()}{Trackle\_Prop\_getNumberOfDecimals()}}
+{\footnotesize\ttfamily uint8\+\_\+t Trackle\+\_\+\+Prop\+\_\+get\+Number\+Of\+Decimals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}}}]{prop\+ID }\end{DoxyParamCaption})}
+
+
+
+Get number of decimals of a property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+ID} & ID of the property. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of decimals of the property (0 if prop\+ID doesn\textquotesingle{}t identify a valid property) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__properties_8h_a8209f02b26e0df422e6db8e8b8e731fb}\label{trackle__utils__properties_8h_a8209f02b26e0df422e6db8e8b8e731fb}} 
+\index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Prop\_getScale@{Trackle\_Prop\_getScale}}
+\index{Trackle\_Prop\_getScale@{Trackle\_Prop\_getScale}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Prop\_getScale()}{Trackle\_Prop\_getScale()}}
+{\footnotesize\ttfamily uint16\+\_\+t Trackle\+\_\+\+Prop\+\_\+get\+Scale (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}}}]{prop\+ID }\end{DoxyParamCaption})}
+
+
+
+Get scale of a property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+ID} & ID of the property. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Scale of the property (0 if prop\+ID doesn\textquotesingle{}t identify a valid property) 
+\end{DoxyReturn}
 \mbox{\Hypertarget{trackle__utils__properties_8h_adbd17beb656e85995284dc1c7ac50607}\label{trackle__utils__properties_8h_adbd17beb656e85995284dc1c7ac50607}} 
 \index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Prop\_getValue@{Trackle\_Prop\_getValue}}
 \index{Trackle\_Prop\_getValue@{Trackle\_Prop\_getValue}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
@@ -239,6 +285,41 @@ Get abilitation of a property.
 \begin{DoxyReturn}{Returns}
 true if property is disabled, false otherwise. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__properties_8h_a03afdedb789d15c4199d5cb021dc582e}\label{trackle__utils__properties_8h_a03afdedb789d15c4199d5cb021dc582e}} 
+\index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Prop\_isSigned@{Trackle\_Prop\_isSigned}}
+\index{Trackle\_Prop\_isSigned@{Trackle\_Prop\_isSigned}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Prop\_isSigned()}{Trackle\_Prop\_isSigned()}}
+{\footnotesize\ttfamily bool Trackle\+\_\+\+Prop\+\_\+is\+Signed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{trackle__utils__properties_8h_a44a453fbe529a53629bcf4d40c8595de}{Trackle\+\_\+\+Prop\+ID\+\_\+t}}}]{prop\+ID }\end{DoxyParamCaption})}
+
+
+
+Tells if a property is signed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prop\+ID} & ID of the property. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if property is signed, false otherwise. False also if property doesn\textquotesingle{}t exist. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__properties_8h_a9cc1dd90ec67bc9420c1f49f186c63ad}\label{trackle__utils__properties_8h_a9cc1dd90ec67bc9420c1f49f186c63ad}} 
+\index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Prop\_setDefaults@{Trackle\_Prop\_setDefaults}}
+\index{Trackle\_Prop\_setDefaults@{Trackle\_Prop\_setDefaults}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Prop\_setDefaults()}{Trackle\_Prop\_setDefaults()}}
+{\footnotesize\ttfamily void Trackle\+\_\+\+Prop\+\_\+set\+Defaults (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{value,  }\item[{bool}]{changed }\end{DoxyParamCaption})}
+
+
+
+Set dafault value and changed of a new property. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Default value of a property \\
+\hline
+{\em changed} & Default changed value of a property \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{trackle__utils__properties_8h_a1e2666ce5302c14db1f2b59b400e404f}\label{trackle__utils__properties_8h_a1e2666ce5302c14db1f2b59b400e404f}} 
 \index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Prop\_setDisabled@{Trackle\_Prop\_setDisabled}}
 \index{Trackle\_Prop\_setDisabled@{Trackle\_Prop\_setDisabled}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
@@ -318,6 +399,19 @@ Create a new properties group, grouping properties that must be published with t
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 ID associated with the new created properties group, or \mbox{\hyperlink{trackle__utils__properties_8h_ac61d688a0b3061cc29b5966b2748879c}{Trackle\+\_\+\+Prop\+Group\+ID\+\_\+\+ERROR}} on failure. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{trackle__utils__properties_8h_a392d54ce5a1d73405de4eff3e6e7aade}\label{trackle__utils__properties_8h_a392d54ce5a1d73405de4eff3e6e7aade}} 
+\index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Props\_getNumber@{Trackle\_Props\_getNumber}}
+\index{Trackle\_Props\_getNumber@{Trackle\_Props\_getNumber}!trackle\_utils\_properties.h@{trackle\_utils\_properties.h}}
+\doxysubsubsection{\texorpdfstring{Trackle\_Props\_getNumber()}{Trackle\_Props\_getNumber()}}
+{\footnotesize\ttfamily int Trackle\+\_\+\+Props\+\_\+get\+Number (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the number of the properties created so far. 
+
+\begin{DoxyReturn}{Returns}
+Number of properties created. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{trackle__utils__properties_8h_a12db7e4d66706a3c4053c73ca2812071}\label{trackle__utils__properties_8h_a12db7e4d66706a3c4053c73ca2812071}} 
 \index{trackle\_utils\_properties.h@{trackle\_utils\_properties.h}!Trackle\_Props\_startTask@{Trackle\_Props\_startTask}}

@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.4" xml:lang="en-US">
+  <compounddef id="trackle__utils__ota_8h" kind="file" language="C++">
+    <compoundname>trackle_utils_ota.h</compoundname>
+    <includes local="yes">esp_ota_ops.h</includes>
+    <includes local="yes">esp_http_client.h</includes>
+    <includes local="yes">esp_https_ota.h</includes>
+    <includes local="yes">cJSON.h</includes>
+    <includes refid="trackle__utils_8h" local="yes">trackle_utils.h</includes>
+    <incdepgraph>
+      <node id="6">
+        <label>trackle_utils.h</label>
+        <link refid="trackle__utils_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>trackle_utils_ota.h</label>
+        <link refid="trackle__utils__ota_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>cJSON.h</label>
+      </node>
+      <node id="3">
+        <label>esp_http_client.h</label>
+      </node>
+      <node id="4">
+        <label>esp_https_ota.h</label>
+      </node>
+      <node id="2">
+        <label>esp_ota_ops.h</label>
+      </node>
+      <node id="7">
+        <label>freertos/FreeRTOS.h</label>
+      </node>
+      <node id="9">
+        <label>freertos/event_groups.h</label>
+      </node>
+      <node id="8">
+        <label>freertos/task.h</label>
+      </node>
+      <node id="11">
+        <label>stdio.h</label>
+      </node>
+      <node id="12">
+        <label>string.h</label>
+      </node>
+      <node id="10">
+        <label>sys/time.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="trackle__utils__ota_8h_1ac4eb46eecfb14611e17861241ab8de9f" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* OTA_TAG</definition>
+        <argsstring></argsstring>
+        <name>OTA_TAG</name>
+        <initializer>= &quot;trackle-utils-ota&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="11" column="19" bodyfile="trackle_utils_ota.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trackle__utils__ota_8h_1a123c2886084fc68ce1556bfb0bbfc02c" prot="public" static="yes" mutable="no">
+        <type>const char *</type>
+        <definition>const char* OTA_EVENT_NAME</definition>
+        <argsstring></argsstring>
+        <name>OTA_EVENT_NAME</name>
+        <initializer>= &quot;trackle/device/update/status&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="12" column="19" bodyfile="trackle_utils_ota.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char ota_url[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>ota_url</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="14" column="6" bodyfile="trackle_utils_ota.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="trackle__utils__ota_8h_1a855291fb065f80e9a0f8f93de3f25978" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool safe_ota</definition>
+        <argsstring></argsstring>
+        <name>safe_ota</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="15" column="6" bodyfile="trackle_utils_ota.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="trackle__utils__ota_8h_1ae7c4f5057d30a650919c74c7f9e7d67c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>esp_err_t</type>
+        <definition>esp_err_t _http_event_handler</definition>
+        <argsstring>(esp_http_client_event_t *evt)</argsstring>
+        <name>_http_event_handler</name>
+        <param>
+          <type>esp_http_client_event_t *</type>
+          <declname>evt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="17" column="11" bodyfile="trackle_utils_ota.h" bodystart="17" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__ota_8h_1ab11284ede385340cba8278bbc2df3f8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void simple_ota_task</definition>
+        <argsstring>(void *pvParameter)</argsstring>
+        <name>simple_ota_task</name>
+        <param>
+          <type>void *</type>
+          <declname>pvParameter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="46" column="6" bodyfile="trackle_utils_ota.h" bodystart="46" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="trackle__utils__ota_8h_1ac2e187542a74410e3d1eabae0a6708c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void firmware_ota_url</definition>
+        <argsstring>(const char *data)</argsstring>
+        <name>firmware_ota_url</name>
+        <param>
+          <type>const char *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="trackle_utils_ota.h" line="76" column="6" bodyfile="trackle_utils_ota.h" bodystart="76" bodyend="95"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>TRACKLE_UTILS_OTA_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRACKLE_UTILS_OTA_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;esp_ota_ops.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;esp_http_client.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;esp_https_ota.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;cJSON.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trackle__utils_8h" kindref="compound">trackle_utils.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*OTA_TAG<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;trackle-utils-ota&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*OTA_EVENT_NAME<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;trackle/device/update/status&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" kindref="member">ota_url</ref>[256];</highlight></codeline>
+<codeline lineno="15" refid="trackle__utils__ota_8h_1a855291fb065f80e9a0f8f93de3f25978" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__ota_8h_1a855291fb065f80e9a0f8f93de3f25978" kindref="member">safe_ota</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="trackle__utils__ota_8h_1ae7c4f5057d30a650919c74c7f9e7d67c" refkind="member"><highlight class="normal">esp_err_t<sp/><ref refid="trackle__utils__ota_8h_1ae7c4f5057d30a650919c74c7f9e7d67c" kindref="member">_http_event_handler</ref>(esp_http_client_event_t<sp/>*evt)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(evt-&gt;event_id)</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_ERROR:</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_ERROR&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_ON_CONNECTED:</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_ON_CONNECTED&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_HEADER_SENT:</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_HEADER_SENT&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_ON_HEADER:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_ON_HEADER,<sp/>key=%s,<sp/>value=%s&quot;</highlight><highlight class="normal">,<sp/>evt-&gt;header_key,<sp/>evt-&gt;header_value);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_ON_DATA:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_ON_DATA,<sp/>len=%d&quot;</highlight><highlight class="normal">,<sp/>evt-&gt;data_len);</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_ON_FINISH:</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_ON_FINISH&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>HTTP_EVENT_DISCONNECTED:</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;HTTP_EVENT_DISCONNECTED&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ESP_OK;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="trackle__utils__ota_8h_1ab11284ede385340cba8278bbc2df3f8e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__ota_8h_1ab11284ede385340cba8278bbc2df3f8e" kindref="member">simple_ota_task</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>*pvParameter)</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_LOGW(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;Starting<sp/>OTA<sp/>%s&quot;</highlight><highlight class="normal">,<sp/><ref refid="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" kindref="member">ota_url</ref>);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>tracklePublishSecure(OTA_EVENT_NAME,<sp/></highlight><highlight class="stringliteral">&quot;started&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>xEventGroupSetBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>,<sp/><ref refid="trackle__utils_8h_1aff8a44b6213dfe96816a60cb03c2dc78" kindref="member">OTA_UPDATING</ref>);<sp/></highlight><highlight class="comment">//updating</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>vTaskDelay(1000<sp/>/<sp/>portTICK_PERIOD_MS);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_http_client_config_t<sp/>config<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.url<sp/>=<sp/><ref refid="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" kindref="member">ota_url</ref>,</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.event_handler<sp/>=<sp/><ref refid="trackle__utils__ota_8h_1ae7c4f5057d30a650919c74c7f9e7d67c" kindref="member">_http_event_handler</ref>,</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>esp_err_t<sp/>ret<sp/>=<sp/>esp_https_ota(&amp;config);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ret<sp/>==<sp/>ESP_OK)</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP_LOGW(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;OTA<sp/>completed,<sp/>now<sp/>restarting....&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tracklePublishSecure(OTA_EVENT_NAME,<sp/></highlight><highlight class="stringliteral">&quot;success&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vTaskDelay(1000<sp/>/<sp/>portTICK_PERIOD_MS);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>esp_restart();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tracklePublishSecure(OTA_EVENT_NAME,<sp/></highlight><highlight class="stringliteral">&quot;failed&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>xEventGroupClearBits(<ref refid="trackle__utils_8h_1a6aaca350cca4b3d105d88a6f399cb381" kindref="member">s_wifi_event_group</ref>,<sp/><ref refid="trackle__utils_8h_1aff8a44b6213dfe96816a60cb03c2dc78" kindref="member">OTA_UPDATING</ref>);<sp/></highlight><highlight class="comment">//stop<sp/>updating</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>vTaskDelete(NULL);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">//<sp/>callback<sp/>a<sp/>cui<sp/>viene<sp/>inviata<sp/>la<sp/>richiesta<sp/>di<sp/>ota<sp/>da<sp/>url</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="trackle__utils__ota_8h_1ac2e187542a74410e3d1eabae0a6708c4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trackle__utils__ota_8h_1ac2e187542a74410e3d1eabae0a6708c4" kindref="member">firmware_ota_url</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*data)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;firmware_ota_url<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>data);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>cJSON<sp/>*json<sp/>=<sp/>cJSON_Parse(data);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(json<sp/>!=<sp/>NULL)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cJSON<sp/>*url<sp/>=<sp/>cJSON_GetObjectItemCaseSensitive(json,<sp/></highlight><highlight class="stringliteral">&quot;url&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(cJSON_IsString(url)<sp/>&amp;&amp;<sp/>(url-&gt;valuestring<sp/>!=<sp/>NULL))</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>n<sp/>=<sp/>strlen(url-&gt;valuestring);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(<ref refid="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" kindref="member">ota_url</ref>,<sp/>url-&gt;valuestring);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trackle__utils__ota_8h_1a79646eaa928ba247387a11eb7360e5e8" kindref="member">ota_url</ref>[n]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;\0&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>xTaskCreate(&amp;<ref refid="trackle__utils__ota_8h_1ab11284ede385340cba8278bbc2df3f8e" kindref="member">simple_ota_task</ref>,<sp/></highlight><highlight class="stringliteral">&quot;simple_ota_task&quot;</highlight><highlight class="normal">,<sp/>8192,<sp/>NULL,<sp/>5,<sp/>NULL);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>cJSON_Delete(json);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>ESP_LOGI(OTA_TAG,<sp/></highlight><highlight class="stringliteral">&quot;firmware_ota_url<sp/>result<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>result);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="trackle_utils_ota.h"/>
+  </compounddef>
+</doxygen>
