@@ -167,4 +167,11 @@ bool Trackle_Props_startTask();
  */
 int Trackle_Props_getNumber();
 
+/**
+ * @brief Set dafault value and changed of a new property
+ * @param value Default value of a property
+ * @param changed Default changed value of a property
+ */
+void Trackle_Prop_setDefaults(int32_t value, bool changed);
+
 #endif

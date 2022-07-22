@@ -48,6 +48,9 @@ static int numPropGroupsCreated = 0;                             // Number of th
 static Prop_t props[TRACKLE_MAX_PROPS_NUM] = {0}; // Array holding the properties created by the user.
 static int numPropsCreated = 0;                   // Number of the properties created (aka next property ID available)
 
+int32_t defaultValue = 0;   //  Default value of a new property
+bool defaultChanged = true; // Default changed value of a property
+
 Trackle_PropGroupID_t Trackle_PropGroup_create(uint32_t periodMs, bool onlyIfChanged)
 {
     if (numPropGroupsCreated < TRACKLE_MAX_PROPGROUPS_NUM)
@@ -251,12 +254,12 @@ Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t n
         {
             return Trackle_PropID_ERROR;
         }
-        props[newPropIndex].value = 0;
+        props[newPropIndex].value = defaultValue;
         props[newPropIndex].scale = scale;
         props[newPropIndex].sign = sign;
         props[newPropIndex].numDecimals = numDecimals;
         props[newPropIndex].disabled = false;
-        props[newPropIndex].changed = true;
+        props[newPropIndex].changed = defaultChanged;
         props[newPropIndex].setToPublish = false;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
@@ -349,4 +352,10 @@ bool Trackle_Prop_isSigned(Trackle_PropID_t propID)
         return props[propIndex].sign;
     }
     return false;
+}
+
+void Trackle_Prop_setDefaults(int32_t value, bool changed)
+{
+    defaultValue = value;
+    defaultChanged = changed;
 }
