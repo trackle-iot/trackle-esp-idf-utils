@@ -30,6 +30,8 @@ typedef struct
     bool disabled;                          // If disabled, property is ignored from publish
     uint8_t numDecimals;                    // Number of decimal digits (only used if scale is set)
     bool setToPublish;                      // True if added to JSON to publish
+    char *stringValue;                      // If this is not NULL, property is a string property and this is its value
+    int stringValueMaxLength;               // Max length of the string contained in \ref stringValue field
 } Prop_t;
 
 // Property group data structure
@@ -99,7 +101,11 @@ static void appendPropertyToJsonString(char *jsonBuffer, int propIndex)
     {
         jsonBufferTail += sprintf(jsonBufferTail, ",");
     }
-    if (props[propIndex].scale == 1)
+    if (props[propIndex].stringValue != NULL)
+    { // string
+        jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":\"%s\"", props[propIndex].key, props[propIndex].stringValue);
+    }
+    else if (props[propIndex].scale == 1)
     { // integer
         if (props[propIndex].sign)
         { // uint, remove sign
@@ -261,6 +267,45 @@ Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t n
         props[newPropIndex].disabled = false;
         props[newPropIndex].changed = defaultChanged;
         props[newPropIndex].setToPublish = false;
+        props[newPropIndex].stringValue = NULL;
+        props[newPropIndex].stringValueMaxLength = 0;
+        numPropsCreated++;
+        return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
+    }
+    return Trackle_PropID_ERROR;
+}
+
+Trackle_PropID_t Trackle_Prop_createString(const char *name, int maxLength)
+{
+    if (numPropsCreated < TRACKLE_MAX_PROPS_NUM)
+    {
+        const int newPropIndex = numPropsCreated;
+        for (int pIdx = 0; pIdx < numPropsCreated; pIdx++)
+        {
+            if (strcmp(name, props[pIdx].key) == 0)
+            {
+                return Trackle_PropID_ERROR;
+            }
+        }
+        if (strlen(name) < TRACKLE_MAX_PROP_NAME_LENGTH)
+        {
+            strcpy(props[newPropIndex].key, name);
+        }
+        else
+        {
+            return Trackle_PropID_ERROR;
+        }
+        props[newPropIndex].value = defaultValue;
+        props[newPropIndex].scale = 1;
+        props[newPropIndex].sign = 0;
+        props[newPropIndex].numDecimals = 0;
+        props[newPropIndex].disabled = false;
+        props[newPropIndex].changed = defaultChanged;
+        props[newPropIndex].setToPublish = false;
+        props[newPropIndex].stringValue = malloc(maxLength * sizeof(char) + 1); // +1 for null character
+        if (props[newPropIndex].stringValue == NULL)
+            return Trackle_PropID_ERROR;
+        props[newPropIndex].stringValueMaxLength = maxLength;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
     }
@@ -277,6 +322,23 @@ bool Trackle_Prop_update(Trackle_PropID_t propID, int newValue)
             ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %d, new: %d", props[propIndex].key, props[propIndex].value, newValue);
             props[propIndex].changed = true;
             props[propIndex].value = newValue;
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Trackle_Prop_updateString(Trackle_PropID_t propID, const char *newValue)
+{
+    const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
+    if (propIndex >= 0 && propIndex < numPropsCreated)
+    {
+        if (props[propIndex].stringValue != NULL && newValue != NULL && strcmp(props[propIndex].stringValue, newValue) != 0)
+        {
+            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %s, new: %s", props[propIndex].key, props[propIndex].stringValue, newValue);
+            props[propIndex].changed = true;
+            strncpy(props[propIndex].stringValue, newValue, props[propIndex].stringValueMaxLength);
+            props[propIndex].stringValue[props[propIndex].stringValueMaxLength] = '\0';
             return true;
         }
     }
@@ -322,6 +384,21 @@ int32_t Trackle_Prop_getValue(Trackle_PropID_t propID)
         return props[propIndex].value;
     }
     return -1;
+}
+
+bool Trackle_Prop_getStringValue(Trackle_PropID_t propID, char *retValue, int retValueMaxLen)
+{
+    const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
+    if (propIndex >= 0 && propIndex < numPropsCreated)
+    {
+        if (props[propIndex].stringValue != NULL)
+        {
+            strncpy(retValue, props[propIndex].stringValue, retValueMaxLen);
+            retValue[retValueMaxLen] = '\0';
+            return true;
+        }
+    }
+    return false;
 }
 
 uint16_t Trackle_Prop_getScale(Trackle_PropID_t propID)

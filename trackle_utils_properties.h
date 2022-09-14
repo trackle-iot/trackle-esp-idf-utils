@@ -88,7 +88,7 @@ Trackle_PropGroupID_t Trackle_PropGroup_create(uint32_t periodMs, bool onlyIfCha
 bool Trackle_PropGroup_addProp(Trackle_PropID_t propId, Trackle_PropGroupID_t propGroupId);
 
 /**
- * @brief Create a new property.
+ * @brief Create a new numeric property.
  * @param name Name/key to be assigned to the property.
  * @param scale Divider to be applied to values used to update the property (propValue = newValue / scale)
  * @param numDecimals Number of decimal digits to be used when publishing the property to the cloud. It's used only if \ref scale differs from 1 (otherwise the property is an integer and it doesn't make sense).
@@ -98,12 +98,28 @@ bool Trackle_PropGroup_addProp(Trackle_PropID_t propId, Trackle_PropGroupID_t pr
 Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t numDecimals, bool sign);
 
 /**
- * @brief Update the value of a property.
+ * @brief Create a new string property.
+ * @param name Name/key to be assigned to the property.
+ * @param maxLength Maximum length of the string that will be contained in the property.
+ * @return ID associated with the new created property, or \ref Trackle_PropID_ERROR on failure.
+ */
+Trackle_PropID_t Trackle_Prop_createString(const char *name, int maxLength);
+
+/**
+ * @brief Update the value of a numeric property.
  * @param propID ID of the property to be updated.
  * @param newValue New value of the property.
  * @return true if update was successful, false otherwise.
  */
 bool Trackle_Prop_update(Trackle_PropID_t propID, int newValue);
+
+/**
+ * @brief Update the value of a string property.
+ * @param propID ID of the property to be updated.
+ * @param newValue New value of the property.
+ * @return true if update was successful, false otherwise.
+ */
+bool Trackle_Prop_updateString(Trackle_PropID_t propID, const char *newValue);
 
 /**
  * @brief Set the abilitation of a property.
@@ -133,6 +149,15 @@ const char *Trackle_Prop_getKey(Trackle_PropID_t propID);
  * @return Value of the property (-1 if \ref propID doesn't identify a valid property)
  */
 int32_t Trackle_Prop_getValue(Trackle_PropID_t propID);
+
+/**
+ * @brief Get value of a string property.
+ * @param propID ID of the property.
+ * @param retValue Char array that will contain a copy of the actual value of the property
+ * @param retValueMaxLen Maximum length of the string that the function is allowed to store in the \ref retValue array (max is array's size-1, for null char).
+ * @return True on success, false on errors
+ */
+bool Trackle_Prop_getStringValue(Trackle_PropID_t propID, char *retValue, int retValueMaxLen);
 
 /**
  * @brief Get scale of a property.
