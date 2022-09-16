@@ -9,6 +9,16 @@
 
 #include <wifi_provisioning/manager.h>
 #include <wifi_provisioning/scheme_ble.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/event_groups.h>
+
+// Wifi provisioning event bits
+#define PROV_EVT_NO BIT0
+#define PROV_EVT_OK BIT1
+#define PROV_EVT_ERR BIT2
+#define PROV_EVT_RUN BIT4
+
+EventGroupHandle_t wifiProvisioningEvents;
 
 #define PROV_MGR_MAX_RETRY_CNT 2
 int prov_retry_num = 0;
@@ -29,6 +39,8 @@ static void bt_event_handler(void *arg, esp_event_base_t event_base,
         {
         case WIFI_PROV_START:
             ESP_LOGI(BT_TAG, "Provisioning started");
+            xEventGroupClearBits(wifiProvisioningEvents, PROV_EVT_NO | PROV_EVT_OK | PROV_EVT_ERR | PROV_EVT_RUN);
+            xEventGroupSetBits(wifiProvisioningEvents, PROV_EVT_RUN);
             break;
         case WIFI_PROV_CRED_RECV:
         {
@@ -56,7 +68,8 @@ static void bt_event_handler(void *arg, esp_event_base_t event_base,
                 {
                     ESP_LOGE(BT_TAG, "Failed to set wifi config, 0x%x", err);
                 }
-
+                xEventGroupClearBits(wifiProvisioningEvents, PROV_EVT_NO | PROV_EVT_OK | PROV_EVT_ERR | PROV_EVT_RUN);
+                xEventGroupSetBits(wifiProvisioningEvents, PROV_EVT_ERR);
                 xEventGroupSetBits(s_wifi_event_group, RESTART);
             }
 
@@ -64,11 +77,15 @@ static void bt_event_handler(void *arg, esp_event_base_t event_base,
         }
         case WIFI_PROV_CRED_SUCCESS:
             ESP_LOGI(BT_TAG, "Provisioning successful");
+            xEventGroupClearBits(wifiProvisioningEvents, PROV_EVT_NO | PROV_EVT_OK | PROV_EVT_ERR | PROV_EVT_RUN);
+            xEventGroupSetBits(wifiProvisioningEvents, PROV_EVT_OK);
             break;
         case WIFI_PROV_END:
             // De-initialize manager once provisioning is finished and restart
             ESP_LOGI(BT_TAG, "Provisioning end");
             wifi_prov_mgr_deinit();
+            xEventGroupClearBits(wifiProvisioningEvents, PROV_EVT_NO | PROV_EVT_OK | PROV_EVT_ERR | PROV_EVT_RUN);
+            xEventGroupSetBits(wifiProvisioningEvents, PROV_EVT_NO);
             xEventGroupSetBits(s_wifi_event_group, RESTART);
             break;
         default:
@@ -89,6 +106,8 @@ static void get_device_service_name(char *service_name, size_t max)
 
 void trackle_utils_bt_provision_init()
 {
+    wifiProvisioningEvents = xEventGroupCreate();
+    xEventGroupSetBits(wifiProvisioningEvents, PROV_EVT_NO);
     ESP_ERROR_CHECK(esp_event_handler_register(WIFI_PROV_EVENT, ESP_EVENT_ANY_ID, &bt_event_handler, NULL));
 }
 
