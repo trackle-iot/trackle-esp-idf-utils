@@ -11,7 +11,7 @@
 #define JSON_BUFFER_LEN 1024 // Length of the buffer that holds the JSON string of the properties while it's being built.
 
 #define TRACKLE_PROPERTIES_TASK_NAME "trackle_utils_properties"
-#define TRACKLE_PROPERTIES_TASK_STACK_SIZE 4096
+#define TRACKLE_PROPERTIES_TASK_STACK_SIZE 8192
 #define TRACKLE_PROPERTIES_TASK_PRIORITY (tskIDLE_PRIORITY + 10)
 #define TRACKLE_PROPERTIES_TASK_CORE_ID 1
 #define TRACKLE_PROPERTIES_TASK_PERIOD_MS 100
