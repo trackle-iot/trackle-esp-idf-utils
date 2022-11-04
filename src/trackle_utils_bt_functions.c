@@ -1,7 +1,9 @@
 #include "trackle_utils_bt_functions.h"
 
+#include <stdio.h>
 #include <string.h>
 
+#include <esp_log.h>
 #include <wifi_provisioning/manager.h>
 
 typedef struct
@@ -10,27 +12,66 @@ typedef struct
     int (*function)(const char *arg);
 } BtFunction_t;
 
+typedef struct
+{
+    char name[MAX_BT_GET_NAME_LEN];
+    void *(*function)(const char *arg);
+    int dataType;
+} BtGet_t;
+
 static int actualBtFunctionsNum = 0;
 static BtFunction_t btFunctions[MAX_BT_FUNCTIONS_NUM];
+
+static int actualBtGetsNum = 0;
+static BtGet_t btGets[MAX_BT_GETS_NUM];
+
+static bool isNameAlreadyUsed(const char *name)
+{
+    for (int i = 0; i < actualBtFunctionsNum; i++)
+    {
+        if (strcmp(btFunctions[i].name, name) == 0)
+        {
+            return true;
+        }
+    }
+    for (int i = 0; i < actualBtGetsNum; i++)
+    {
+        if (strcmp(btGets[i].name, name) == 0)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool Trackle_BtFunction_add(const char *name, int (*function)(const char *))
 {
     if (actualBtFunctionsNum < MAX_BT_FUNCTIONS_NUM)
     {
-        for (int i = 0; i < actualBtFunctionsNum; i++)
-        {
-            if (strcmp(btFunctions[i].name, name) == 0)
-            {
-                return false; // Fail, functions already exist
-            }
-        }
-        if (strlen(name) + 1 > MAX_BT_FUNCTION_NAME_LEN) // +1 because there must be space for null character
-        {
+        if (isNameAlreadyUsed(name))
             return false;
-        }
+        if (strlen(name) + 1 > MAX_BT_FUNCTION_NAME_LEN) // +1 because there must be space for null character
+            return false;
         strcpy(btFunctions[actualBtFunctionsNum].name, name);
         btFunctions[actualBtFunctionsNum].function = function;
         actualBtFunctionsNum++;
+        return true;
+    }
+    return false;
+}
+
+bool Trackle_BtGet_add(const char *name, void (*function)(const char *), Data_TypeDef dataType)
+{
+    if (actualBtGetsNum < MAX_BT_GETS_NUM)
+    {
+        if (isNameAlreadyUsed(name))
+            return false;
+        if (strlen(name) + 1 > MAX_BT_GET_NAME_LEN) // +1 because there must be space for null character
+            return false;
+        strcpy(btGets[actualBtGetsNum].name, name);
+        btGets[actualBtGetsNum].function = function;
+        btGets[actualBtGetsNum].dataType = dataType;
+        actualBtGetsNum++;
         return true;
     }
     return false;
@@ -60,22 +101,90 @@ static esp_err_t btFunctionCallHandler(uint32_t session_id, const uint8_t *inbuf
     }
 
     const int btFunIdx = *((int *)&priv_data); // Interpret pointer as an integer representing the index of the function of interest.
-    int (*function)(const char *) = btFunctions[btFunIdx].function;
-    const int funRes = function(args); // TODO: return funRes in some way to the user (outbuf?).
+    if (btFunIdx < MAX_BT_FUNCTIONS_NUM)
+    {
+        int (*function)(const char *) = btFunctions[btFunIdx].function;
+        const int funRes = function(args);
+
+        // Return string containing function return code, if there is still memory for its string
+        char *funResStr = malloc(sizeof(char) * 20);
+        if (funResStr == NULL)
+            return ESP_ERR_NO_MEM;
+        sprintf(funResStr, "%d", funRes);
+        *outbuf = (uint8_t *)funResStr;
+        *outlen = strlen(funResStr) + 1;
+    }
+    else
+    {
+        void *(*function)(const char *) = btGets[btFunIdx - MAX_BT_FUNCTIONS_NUM].function;
+        const void *funRes = function(args);
+        char *funResStr = NULL;
+        switch (btGets[btFunIdx - MAX_BT_FUNCTIONS_NUM].dataType)
+        {
+        case VAR_BOOLEAN:
+        {
+            bool boolRes = *((bool *)funRes);
+            funResStr = strdup(boolRes ? "TRUE" : "FALSE");
+            break;
+        }
+        case VAR_CHAR:
+        {
+            char charRes[2];
+            charRes[0] = *((char *)funRes);
+            charRes[1] = '\0';
+            funResStr = strdup(charRes);
+            break;
+        }
+        case VAR_DOUBLE:
+        {
+            double doubleRes = *((double *)funRes);
+            char doubleResStr[128];
+            const int convBytes = snprintf(doubleResStr, 128, "%f", doubleRes);
+            if (convBytes < 0 || convBytes >= 128)
+                return ESP_ERR_NO_MEM;
+            funResStr = strdup(doubleResStr);
+            break;
+        }
+        case VAR_INT:
+        {
+            int intRes = *((int *)funRes);
+            char intResStr[20];
+            const int convBytes = snprintf(intResStr, 20, "%d", intRes);
+            if (convBytes < 0 || convBytes >= 20)
+                return ESP_ERR_NO_MEM;
+            funResStr = strdup(intResStr);
+            break;
+        }
+        case VAR_JSON:
+        case VAR_STRING:
+        {
+            char *stringRes = (char *)funRes;
+            funResStr = strdup(stringRes);
+            break;
+        }
+        case VAR_LONG:
+        {
+            long longRes = *((long *)funRes);
+            char longResStr[40];
+            const int convBytes = snprintf(longResStr, 40, "%ld", longRes);
+            if (convBytes < 0 || convBytes >= 40)
+                return ESP_ERR_NO_MEM;
+            funResStr = strdup(longResStr);
+            break;
+        }
+        default:
+            ESP_LOGE("", "Unexpected error");
+            return ESP_ERR_NO_MEM;
+        }
+        if (funResStr == NULL)
+            return ESP_ERR_NO_MEM;
+        *outbuf = (uint8_t *)funResStr;
+        *outlen = strlen(funResStr) + 1;
+    }
 
     // Deallocate string used as arg
     free(args);
 
-    // Return string containing function return code, if there is still memory for its string
-    char *funResStr = malloc(sizeof(char) * 20);
-    if (funResStr == NULL)
-    {
-        return ESP_ERR_NO_MEM;
-    }
-    funResStr[0] = '\0';
-    sprintf(funResStr, "%d", funRes);
-    *outbuf = (uint8_t *)funResStr;
-    *outlen = strlen(funResStr) + 1;
     return ESP_OK;
 }
 
@@ -85,9 +194,13 @@ esp_err_t btFunctionsEndpointsCreate()
     {
         const esp_err_t err = wifi_prov_mgr_endpoint_create(btFunctions[i].name);
         if (err != ESP_OK)
-        {
             return err;
-        }
+    }
+    for (int i = 0; i < actualBtGetsNum; i++)
+    {
+        const esp_err_t err = wifi_prov_mgr_endpoint_create(btGets[i].name);
+        if (err != ESP_OK)
+            return err;
     }
     return ESP_OK;
 }
@@ -98,9 +211,14 @@ esp_err_t btFunctionsEndpointsRegister()
     {
         const esp_err_t err = wifi_prov_mgr_endpoint_register(btFunctions[i].name, btFunctionCallHandler, *((void **)&i));
         if (err != ESP_OK)
-        {
             return err;
-        }
+    }
+    for (int i = 0; i < actualBtGetsNum; i++)
+    {
+        const int iPlusOffset = i + MAX_BT_FUNCTIONS_NUM;
+        const esp_err_t err = wifi_prov_mgr_endpoint_register(btGets[i].name, btFunctionCallHandler, *((void **)&i));
+        if (err != ESP_OK)
+            return err;
     }
     return ESP_OK;
 }
