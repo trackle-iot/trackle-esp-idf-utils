@@ -14,7 +14,7 @@
 #include <defines.h>
 
 bool Trackle_BtFunction_add(const char *name, int (*function)(const char *));
-bool Trackle_BtGet_add(const char *name, void (*function)(const char *), Data_TypeDef dataType);
+bool Trackle_BtGet_add(const char *name, void *(*function)(const char *), Data_TypeDef dataType);
 
 esp_err_t btFunctionsEndpointsCreate();
 esp_err_t btFunctionsEndpointsRegister();

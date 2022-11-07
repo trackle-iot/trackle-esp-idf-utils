@@ -60,7 +60,7 @@ bool Trackle_BtFunction_add(const char *name, int (*function)(const char *))
     return false;
 }
 
-bool Trackle_BtGet_add(const char *name, void (*function)(const char *), Data_TypeDef dataType)
+bool Trackle_BtGet_add(const char *name, void *(*function)(const char *), Data_TypeDef dataType)
 {
     if (actualBtGetsNum < MAX_BT_GETS_NUM)
     {
@@ -216,7 +216,7 @@ esp_err_t btFunctionsEndpointsRegister()
     for (int i = 0; i < actualBtGetsNum; i++)
     {
         const int iPlusOffset = i + MAX_BT_FUNCTIONS_NUM;
-        const esp_err_t err = wifi_prov_mgr_endpoint_register(btGets[i].name, btFunctionCallHandler, *((void **)&i));
+        const esp_err_t err = wifi_prov_mgr_endpoint_register(btGets[i].name, btFunctionCallHandler, *((void **)&iPlusOffset));
         if (err != ESP_OK)
             return err;
     }
