@@ -6,10 +6,8 @@
 
 #include "trackle_utils.h"
 
-#define WIFI_ESP_MAXIMUM_RETRY 5
 #define CHECK_WIFI_TIMEOUT 5000
 unsigned long timeout_connect_wifi = 0;
-static int s_retry_num = 0;
 esp_netif_t *sta_netif;
 
 static const char *WIFI_TAG = "trackle-utils-wifi";
@@ -47,7 +45,6 @@ static void event_handler(void *arg, esp_event_base_t event_base,
         {
             ESP_LOGI(WIFI_TAG, "Connecting to the AP");
             xEventGroupSetBits(s_wifi_event_group, WIFI_TO_CONNECT_BIT); // connettiti
-            // esp_wifi_connect();
             timeout_connect_wifi = millis();
         }
         else if (currentMode == WIFI_MODE_APSTA)
@@ -62,7 +59,6 @@ static void event_handler(void *arg, esp_event_base_t event_base,
         ESP_LOGW(WIFI_TAG, "Wifi disconnection event: %d...", event->reason);
         // wifi_err_reason_t
 
-        // esp_wifi_connect();
         timeout_connect_wifi = millis() + CHECK_WIFI_TIMEOUT;
         xEventGroupClearBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
     }
@@ -70,7 +66,6 @@ static void event_handler(void *arg, esp_event_base_t event_base,
     {
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
         ESP_LOGW(WIFI_TAG, "Got ip:" IPSTR, IP2STR(&event->ip_info.ip));
-        s_retry_num = 0;
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
     }
 }
@@ -128,18 +123,8 @@ void trackle_utils_wifi_loop()
         timeout_connect_wifi = 0;
         if ((bits & WIFI_TO_CONNECT_BIT))
         {
-            if (s_retry_num < WIFI_ESP_MAXIMUM_RETRY)
-            {
-                s_retry_num++;
-                ESP_LOGI(WIFI_TAG, "Trying to connect to the AP, %d of %d", s_retry_num, WIFI_ESP_MAXIMUM_RETRY);
-                esp_wifi_connect();
-            }
-            else
-            {
-                ESP_LOGI(WIFI_TAG, "Restarting......");
-                s_retry_num = 0;
-                // reinit_wifi(); //TODO check if necessary
-            }
+            ESP_LOGI(WIFI_TAG, "Trying to connect to the AP...");
+            esp_wifi_connect();
         }
     }
 }
