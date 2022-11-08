@@ -6,6 +6,9 @@
 #include "trackle_utils_wifi.h"
 #include "trackle_utils_bt_functions.h"
 #include "trackle_utils.h"
+#include "trackle_utils_claimcode.h"
+
+#include "trackle_esp32.h"
 
 #include <wifi_provisioning/manager.h>
 #include <wifi_provisioning/scheme_ble.h>
@@ -104,11 +107,33 @@ static void get_device_service_name(char *service_name, size_t max)
     snprintf(service_name, max, "%s%02X%02X%02X", ssid_prefix, eth_mac[3], eth_mac[4], eth_mac[5]);
 }
 
+static int btPostCbClaimCode(const char *args)
+{
+    char *key = strtok(args, ",");
+    if (key == NULL || strcmp(key, "cc") != 0)
+    {
+        ESP_LOGE("cc", "Invalid key for setting claim code");
+        return -1;
+    }
+    char *claimCode = strtok(NULL, ",");
+    if (key == NULL || strlen(claimCode) != 63)
+    {
+        ESP_LOGE("cc", "Invalid claim code");
+        return -1;
+    }
+    ESP_LOGE("cc", "Claim code received successfully:");
+    ESP_LOG_BUFFER_CHAR_LEVEL("cc", claimCode, CLAIM_CODE_LENGTH, ESP_LOG_ERROR);
+    trackleSetClaimCode(trackle_s, claimCode);
+    Trackle_saveClaimCode(claimCode);
+    return 1;
+}
+
 void trackle_utils_bt_provision_init()
 {
     wifiProvisioningEvents = xEventGroupCreate();
     xEventGroupSetBits(wifiProvisioningEvents, PROV_EVT_NO);
     ESP_ERROR_CHECK(esp_event_handler_register(WIFI_PROV_EVENT, ESP_EVENT_ANY_ID, &bt_event_handler, NULL));
+    configASSERT(Trackle_BtPost_add("cc", btPostCbClaimCode));
 }
 
 void trackle_utils_bt_provision_loop()
