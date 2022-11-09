@@ -17,3 +17,9 @@ See ```trackle_utils_notifications.h``` for functions to be used with notificati
 BT provisioning functions are functions that can be invoked by a client (app, PC program, etc.) on the ESP32 that implements them, either to retrieve data (GET functions) or to send data (POST functions) to the device.
 
 See ```trackle_utils_bt_functions.h``` for functions to be used with BT functions.
+
+## Claim code
+
+Claim code can be written to and loaded from NVS, ESP32's flash storage.
+
+See ```trackle_utils_claimcode.h``` for functions to be used with BT functions.

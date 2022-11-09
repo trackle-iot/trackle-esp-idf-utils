@@ -77,6 +77,9 @@ $(function() {
   <div class="headertitle"><div class="title">trackle_utils_bt_functions.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Functions for working with bluetooth functions. Read the full description to learn about BT functions.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &lt;esp_err.h&gt;</code><br />
 <code>#include &lt;defines.h&gt;</code><br />
@@ -109,7 +112,18 @@ Functions</h2></td></tr>
 <tr class="memdesc:a4625feaca2e20f96816b7e278b9cf26f"><td class="mdescLeft">&#160;</td><td class="mdescRight">ONLY FOR INTERNAL USAGE. DON'T CALL IN APPLICATION CODE!  <a href="trackle__utils__bt__functions_8h.html#a4625feaca2e20f96816b7e278b9cf26f">More...</a><br /></td></tr>
 <tr class="separator:a4625feaca2e20f96816b7e278b9cf26f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Functions for working with bluetooth functions. Read the full description to learn about BT functions. </p>
+<p >While performing WiFi provisioning via Espressif's own mechanism, it is possible to provide the client (app, PC, etc.) the ability to invoke special functions on the ESP32 target.</p>
+<p >Please, note that such functions can be called only during provisioning.</p>
+<p >There are two kinds of functions:</p><ul>
+<li>GET functions;</li>
+<li>POST functions.</li>
+</ul>
+<p >GET functions can be used to retrieve data from the target (available datatypes are int, long, string, JSON, boolean, char, double).</p>
+<p >POST functions are meant to be used to send data to the target.</p>
+<p >Both kinds of functions are designed to be compatible with GETs and POSTs used with the Trackle cloud platform. So the same functions can be made accessible also during provisioning via Bluetooth. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="af69ac27f63c73ea8b7a23f9ac5f0b21e" name="af69ac27f63c73ea8b7a23f9ac5f0b21e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af69ac27f63c73ea8b7a23f9ac5f0b21e">&#9670;&#160;</a></span>MAX_BT_GET_NAME_LEN</h2>
 

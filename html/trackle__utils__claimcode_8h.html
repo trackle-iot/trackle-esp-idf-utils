@@ -77,6 +77,9 @@ $(function() {
   <div class="headertitle"><div class="title">trackle_utils_claimcode.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Functions and constants for working with the claimcode.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;esp_types.h&gt;</code><br />
 <code>#include &lt;inttypes.h&gt;</code><br />
 </div>
@@ -85,16 +88,21 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a2b2d8f4a427e6ab42fd8c3a3afd716f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__claimcode_8h.html#a2b2d8f4a427e6ab42fd8c3a3afd716f9">CLAIM_CODE_LENGTH</a>&#160;&#160;&#160;63</td></tr>
+<tr class="memdesc:a2b2d8f4a427e6ab42fd8c3a3afd716f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Length of a valid claim code.  <a href="trackle__utils__claimcode_8h.html#a2b2d8f4a427e6ab42fd8c3a3afd716f9">More...</a><br /></td></tr>
 <tr class="separator:a2b2d8f4a427e6ab42fd8c3a3afd716f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a76677cc9fd97c16baaf467495b91cce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__claimcode_8h.html#a76677cc9fd97c16baaf467495b91cce9">Trackle_saveClaimCode</a> (const char *claimCode)</td></tr>
+<tr class="memdesc:a76677cc9fd97c16baaf467495b91cce9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the provided claim code to NVS. The provided claimCode is expected to be at least <a class="el" href="trackle__utils__claimcode_8h.html#a2b2d8f4a427e6ab42fd8c3a3afd716f9">CLAIM_CODE_LENGTH</a> bytes long.  <a href="trackle__utils__claimcode_8h.html#a76677cc9fd97c16baaf467495b91cce9">More...</a><br /></td></tr>
 <tr class="separator:a76677cc9fd97c16baaf467495b91cce9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d531b222ce72d581a99f389d9fabc56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__claimcode_8h.html#a3d531b222ce72d581a99f389d9fabc56">Trackle_loadClaimCode</a> ()</td></tr>
+<tr class="memdesc:a3d531b222ce72d581a99f389d9fabc56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load claim code from NVS and set as current claim code in the library. If no claim code can be retrieved from NVS, do nothing.  <a href="trackle__utils__claimcode_8h.html#a3d531b222ce72d581a99f389d9fabc56">More...</a><br /></td></tr>
 <tr class="separator:a3d531b222ce72d581a99f389d9fabc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Functions and constants for working with the claimcode. </p>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a2b2d8f4a427e6ab42fd8c3a3afd716f9" name="a2b2d8f4a427e6ab42fd8c3a3afd716f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b2d8f4a427e6ab42fd8c3a3afd716f9">&#9670;&#160;</a></span>CLAIM_CODE_LENGTH</h2>
 
@@ -106,6 +114,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Length of a valid claim code. </p>
 
 </div>
 </div>
@@ -125,6 +135,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Load claim code from NVS and set as current claim code in the library. If no claim code can be retrieved from NVS, do nothing. </p>
+
 </div>
 </div>
 <a id="a76677cc9fd97c16baaf467495b91cce9" name="a76677cc9fd97c16baaf467495b91cce9"></a>
@@ -142,6 +154,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Save the provided claim code to NVS. The provided claimCode is expected to be at least <a class="el" href="trackle__utils__claimcode_8h.html#a2b2d8f4a427e6ab42fd8c3a3afd716f9">CLAIM_CODE_LENGTH</a> bytes long. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">claimCode</td><td>Claim code to save to NVS </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
