@@ -92,7 +92,7 @@ static esp_err_t btFunctionCallHandler(uint32_t session_id, const uint8_t *inbuf
     }
     else
     {
-        args = malloc(sizeof(uint8_t) * inlen + 1);
+        args = malloc(sizeof(uint8_t) * (inlen + 1));
         if (args == NULL)
         {
             return ESP_ERR_NO_MEM;
