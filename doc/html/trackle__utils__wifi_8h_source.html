@@ -20,7 +20,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_k.e323666f.png"/></td>
   <td id="projectalign">
    <div id="projectname">Trackle Utils
    </div>
@@ -74,22 +73,22 @@ $(function() {
   <div class="headertitle"><div class="title">trackle_utils_wifi.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="trackle__utils__wifi_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TRACKLE_UTILS_WIFI_H</span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef TRACKLE_UTILS_WIFI_H</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define TRACKLE_UTILS_WIFI_H</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;esp_wifi.h&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="trackle__utils_8h.html">trackle_utils.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;trackle_utils.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#af18659fe29b775619edd93608c136f7f">    9</a></span><span class="preprocessor">#define CHECK_WIFI_TIMEOUT 5000</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">   10</a></span><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code hl_variable" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> = 0;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#a8475209c3d16d25790fc4b67e18f3f57">   11</a></span>esp_netif_t *<a class="code hl_variable" href="trackle__utils__wifi_8h.html#a8475209c3d16d25790fc4b67e18f3f57">sta_netif</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define CHECK_WIFI_TIMEOUT 5000</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> timeout_connect_wifi = 0;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>esp_netif_t *sta_netif;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span> *WIFI_TAG = <span class="stringliteral">&quot;trackle-utils-wifi&quot;</span>;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// return ESP_OK if wisi is provisioned (strlen ssid &gt; 0), else ESP_FAIL</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#a070e7458bd4670954a7512f1e1f2b201">   16</a></span>esp_err_t <a class="code hl_function" href="trackle__utils__wifi_8h.html#a070e7458bd4670954a7512f1e1f2b201">wifi_is_provisioned</a>()</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>esp_err_t wifi_is_provisioned()</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="comment">/* Get Wi-Fi Station configuration */</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    wifi_config_t wifi_cfg;</div>
@@ -120,13 +119,13 @@ $(function() {
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordflow">if</span> (currentMode == WIFI_MODE_STA)</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        {</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>            ESP_LOGI(WIFI_TAG, <span class="stringliteral">&quot;Connecting to the AP&quot;</span>);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            xEventGroupSetBits(<a class="code hl_variable" href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a>, <a class="code hl_define" href="trackle__utils_8h.html#a6b9162dc5c1626c8b075c6c60dfc4132">WIFI_TO_CONNECT_BIT</a>); <span class="comment">// connettiti</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            <a class="code hl_variable" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> = millis();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>            xEventGroupSetBits(s_wifi_event_group, WIFI_TO_CONNECT_BIT); <span class="comment">// connettiti</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>            timeout_connect_wifi = millis();</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        }</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (currentMode == WIFI_MODE_APSTA)</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        {</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>            ESP_LOGI(WIFI_TAG, <span class="stringliteral">&quot;APMode, not connecting....&quot;</span>);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            xEventGroupClearBits(<a class="code hl_variable" href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a>, <a class="code hl_define" href="trackle__utils_8h.html#a6b9162dc5c1626c8b075c6c60dfc4132">WIFI_TO_CONNECT_BIT</a>); <span class="comment">// non cercare di riconnetterti</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>            xEventGroupClearBits(s_wifi_event_group, WIFI_TO_CONNECT_BIT); <span class="comment">// non cercare di riconnetterti</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        }</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event_base == WIFI_EVENT &amp;&amp; event_id == WIFI_EVENT_STA_DISCONNECTED)</div>
@@ -135,23 +134,23 @@ $(function() {
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        ESP_LOGW(WIFI_TAG, <span class="stringliteral">&quot;Wifi disconnection event: %d...&quot;</span>, event-&gt;reason);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="comment">// wifi_err_reason_t</span></div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <a class="code hl_variable" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> = millis() + <a class="code hl_define" href="trackle__utils__wifi_8h.html#af18659fe29b775619edd93608c136f7f">CHECK_WIFI_TIMEOUT</a>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        xEventGroupClearBits(<a class="code hl_variable" href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a>, <a class="code hl_define" href="trackle__utils_8h.html#ad552e7688532cbbecd3967538ced06ac">WIFI_CONNECTED_BIT</a>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        timeout_connect_wifi = millis() + CHECK_WIFI_TIMEOUT;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        xEventGroupClearBits(s_wifi_event_group, WIFI_CONNECTED_BIT);</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    }</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (event_base == IP_EVENT &amp;&amp; event_id == IP_EVENT_STA_GOT_IP)</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        ip_event_got_ip_t *<span class="keyword">event</span> = (ip_event_got_ip_t *)event_data;</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        ESP_LOGW(WIFI_TAG, <span class="stringliteral">&quot;Got ip:&quot;</span> IPSTR, IP2STR(&amp;event-&gt;ip_info.ip));</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        xEventGroupSetBits(<a class="code hl_variable" href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a>, <a class="code hl_define" href="trackle__utils_8h.html#ad552e7688532cbbecd3967538ced06ac">WIFI_CONNECTED_BIT</a>);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#af67410a15ecc24ecef0e5abce0c5b30c">   73</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="trackle__utils__wifi_8h.html#af67410a15ecc24ecef0e5abce0c5b30c">wifi_init</a>()</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="keywordtype">void</span> wifi_init()</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>{</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    ESP_LOGI(WIFI_TAG, <span class="stringliteral">&quot;wifi_init....&quot;</span>);</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="comment">// init event group</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <a class="code hl_variable" href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a> = xEventGroupCreate();</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    s_wifi_event_group = xEventGroupCreate();</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    ESP_ERROR_CHECK(esp_netif_init());</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    ESP_ERROR_CHECK(esp_event_loop_create_default());</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
@@ -159,7 +158,7 @@ $(function() {
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    ESP_ERROR_CHECK(esp_event_handler_register(WIFI_EVENT, ESP_EVENT_ANY_ID, &amp;event_handler, NULL));</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    ESP_ERROR_CHECK(esp_event_handler_register(IP_EVENT, IP_EVENT_STA_GOT_IP, &amp;event_handler, NULL));</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_variable" href="trackle__utils__wifi_8h.html#a8475209c3d16d25790fc4b67e18f3f57">sta_netif</a> = esp_netif_create_default_wifi_sta();</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    sta_netif = esp_netif_create_default_wifi_sta();</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    ESP_ERROR_CHECK(esp_wifi_init(&amp;cfg));</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    esp_wifi_set_storage(WIFI_STORAGE_FLASH);</div>
@@ -180,7 +179,7 @@ $(function() {
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">    ESP_LOGI(WIFI_TAG, &quot;esp_wifi_start.....&quot;);</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">}*/</span></div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#aaf48dd31815d6c6e4a94cebfb63e56a3">  107</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="trackle__utils__wifi_8h.html#aaf48dd31815d6c6e4a94cebfb63e56a3">wifi_init_sta</a>()</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="keywordtype">void</span> wifi_init_sta()</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>{</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    ESP_ERROR_CHECK(esp_wifi_start());</div>
@@ -188,16 +187,16 @@ $(function() {
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    ESP_LOGI(WIFI_TAG, <span class="stringliteral">&quot;wifi_init_sta finished.&quot;</span>);</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="trackle__utils__wifi_8h.html#a7e0c1523bc1ca08e141060a7c8635f0a">  115</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="trackle__utils__wifi_8h.html#a7e0c1523bc1ca08e141060a7c8635f0a">trackle_utils_wifi_loop</a>()</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keywordtype">void</span> trackle_utils_wifi_loop()</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>{</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    EventBits_t bits = xEventGroupGetBits(<a class="code hl_variable" href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a>);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    EventBits_t bits = xEventGroupGetBits(s_wifi_event_group);</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    uint32_t loop_millis = millis();</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="comment">// check connessione wifi</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> &gt; 0 &amp;&amp; <a class="code hl_variable" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> &lt; loop_millis)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    <span class="keywordflow">if</span> (timeout_connect_wifi &gt; 0 &amp;&amp; timeout_connect_wifi &lt; loop_millis)</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    {</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <a class="code hl_variable" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> = 0;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> ((bits &amp; <a class="code hl_define" href="trackle__utils_8h.html#a6b9162dc5c1626c8b075c6c60dfc4132">WIFI_TO_CONNECT_BIT</a>))</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        timeout_connect_wifi = 0;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span> ((bits &amp; WIFI_TO_CONNECT_BIT))</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        {</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            ESP_LOGI(WIFI_TAG, <span class="stringliteral">&quot;Trying to connect to the AP...&quot;</span>);</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            esp_wifi_connect();</div>
@@ -206,17 +205,6 @@ $(function() {
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="atrackle__utils_8h_html"><div class="ttname"><a href="trackle__utils_8h.html">trackle_utils.h</a></div></div>
-<div class="ttc" id="atrackle__utils_8h_html_a6aaca350cca4b3d105d88a6f399cb381"><div class="ttname"><a href="trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381">s_wifi_event_group</a></div><div class="ttdeci">EventGroupHandle_t s_wifi_event_group</div></div>
-<div class="ttc" id="atrackle__utils_8h_html_a6b9162dc5c1626c8b075c6c60dfc4132"><div class="ttname"><a href="trackle__utils_8h.html#a6b9162dc5c1626c8b075c6c60dfc4132">WIFI_TO_CONNECT_BIT</a></div><div class="ttdeci">#define WIFI_TO_CONNECT_BIT</div><div class="ttdef"><b>Definition:</b> trackle_utils.h:18</div></div>
-<div class="ttc" id="atrackle__utils_8h_html_ad552e7688532cbbecd3967538ced06ac"><div class="ttname"><a href="trackle__utils_8h.html#ad552e7688532cbbecd3967538ced06ac">WIFI_CONNECTED_BIT</a></div><div class="ttdeci">#define WIFI_CONNECTED_BIT</div><div class="ttdef"><b>Definition:</b> trackle_utils.h:17</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_a070e7458bd4670954a7512f1e1f2b201"><div class="ttname"><a href="trackle__utils__wifi_8h.html#a070e7458bd4670954a7512f1e1f2b201">wifi_is_provisioned</a></div><div class="ttdeci">esp_err_t wifi_is_provisioned()</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:16</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_a4761d43b92b1ef8b6e00519d3d589ecf"><div class="ttname"><a href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a></div><div class="ttdeci">unsigned long timeout_connect_wifi</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:10</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_a7e0c1523bc1ca08e141060a7c8635f0a"><div class="ttname"><a href="trackle__utils__wifi_8h.html#a7e0c1523bc1ca08e141060a7c8635f0a">trackle_utils_wifi_loop</a></div><div class="ttdeci">void trackle_utils_wifi_loop()</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:115</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_a8475209c3d16d25790fc4b67e18f3f57"><div class="ttname"><a href="trackle__utils__wifi_8h.html#a8475209c3d16d25790fc4b67e18f3f57">sta_netif</a></div><div class="ttdeci">esp_netif_t * sta_netif</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:11</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_aaf48dd31815d6c6e4a94cebfb63e56a3"><div class="ttname"><a href="trackle__utils__wifi_8h.html#aaf48dd31815d6c6e4a94cebfb63e56a3">wifi_init_sta</a></div><div class="ttdeci">void wifi_init_sta()</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:107</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_af18659fe29b775619edd93608c136f7f"><div class="ttname"><a href="trackle__utils__wifi_8h.html#af18659fe29b775619edd93608c136f7f">CHECK_WIFI_TIMEOUT</a></div><div class="ttdeci">#define CHECK_WIFI_TIMEOUT</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:9</div></div>
-<div class="ttc" id="atrackle__utils__wifi_8h_html_af67410a15ecc24ecef0e5abce0c5b30c"><div class="ttname"><a href="trackle__utils__wifi_8h.html#af67410a15ecc24ecef0e5abce0c5b30c">wifi_init</a></div><div class="ttdeci">void wifi_init()</div><div class="ttdef"><b>Definition:</b> trackle_utils_wifi.h:73</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

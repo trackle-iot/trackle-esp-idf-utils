@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['getgmtimestamp_0',['getGmTimestamp',['../trackle__utils_8h.html#aba0bed0e1689801a1985fab37e0d6602',1,'trackle_utils.h']]]
+  ['hextostring_0',['hexToString',['../trackle__utils_8h.html#a53c860f31c2a9cf04a1b2720359a9dd8',1,'trackle_utils.h']]]
 ];

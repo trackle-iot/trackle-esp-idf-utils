@@ -14,6 +14,11 @@ static const char *OTA_EVENT_NAME = "trackle/device/update/status";
 char ota_url[256];
 bool safe_ota = false;
 
+/**
+ * @file trackle_utils_ota.h
+ * @brief Utilities to implement Over The Air firmware updates.
+ */
+
 esp_err_t _http_event_handler(esp_http_client_event_t *evt)
 {
     switch (evt->event_id)
@@ -48,7 +53,7 @@ void simple_ota_task(void *pvParameter)
     ESP_LOGW(OTA_TAG, "Starting OTA %s", ota_url);
     tracklePublishSecure(OTA_EVENT_NAME, "started");
 
-    xEventGroupSetBits(s_wifi_event_group, OTA_UPDATING); //updating
+    xEventGroupSetBits(s_wifi_event_group, OTA_UPDATING); // updating
     vTaskDelay(1000 / portTICK_PERIOD_MS);
 
     esp_http_client_config_t config = {
@@ -67,12 +72,16 @@ void simple_ota_task(void *pvParameter)
     else
     {
         tracklePublishSecure(OTA_EVENT_NAME, "failed");
-        xEventGroupClearBits(s_wifi_event_group, OTA_UPDATING); //stop updating
+        xEventGroupClearBits(s_wifi_event_group, OTA_UPDATING); // stop updating
         vTaskDelete(NULL);
     }
 }
 
-// callback a cui viene inviata la richiesta di ota da url
+/**
+ * @brief Callback meant to be given as parameter to \ref trackleSetFirmwareUrlUpdateCallback to implement OTA via URL.
+ *
+ * @param data JSON string containing the "url" key, that points to the URL of the firmware to be downloaded.
+ */
 void firmware_ota_url(const char *data)
 {
     ESP_LOGI(OTA_TAG, "firmware_ota_url %s", data);

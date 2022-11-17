@@ -54,14 +54,10 @@ bool Trackle_BtPost_add(const char *name, int (*function)(const char *));
  */
 bool Trackle_BtGet_add(const char *name, void *(*function)(const char *), Data_TypeDef dataType);
 
-/**
- * @brief ONLY FOR INTERNAL USAGE. DON'T CALL IN APPLICATION CODE!
- */
+// ONLY FOR INTERNAL USAGE. DON'T CALL IN APPLICATION CODE!
 esp_err_t btFunctionsEndpointsCreate();
 
-/**
- * @brief ONLY FOR INTERNAL USAGE. DON'T CALL IN APPLICATION CODE!
- */
+// ONLY FOR INTERNAL USAGE. DON'T CALL IN APPLICATION CODE!
 esp_err_t btFunctionsEndpointsRegister();
 
 #endif

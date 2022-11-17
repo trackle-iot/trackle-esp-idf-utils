@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['readconfigfromstorage_0',['readConfigFromStorage',['../trackle__utils__storage_8h.html#a4c74614bb8cadb981faf5d5b724ee97d',1,'trackle_utils_storage.h']]],
-  ['readdeviceinfofromstorage_1',['readDeviceInfoFromStorage',['../trackle__utils__storage_8h.html#acc2356381872d16b92c5fe484ab5f567',1,'trackle_utils_storage.h']]],
-  ['readme_2emd_2',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['restart_3',['RESTART',['../trackle__utils_8h.html#acfe2df1dab131d83f22efc4dcc9c6374',1,'trackle_utils.h']]]
+  ['s_5fwifi_5fevent_5fgroup_0',['s_wifi_event_group',['../trackle__utils_8h.html#a6aaca350cca4b3d105d88a6f399cb381',1,'trackle_utils.h']]],
+  ['safe_5fota_1',['safe_ota',['../trackle__utils__ota_8h.html#a855291fb065f80e9a0f8f93de3f25978',1,'trackle_utils_ota.h']]],
+  ['splitstring_2',['splitString',['../trackle__utils_8h.html#aa4389eec9f363a491d4b5679b26e3c3d',1,'trackle_utils.h']]],
+  ['sta_5fnetif_3',['sta_netif',['../trackle__utils__wifi_8h.html#a8475209c3d16d25790fc4b67e18f3f57',1,'trackle_utils_wifi.h']]],
+  ['start_5fprovisioning_4',['START_PROVISIONING',['../trackle__utils_8h.html#a4e00f705d8c6b61ebf4470c4f5793cee',1,'trackle_utils.h']]],
+  ['string_5fdevice_5fid_5',['string_device_id',['../trackle__utils__storage_8h.html#a2f5c2bd285ab79cac4981636defa0a2b',1,'trackle_utils_storage.h']]],
+  ['stringtohex_6',['stringToHex',['../trackle__utils_8h.html#a1fc69e2dc8816830c378eb4881ac25f2',1,'trackle_utils.h']]]
 ];

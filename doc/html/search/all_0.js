@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5fhttp_5fevent_5fhandler_0',['_http_event_handler',['../trackle__utils__ota_8h.html#ae7c4f5057d30a650919c74c7f9e7d67c',1,'trackle_utils_ota.h']]]
+  ['claim_5fcode_5flength_0',['CLAIM_CODE_LENGTH',['../trackle__utils__claimcode_8h.html#a2b2d8f4a427e6ab42fd8c3a3afd716f9',1,'trackle_utils_claimcode.h']]]
 ];

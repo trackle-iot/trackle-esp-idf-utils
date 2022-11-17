@@ -20,7 +20,6 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
-  <td id="projectlogo"><img alt="Logo" src="logo_k.e323666f.png"/></td>
   <td id="projectalign">
    <div id="projectname">Trackle Utils
    </div>
@@ -72,54 +71,30 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">trackle_utils_ota.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Utilities to implement Over The Air firmware updates.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;esp_ota_ops.h&quot;</code><br />
 <code>#include &quot;esp_http_client.h&quot;</code><br />
 <code>#include &quot;esp_https_ota.h&quot;</code><br />
 <code>#include &quot;cJSON.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="trackle__utils_8h_source.html">trackle_utils.h</a>&quot;</code><br />
+<code>#include &quot;trackle_utils.h&quot;</code><br />
 </div>
 <p><a href="trackle__utils__ota_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae7c4f5057d30a650919c74c7f9e7d67c"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__ota_8h.html#ae7c4f5057d30a650919c74c7f9e7d67c">_http_event_handler</a> (esp_http_client_event_t *evt)</td></tr>
-<tr class="separator:ae7c4f5057d30a650919c74c7f9e7d67c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab11284ede385340cba8278bbc2df3f8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__ota_8h.html#ab11284ede385340cba8278bbc2df3f8e">simple_ota_task</a> (void *pvParameter)</td></tr>
-<tr class="separator:ab11284ede385340cba8278bbc2df3f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2e187542a74410e3d1eabae0a6708c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__ota_8h.html#ac2e187542a74410e3d1eabae0a6708c4">firmware_ota_url</a> (const char *data)</td></tr>
+<tr class="memdesc:ac2e187542a74410e3d1eabae0a6708c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback meant to be given as parameter to trackleSetFirmwareUrlUpdateCallback to implement OTA via URL.  <a href="trackle__utils__ota_8h.html#ac2e187542a74410e3d1eabae0a6708c4">More...</a><br /></td></tr>
 <tr class="separator:ac2e187542a74410e3d1eabae0a6708c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a79646eaa928ba247387a11eb7360e5e8"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__ota_8h.html#a79646eaa928ba247387a11eb7360e5e8">ota_url</a> [256]</td></tr>
-<tr class="separator:a79646eaa928ba247387a11eb7360e5e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a855291fb065f80e9a0f8f93de3f25978"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__ota_8h.html#a855291fb065f80e9a0f8f93de3f25978">safe_ota</a> = false</td></tr>
-<tr class="separator:a855291fb065f80e9a0f8f93de3f25978"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ae7c4f5057d30a650919c74c7f9e7d67c" name="ae7c4f5057d30a650919c74c7f9e7d67c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7c4f5057d30a650919c74c7f9e7d67c">&#9670;&#160;</a></span>_http_event_handler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_err_t _http_event_handler </td>
-          <td>(</td>
-          <td class="paramtype">esp_http_client_event_t *&#160;</td>
-          <td class="paramname"><em>evt</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Utilities to implement Over The Air firmware updates. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac2e187542a74410e3d1eabae0a6708c4" name="ac2e187542a74410e3d1eabae0a6708c4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2e187542a74410e3d1eabae0a6708c4">&#9670;&#160;</a></span>firmware_ota_url()</h2>
 
@@ -136,52 +111,13 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="ab11284ede385340cba8278bbc2df3f8e" name="ab11284ede385340cba8278bbc2df3f8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab11284ede385340cba8278bbc2df3f8e">&#9670;&#160;</a></span>simple_ota_task()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void simple_ota_task </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>pvParameter</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a79646eaa928ba247387a11eb7360e5e8" name="a79646eaa928ba247387a11eb7360e5e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79646eaa928ba247387a11eb7360e5e8">&#9670;&#160;</a></span>ota_url</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">char ota_url[256]</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a855291fb065f80e9a0f8f93de3f25978" name="a855291fb065f80e9a0f8f93de3f25978"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a855291fb065f80e9a0f8f93de3f25978">&#9670;&#160;</a></span>safe_ota</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool safe_ota = false</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Callback meant to be given as parameter to trackleSetFirmwareUrlUpdateCallback to implement OTA via URL. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>JSON string containing the "url" key, that points to the URL of the firmware to be downloaded. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

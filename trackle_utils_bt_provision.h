@@ -15,6 +15,11 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/event_groups.h>
 
+/**
+ * @file trackle_utils_bt_provision.h
+ * @brief Functions to perform Bluetooth provisioning.
+ */
+
 // Wifi provisioning event bits
 #define PROV_EVT_NO BIT0
 #define PROV_EVT_OK BIT1
@@ -99,6 +104,12 @@ static void bt_event_handler(void *arg, esp_event_base_t event_base,
     ESP_LOGI(BT_TAG, "end bt_event_handler: -------------------");
 }
 
+/**
+ * @brief Get the device's name as seen during a scan.
+ *
+ * @param service_name Buffer where to save the retrieved device name.
+ * @param max Max length of the device name to store in the buffer (if longer, it will be truncated to this length)
+ */
 static void get_device_service_name(char *service_name, size_t max)
 {
     uint8_t eth_mac[6];
@@ -128,6 +139,9 @@ static int btPostCbClaimCode(const char *args)
     return 1;
 }
 
+/**
+ * @brief Start BT provisioning.
+ */
 void trackle_utils_bt_provision_init()
 {
     wifiProvisioningEvents = xEventGroupCreate();
@@ -136,6 +150,9 @@ void trackle_utils_bt_provision_init()
     configASSERT(Trackle_BtPost_add("cc", btPostCbClaimCode));
 }
 
+/**
+ * @brief Function that must be called periodically during BT provisioning.
+ */
 void trackle_utils_bt_provision_loop()
 {
     EventBits_t bits = xEventGroupGetBits(s_wifi_event_group);

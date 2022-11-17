@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['max_5fbt_5fget_5fname_5flen_0',['MAX_BT_GET_NAME_LEN',['../trackle__utils__bt__functions_8h.html#af69ac27f63c73ea8b7a23f9ac5f0b21e',1,'trackle_utils_bt_functions.h']]],
-  ['max_5fbt_5fgets_5fnum_1',['MAX_BT_GETS_NUM',['../trackle__utils__bt__functions_8h.html#afd09d973988f95fe9a6a5c69e7c1f85a',1,'trackle_utils_bt_functions.h']]],
-  ['max_5fbt_5fpost_5fname_5flen_2',['MAX_BT_POST_NAME_LEN',['../trackle__utils__bt__functions_8h.html#aa736529397ca6644d343dadb80f974af',1,'trackle_utils_bt_functions.h']]],
-  ['max_5fbt_5fposts_5fnum_3',['MAX_BT_POSTS_NUM',['../trackle__utils__bt__functions_8h.html#a694c5a11cc3a9d692a49fcddfddda247',1,'trackle_utils_bt_functions.h']]]
+  ['old_5ffactory_5fpartition_0',['OLD_FACTORY_PARTITION',['../trackle__utils__storage_8h.html#a7dc3f76e51d5ac24ce330ace7bd75b2d',1,'trackle_utils_storage.h']]],
+  ['ota_5fupdating_1',['OTA_UPDATING',['../trackle__utils_8h.html#aff8a44b6213dfe96816a60cb03c2dc78',1,'trackle_utils.h']]],
+  ['ota_5furl_2',['ota_url',['../trackle__utils__ota_8h.html#a79646eaa928ba247387a11eb7360e5e8',1,'trackle_utils_ota.h']]]
 ];

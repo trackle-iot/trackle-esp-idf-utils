@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['readconfigfromstorage_0',['readConfigFromStorage',['../trackle__utils__storage_8h.html#a4c74614bb8cadb981faf5d5b724ee97d',1,'trackle_utils_storage.h']]],
-  ['readdeviceinfofromstorage_1',['readDeviceInfoFromStorage',['../trackle__utils__storage_8h.html#acc2356381872d16b92c5fe484ab5f567',1,'trackle_utils_storage.h']]]
+  ['splitstring_0',['splitString',['../trackle__utils_8h.html#aa4389eec9f363a491d4b5679b26e3c3d',1,'trackle_utils.h']]],
+  ['stringtohex_1',['stringToHex',['../trackle__utils_8h.html#a1fc69e2dc8816830c378eb4881ac25f2',1,'trackle_utils.h']]]
 ];
