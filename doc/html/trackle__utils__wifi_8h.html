@@ -71,74 +71,39 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">trackle_utils_wifi.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Functions to manage the connection of the device to WLAN via Wi-Fi.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string.h&gt;</code><br />
 <code>#include &quot;esp_wifi.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="trackle__utils_8h_source.html">trackle_utils.h</a>&quot;</code><br />
 </div>
 <p><a href="trackle__utils__wifi_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:af18659fe29b775619edd93608c136f7f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#af18659fe29b775619edd93608c136f7f">CHECK_WIFI_TIMEOUT</a>&#160;&#160;&#160;5000</td></tr>
-<tr class="separator:af18659fe29b775619edd93608c136f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a070e7458bd4670954a7512f1e1f2b201"><td class="memItemLeft" align="right" valign="top">esp_err_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#a070e7458bd4670954a7512f1e1f2b201">wifi_is_provisioned</a> ()</td></tr>
+<tr class="memdesc:a070e7458bd4670954a7512f1e1f2b201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tells if WiFi credentials have been set.  <a href="trackle__utils__wifi_8h.html#a070e7458bd4670954a7512f1e1f2b201">More...</a><br /></td></tr>
 <tr class="separator:a070e7458bd4670954a7512f1e1f2b201"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af67410a15ecc24ecef0e5abce0c5b30c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#af67410a15ecc24ecef0e5abce0c5b30c">wifi_init</a> ()</td></tr>
+<tr class="memdesc:af67410a15ecc24ecef0e5abce0c5b30c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Wi-Fi.  <a href="trackle__utils__wifi_8h.html#af67410a15ecc24ecef0e5abce0c5b30c">More...</a><br /></td></tr>
 <tr class="separator:af67410a15ecc24ecef0e5abce0c5b30c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf48dd31815d6c6e4a94cebfb63e56a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#aaf48dd31815d6c6e4a94cebfb63e56a3">wifi_init_sta</a> ()</td></tr>
+<tr class="memitem:aaf48dd31815d6c6e4a94cebfb63e56a3"><td class="memItemLeft" align="right" valign="top"><a id="aaf48dd31815d6c6e4a94cebfb63e56a3" name="aaf48dd31815d6c6e4a94cebfb63e56a3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>wifi_init_sta</b> ()</td></tr>
+<tr class="memdesc:aaf48dd31815d6c6e4a94cebfb63e56a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize Wi-Fi station mode in order to be able to connect to an AP. <br /></td></tr>
 <tr class="separator:aaf48dd31815d6c6e4a94cebfb63e56a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e0c1523bc1ca08e141060a7c8635f0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#a7e0c1523bc1ca08e141060a7c8635f0a">trackle_utils_wifi_loop</a> ()</td></tr>
+<tr class="memitem:a7e0c1523bc1ca08e141060a7c8635f0a"><td class="memItemLeft" align="right" valign="top"><a id="a7e0c1523bc1ca08e141060a7c8635f0a" name="a7e0c1523bc1ca08e141060a7c8635f0a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>trackle_utils_wifi_loop</b> ()</td></tr>
+<tr class="memdesc:a7e0c1523bc1ca08e141060a7c8635f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to be called periodically in order to be able to connect to WiFi. <br /></td></tr>
 <tr class="separator:a7e0c1523bc1ca08e141060a7c8635f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a4761d43b92b1ef8b6e00519d3d589ecf"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#a4761d43b92b1ef8b6e00519d3d589ecf">timeout_connect_wifi</a> = 0</td></tr>
-<tr class="separator:a4761d43b92b1ef8b6e00519d3d589ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8475209c3d16d25790fc4b67e18f3f57"><td class="memItemLeft" align="right" valign="top">esp_netif_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__wifi_8h.html#a8475209c3d16d25790fc4b67e18f3f57">sta_netif</a></td></tr>
-<tr class="separator:a8475209c3d16d25790fc4b67e18f3f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="af18659fe29b775619edd93608c136f7f" name="af18659fe29b775619edd93608c136f7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af18659fe29b775619edd93608c136f7f">&#9670;&#160;</a></span>CHECK_WIFI_TIMEOUT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CHECK_WIFI_TIMEOUT&#160;&#160;&#160;5000</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a7e0c1523bc1ca08e141060a7c8635f0a" name="a7e0c1523bc1ca08e141060a7c8635f0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e0c1523bc1ca08e141060a7c8635f0a">&#9670;&#160;</a></span>trackle_utils_wifi_loop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void trackle_utils_wifi_loop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Functions to manage the connection of the device to WLAN via Wi-Fi. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="af67410a15ecc24ecef0e5abce0c5b30c" name="af67410a15ecc24ecef0e5abce0c5b30c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af67410a15ecc24ecef0e5abce0c5b30c">&#9670;&#160;</a></span>wifi_init()</h2>
 
@@ -154,22 +119,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="aaf48dd31815d6c6e4a94cebfb63e56a3" name="aaf48dd31815d6c6e4a94cebfb63e56a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf48dd31815d6c6e4a94cebfb63e56a3">&#9670;&#160;</a></span>wifi_init_sta()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void wifi_init_sta </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Initialize Wi-Fi. </p>
 
 </div>
 </div>
@@ -188,34 +138,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a8475209c3d16d25790fc4b67e18f3f57" name="a8475209c3d16d25790fc4b67e18f3f57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8475209c3d16d25790fc4b67e18f3f57">&#9670;&#160;</a></span>sta_netif</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">esp_netif_t* sta_netif</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4761d43b92b1ef8b6e00519d3d589ecf" name="a4761d43b92b1ef8b6e00519d3d589ecf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4761d43b92b1ef8b6e00519d3d589ecf">&#9670;&#160;</a></span>timeout_connect_wifi</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned long timeout_connect_wifi = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Tells if WiFi credentials have been set. </p>
+<dl class="section return"><dt>Returns</dt><dd>ESP_OK if credentials set, ESP_FAIL otherwise </dd></dl>
 
 </div>
 </div>

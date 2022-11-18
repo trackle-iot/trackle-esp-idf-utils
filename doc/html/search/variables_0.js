@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['config_5fhandle_0',['config_handle',['../trackle__utils__storage_8h.html#acdf2eff792e17c6a1b318200e3f67256',1,'trackle_utils_storage.h']]]
+  ['device_5fid_0',['device_id',['../trackle__utils__storage_8h.html#a9082aefe23f8ebe0e236aee92b38f153',1,'trackle_utils_storage.h']]]
 ];

@@ -4,8 +4,13 @@
 #include "nvs_flash.h"
 #include "trackle_utils.h"
 
-static uint8_t device_id[12];
-unsigned char private_key[122];
+/**
+ * @file trackle_utils_storage.h
+ * @brief Functions and globals for reading/writing Trackle credentials and firmware configuration from/to NVS.
+ */
+
+static uint8_t device_id[12];   ///< Device ID read by \ref readDeviceInfoFromStorage from NVS.
+unsigned char private_key[122]; ///< Private key read by \ref readDeviceInfoFromStorage from NVS.
 char string_device_id[12 * 2 + 1];
 
 #define CONFIG_PARTITION "nvs"
@@ -17,6 +22,12 @@ static const char *STORAGE_TAG = "storage";
 nvs_handle_t config_handle;
 nvs_handle_t device_handle;
 
+/**
+ * @brief Opens NVS partition that contains device ID and private key (and configuration partition if required).
+ *
+ * @param has_config_partition If true, open the configuration partition too.
+ * @return 0 on success, negative value on error
+ */
 int initStorage(bool has_config_partition)
 {
     esp_err_t err = nvs_flash_init_partition(FACTORY_PARTITION);
@@ -69,6 +80,11 @@ int initStorage(bool has_config_partition)
     return 0;
 }
 
+/**
+ * @brief Load Trackle device ID and private key from NVS.
+ * The credentials are then stored in the \ref device_id and \ref private_key global variables.
+ * @return ESP_OK on success, other value on error.
+ */
 esp_err_t readDeviceInfoFromStorage()
 {
     size_t required_size = 12;
@@ -79,6 +95,14 @@ esp_err_t readDeviceInfoFromStorage()
     return err;
 }
 
+/**
+ * @brief Read firmware application-specific configuration structure from NVS.
+ *
+ * @param out_value Location where to save read structure
+ * @param out_size Size of the structure to read from NVS in bytes
+ * @param key String containing the key of the configuration structure in NVS
+ * @return ESP_OK on success, other value on error.
+ */
 esp_err_t readConfigFromStorage(void *out_value, size_t out_size, const char *key)
 {
     esp_err_t err = nvs_get_blob(config_handle, key, out_value, &out_size);
@@ -86,6 +110,14 @@ esp_err_t readConfigFromStorage(void *out_value, size_t out_size, const char *ke
     return err;
 }
 
+/**
+ * @brief Write firmware application-specific configuration structure to NVS.
+ *
+ * @param out_value Pointer to the structure to write to NVS.
+ * @param out_size Size of the structure to write in bytes.
+ * @param key String containing the key of the configuration structure in NVS
+ * @return ESP_OK on success, other value on error.
+ */
 esp_err_t writeConfigToStorage(void *out_value, size_t out_size, const char *key)
 {
     esp_err_t err = nvs_set_blob(config_handle, key, out_value, out_size);

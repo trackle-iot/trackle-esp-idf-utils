@@ -71,12 +71,13 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">trackle_utils_bt_provision.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Functions to perform Bluetooth provisioning.  
+<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;nvs_flash.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="trackle__utils__wifi_8h_source.html">trackle_utils_wifi.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="trackle__utils__bt__functions_8h_source.html">trackle_utils_bt_functions.h</a>&quot;</code><br />
@@ -90,165 +91,65 @@ $(function() {
 </div>
 <p><a href="trackle__utils__bt__provision_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a35b50cc2bdb88fcbc5066578634b51d4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#a35b50cc2bdb88fcbc5066578634b51d4">PROV_EVT_NO</a>&#160;&#160;&#160;BIT0</td></tr>
-<tr class="separator:a35b50cc2bdb88fcbc5066578634b51d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52ef89726ea5b47e6f9d2db4f651cbb8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#a52ef89726ea5b47e6f9d2db4f651cbb8">PROV_EVT_OK</a>&#160;&#160;&#160;BIT1</td></tr>
-<tr class="separator:a52ef89726ea5b47e6f9d2db4f651cbb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a166afcd249e678b887feb76e0f4482b7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#a166afcd249e678b887feb76e0f4482b7">PROV_EVT_ERR</a>&#160;&#160;&#160;BIT2</td></tr>
-<tr class="separator:a166afcd249e678b887feb76e0f4482b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acccbdb05adcc00c526abfc92dc74866b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#acccbdb05adcc00c526abfc92dc74866b">PROV_EVT_RUN</a>&#160;&#160;&#160;BIT4</td></tr>
-<tr class="separator:acccbdb05adcc00c526abfc92dc74866b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5ad58d01d83caba9783d625f7eb1222"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#ab5ad58d01d83caba9783d625f7eb1222">PROV_MGR_MAX_RETRY_CNT</a>&#160;&#160;&#160;2</td></tr>
-<tr class="separator:ab5ad58d01d83caba9783d625f7eb1222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae6ad309a638b1aaabc8a4e1f7a6df33c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#ae6ad309a638b1aaabc8a4e1f7a6df33c">trackle_utils_bt_provision_init</a> ()</td></tr>
+<tr class="memitem:a62b460032f9fa1d3da8f2446bb4df492"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#a62b460032f9fa1d3da8f2446bb4df492">get_device_service_name</a> (char *service_name, size_t max)</td></tr>
+<tr class="memdesc:a62b460032f9fa1d3da8f2446bb4df492"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the device's name as seen during a scan.  <a href="trackle__utils__bt__provision_8h.html#a62b460032f9fa1d3da8f2446bb4df492">More...</a><br /></td></tr>
+<tr class="separator:a62b460032f9fa1d3da8f2446bb4df492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ad309a638b1aaabc8a4e1f7a6df33c"><td class="memItemLeft" align="right" valign="top"><a id="ae6ad309a638b1aaabc8a4e1f7a6df33c" name="ae6ad309a638b1aaabc8a4e1f7a6df33c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>trackle_utils_bt_provision_init</b> ()</td></tr>
+<tr class="memdesc:ae6ad309a638b1aaabc8a4e1f7a6df33c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start BT provisioning. <br /></td></tr>
 <tr class="separator:ae6ad309a638b1aaabc8a4e1f7a6df33c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a098ddae8c6f927c6e45a3be6ff8da634"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#a098ddae8c6f927c6e45a3be6ff8da634">trackle_utils_bt_provision_loop</a> ()</td></tr>
+<tr class="memitem:a098ddae8c6f927c6e45a3be6ff8da634"><td class="memItemLeft" align="right" valign="top"><a id="a098ddae8c6f927c6e45a3be6ff8da634" name="a098ddae8c6f927c6e45a3be6ff8da634"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>trackle_utils_bt_provision_loop</b> ()</td></tr>
+<tr class="memdesc:a098ddae8c6f927c6e45a3be6ff8da634"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that must be called periodically during BT provisioning. <br /></td></tr>
 <tr class="separator:a098ddae8c6f927c6e45a3be6ff8da634"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a8be5b6adf2003e591174ea853ec7b6ee"><td class="memItemLeft" align="right" valign="top">EventGroupHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#a8be5b6adf2003e591174ea853ec7b6ee">wifiProvisioningEvents</a></td></tr>
-<tr class="separator:a8be5b6adf2003e591174ea853ec7b6ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed35ae8c893bfcbe26113761cda92385"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils__bt__provision_8h.html#aed35ae8c893bfcbe26113761cda92385">prov_retry_num</a> = 0</td></tr>
-<tr class="separator:aed35ae8c893bfcbe26113761cda92385"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a166afcd249e678b887feb76e0f4482b7" name="a166afcd249e678b887feb76e0f4482b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a166afcd249e678b887feb76e0f4482b7">&#9670;&#160;</a></span>PROV_EVT_ERR</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Functions to perform Bluetooth provisioning. </p>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a62b460032f9fa1d3da8f2446bb4df492" name="a62b460032f9fa1d3da8f2446bb4df492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b460032f9fa1d3da8f2446bb4df492">&#9670;&#160;</a></span>get_device_service_name()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">#define PROV_EVT_ERR&#160;&#160;&#160;BIT2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a35b50cc2bdb88fcbc5066578634b51d4" name="a35b50cc2bdb88fcbc5066578634b51d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35b50cc2bdb88fcbc5066578634b51d4">&#9670;&#160;</a></span>PROV_EVT_NO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PROV_EVT_NO&#160;&#160;&#160;BIT0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a52ef89726ea5b47e6f9d2db4f651cbb8" name="a52ef89726ea5b47e6f9d2db4f651cbb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52ef89726ea5b47e6f9d2db4f651cbb8">&#9670;&#160;</a></span>PROV_EVT_OK</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PROV_EVT_OK&#160;&#160;&#160;BIT1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acccbdb05adcc00c526abfc92dc74866b" name="acccbdb05adcc00c526abfc92dc74866b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acccbdb05adcc00c526abfc92dc74866b">&#9670;&#160;</a></span>PROV_EVT_RUN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PROV_EVT_RUN&#160;&#160;&#160;BIT4</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab5ad58d01d83caba9783d625f7eb1222" name="ab5ad58d01d83caba9783d625f7eb1222"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5ad58d01d83caba9783d625f7eb1222">&#9670;&#160;</a></span>PROV_MGR_MAX_RETRY_CNT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define PROV_MGR_MAX_RETRY_CNT&#160;&#160;&#160;2</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="ae6ad309a638b1aaabc8a4e1f7a6df33c" name="ae6ad309a638b1aaabc8a4e1f7a6df33c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6ad309a638b1aaabc8a4e1f7a6df33c">&#9670;&#160;</a></span>trackle_utils_bt_provision_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void trackle_utils_bt_provision_init </td>
+          <td class="memname">static void get_device_service_name </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>service_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>max</em>&#160;</td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a098ddae8c6f927c6e45a3be6ff8da634" name="a098ddae8c6f927c6e45a3be6ff8da634"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a098ddae8c6f927c6e45a3be6ff8da634">&#9670;&#160;</a></span>trackle_utils_bt_provision_loop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">void trackle_utils_bt_provision_loop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
           <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="aed35ae8c893bfcbe26113761cda92385" name="aed35ae8c893bfcbe26113761cda92385"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed35ae8c893bfcbe26113761cda92385">&#9670;&#160;</a></span>prov_retry_num</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int prov_retry_num = 0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8be5b6adf2003e591174ea853ec7b6ee" name="a8be5b6adf2003e591174ea853ec7b6ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8be5b6adf2003e591174ea853ec7b6ee">&#9670;&#160;</a></span>wifiProvisioningEvents</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">EventGroupHandle_t wifiProvisioningEvents</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Get the device's name as seen during a scan. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">service_name</td><td>Buffer where to save the retrieved device name. </td></tr>
+    <tr><td class="paramname">max</td><td>Max length of the device name to store in the buffer (if longer, it will be truncated to this length) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

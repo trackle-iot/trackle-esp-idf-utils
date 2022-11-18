@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['device_5fhandle_0',['device_handle',['../trackle__utils__storage_8h.html#a0bed4fde91aa06d674981f7d371f6db5',1,'trackle_utils_storage.h']]]
+  ['private_5fkey_0',['private_key',['../trackle__utils__storage_8h.html#ab6b5ac028f4c25b0f2a6bbd659886bd2',1,'trackle_utils_storage.h']]]
 ];

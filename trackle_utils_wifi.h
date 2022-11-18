@@ -6,13 +6,21 @@
 
 #include "trackle_utils.h"
 
+/**
+ * @file trackle_utils_wifi.h
+ * @brief Functions to manage the connection of the device to WLAN via Wi-Fi
+ */
+
 #define CHECK_WIFI_TIMEOUT 5000
 unsigned long timeout_connect_wifi = 0;
 esp_netif_t *sta_netif;
 
 static const char *WIFI_TAG = "trackle-utils-wifi";
 
-// return ESP_OK if wisi is provisioned (strlen ssid > 0), else ESP_FAIL
+/**
+ * @brief Tells if WiFi credentials have been set.
+ * @return ESP_OK if credentials set, ESP_FAIL otherwise
+ */
 esp_err_t wifi_is_provisioned()
 {
     /* Get Wi-Fi Station configuration */
@@ -70,6 +78,10 @@ static void event_handler(void *arg, esp_event_base_t event_base,
     }
 }
 
+/**
+ * @brief Initialize Wi-Fi
+ *
+ */
 void wifi_init()
 {
     ESP_LOGI(WIFI_TAG, "wifi_init....");
@@ -104,6 +116,9 @@ void wifi_init()
     ESP_LOGI(WIFI_TAG, "esp_wifi_start.....");
 }*/
 
+/**
+ * @brief Initialize Wi-Fi station mode in order to be able to connect to an AP.
+ */
 void wifi_init_sta()
 {
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
@@ -112,6 +127,9 @@ void wifi_init_sta()
     ESP_LOGI(WIFI_TAG, "wifi_init_sta finished.");
 }
 
+/**
+ * @brief Function to be called periodically in order to be able to connect to WiFi.
+ */
 void trackle_utils_wifi_loop()
 {
     EventBits_t bits = xEventGroupGetBits(s_wifi_event_group);
