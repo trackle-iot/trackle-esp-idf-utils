@@ -188,7 +188,7 @@ static void tracklePropertiesTaskCode(void *arg)
             if (propsToPublish)
             {
                 strcat(jsonBuffer, "}");
-                bool publishedSuccessfully = tracklePublishPropertiesSecure(jsonBuffer);
+                bool publishedSuccessfully = trackleSyncStateSecure(jsonBuffer);
                 if (publishedSuccessfully)
                 {
                     for (int pIdx = 0; pIdx < numPropsCreated; pIdx++)
