@@ -26,6 +26,11 @@
 #define PROV_EVT_ERR BIT2
 #define PROV_EVT_RUN BIT4
 
+extern char bleProvDeviceName[21];
+extern uint8_t bleProvUuid[16];
+extern uint8_t bleAdvData[6];
+extern size_t bleAdvDataLen;
+
 EventGroupHandle_t wifiProvisioningEvents;
 
 #define PROV_MGR_MAX_RETRY_CNT 2
@@ -176,19 +181,45 @@ void trackle_utils_bt_provision_loop()
 
         btFunctionsEndpointsCreate();
 
-        char service_name[14];
-        get_device_service_name(service_name, sizeof(service_name));
+        wifi_prov_scheme_ble_set_service_uuid(bleProvUuid);
 
-        wifi_prov_security_t security = WIFI_PROV_SECURITY_1;
+        if (bleAdvDataLen > 0)
+        {
+            const esp_err_t e = wifi_prov_scheme_ble_set_mfg_data(bleAdvData, bleAdvDataLen);
+            ESP_LOGE("", "ERROR REG ADV: %s", esp_err_to_name(e));
+        }
 
-        const char *service_key = NULL;
-        uint8_t custom_service_uuid[] = {0xb4, 0xdf, 0x5a, 0x1c, 0x3f, 0x6b, 0xf4, 0xbf, 0xea, 0x4a, 0x82, 0x03, 0x04, 0x90, 0x1a, 0x02};
-        wifi_prov_scheme_ble_set_service_uuid(custom_service_uuid);
-
-        esp_err_t prov_err = wifi_prov_mgr_start_provisioning(security, NULL, service_name, service_key);
+        esp_err_t prov_err = wifi_prov_mgr_start_provisioning(WIFI_PROV_SECURITY_1, NULL, bleProvDeviceName, NULL);
         ESP_LOGI(BT_TAG, "wifi_prov_mgr_start_provisioning %d", prov_err);
         btFunctionsEndpointsRegister();
     }
 }
+
+/**
+ * @brief Set BLE device name. Max length is 20 characters.
+ *
+ * If \ref deviceName is longer than that, only first 20 characters are considered.
+ *
+ * @param deviceName Name to set for the device.
+ */
+void trackle_utils_bt_provision_set_device_name(const char *deviceName);
+
+/**
+ * @brief Set BLE device service UUID.
+ *
+ * @param uuid UUID to set for BLE service (16 bytes).
+ */
+void trackle_utils_bt_provision_set_uuid(const uint8_t uuid[16]);
+
+/**
+ * @brief Set manufacturer specific data (MSD) to be sent with advertisement packet.
+ *
+ * The payload field is allowed to contain a max of 4 bytes. If more are provided, the others are ignored.
+ *
+ * @param cic Bluetooth SIG assigned Company Identifier Code
+ * @param payload MSD payload bytes
+ * @param payloadLen Number of bytes in \ref payload
+ */
+void trackle_utils_bt_provision_set_msd(uint16_t cic, const uint8_t *payload, size_t payloadLen);
 
 #endif

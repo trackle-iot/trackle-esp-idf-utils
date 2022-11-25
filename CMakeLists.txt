@@ -1,3 +1,18 @@
-idf_component_register(SRCS "./src/trackle_utils.c" "./src/trackle_utils_notifications.c" "./src/trackle_utils_properties.c" "./src/trackle_utils_bt_functions.c" "./src/trackle_utils_claimcode.c"
-                       INCLUDE_DIRS "."
-                       REQUIRES trackle-library-esp-idf wifi_provisioning)
+idf_component_register(
+
+    SRCS
+        "./src/trackle_utils.c"
+        "./src/trackle_utils_notifications.c"
+        "./src/trackle_utils_properties.c"
+        "./src/trackle_utils_bt_functions.c"
+        "./src/trackle_utils_bt_provision.c"
+        "./src/trackle_utils_claimcode.c"
+    
+    INCLUDE_DIRS
+        "."
+    
+    REQUIRES
+        trackle-library-esp-idf
+        wifi_provisioning
+
+)
