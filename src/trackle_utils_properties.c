@@ -25,12 +25,14 @@ typedef struct
     char key[TRACKLE_MAX_PROP_NAME_LENGTH]; // Property name/key
     bool changed;                           // True if read value is changed
     bool sign;                              // True if int32, false if uint32
-    int32_t value;                          // Latest read value
+    int32_t lastPubValue;                   // Latest read value
+    int32_t setValue;                       // Latest set value
     uint16_t scale;                         // Scale factor (divides new value when set)
     bool disabled;                          // If disabled, property is ignored from publish
     uint8_t numDecimals;                    // Number of decimal digits (only used if scale is set)
     bool setToPublish;                      // True if added to JSON to publish
-    char *stringValue;                      // If this is not NULL, property is a string property and this is its value
+    char *lastPubStringValue;               // String value
+    char *setStringValue;                   // If this is not NULL, property is a string property and this is its value
     int stringValueMaxLength;               // Max length of the string contained in \ref stringValue field
 } Prop_t;
 
@@ -101,27 +103,45 @@ static void appendPropertyToJsonString(char *jsonBuffer, int propIndex)
     {
         jsonBufferTail += sprintf(jsonBufferTail, ",");
     }
-    if (props[propIndex].stringValue != NULL)
+    if (props[propIndex].setStringValue != NULL)
     { // string
-        jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":\"%s\"", props[propIndex].key, props[propIndex].stringValue);
+        jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":\"%s\"", props[propIndex].key, props[propIndex].setStringValue);
     }
     else if (props[propIndex].scale == 1)
     { // integer
         if (props[propIndex].sign)
         { // uint, remove sign
-            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%d", props[propIndex].key, props[propIndex].value);
+            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%d", props[propIndex].key, props[propIndex].setValue);
         }
         else
         {
-            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%u", props[propIndex].key, props[propIndex].value);
+            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%u", props[propIndex].key, props[propIndex].setValue);
         }
     }
     else
     { // double
         char strFormat[20];
         sprintf(strFormat, "\"%%s\":%%.%df", (int)(props[propIndex].numDecimals));
-        jsonBufferTail += sprintf(jsonBufferTail, strFormat, props[propIndex].key, ((double)props[propIndex].value) / props[propIndex].scale);
+        jsonBufferTail += sprintf(jsonBufferTail, strFormat, props[propIndex].key, ((double)props[propIndex].setValue) / props[propIndex].scale);
     }
+}
+
+static bool isSetValueEqualToLastSent(int propIndex)
+{
+    if (props[propIndex].setStringValue != NULL)
+    {
+        // This is a string-property
+        return strcmp(props[propIndex].setStringValue, props[propIndex].lastPubStringValue) == 0;
+    }
+    return props[propIndex].setValue == props[propIndex].lastPubValue;
+}
+
+static void updateLastSentToSetValue(int propIndex)
+{
+    if (props[propIndex].setStringValue != NULL)
+        strcpy(props[propIndex].lastPubStringValue, props[propIndex].setStringValue);
+    else
+        props[propIndex].lastPubValue = props[propIndex].setValue;
 }
 
 static void tracklePropertiesTaskCode(void *arg)
@@ -169,7 +189,7 @@ static void tracklePropertiesTaskCode(void *arg)
                         const int propIdx = propGroups[pgIdx].propsIndexes[i];
 
                         // ... if it's changed or it must be published anyway ...
-                        if (!props[propIdx].disabled && (props[propIdx].changed || !onlyIfChanged))
+                        if (!props[propIdx].disabled && ((props[propIdx].changed && !isSetValueEqualToLastSent(propIdx)) || !onlyIfChanged))
                         {
                             // ... add it to JSON string to publish.
                             if (!propsToPublish)
@@ -179,6 +199,7 @@ static void tracklePropertiesTaskCode(void *arg)
                             }
                             appendPropertyToJsonString(jsonBuffer, propIdx);
                             props[propIdx].setToPublish = true;
+                            updateLastSentToSetValue(propIdx);
                         }
                     }
                 }
@@ -260,14 +281,16 @@ Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t n
         {
             return Trackle_PropID_ERROR;
         }
-        props[newPropIndex].value = defaultValue;
+        props[newPropIndex].lastPubValue = defaultValue;
+        props[newPropIndex].setValue = defaultValue;
         props[newPropIndex].scale = scale;
         props[newPropIndex].sign = sign;
         props[newPropIndex].numDecimals = numDecimals;
         props[newPropIndex].disabled = false;
         props[newPropIndex].changed = defaultChanged;
         props[newPropIndex].setToPublish = false;
-        props[newPropIndex].stringValue = NULL;
+        props[newPropIndex].lastPubStringValue = NULL;
+        props[newPropIndex].setStringValue = NULL;
         props[newPropIndex].stringValueMaxLength = 0;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
@@ -295,16 +318,22 @@ Trackle_PropID_t Trackle_Prop_createString(const char *name, int maxLength)
         {
             return Trackle_PropID_ERROR;
         }
-        props[newPropIndex].value = defaultValue;
+        props[newPropIndex].lastPubValue = defaultValue;
+        props[newPropIndex].setValue = defaultValue;
         props[newPropIndex].scale = 1;
         props[newPropIndex].sign = 0;
         props[newPropIndex].numDecimals = 0;
         props[newPropIndex].disabled = false;
         props[newPropIndex].changed = defaultChanged;
         props[newPropIndex].setToPublish = false;
-        props[newPropIndex].stringValue = malloc(maxLength * sizeof(char) + 1); // +1 for null character
-        if (props[newPropIndex].stringValue == NULL)
+        props[newPropIndex].lastPubStringValue = malloc(maxLength * sizeof(char) + 1); // +1 for null character
+        if (props[newPropIndex].lastPubStringValue == NULL)
             return Trackle_PropID_ERROR;
+        props[newPropIndex].lastPubStringValue[0] = '\0';
+        props[newPropIndex].setStringValue = malloc(maxLength * sizeof(char) + 1); // +1 for null character
+        if (props[newPropIndex].setStringValue == NULL)
+            return Trackle_PropID_ERROR;
+        props[newPropIndex].setStringValue[0] = '\0';
         props[newPropIndex].stringValueMaxLength = maxLength;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
@@ -317,11 +346,11 @@ bool Trackle_Prop_update(Trackle_PropID_t propID, int newValue)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
-        if (props[propIndex].value != newValue)
+        if (props[propIndex].setValue != newValue)
         {
-            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %d, new: %d", props[propIndex].key, props[propIndex].value, newValue);
+            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %d, new: %d", props[propIndex].key, props[propIndex].setValue, newValue);
             props[propIndex].changed = true;
-            props[propIndex].value = newValue;
+            props[propIndex].setValue = newValue;
             return true;
         }
     }
@@ -333,12 +362,12 @@ bool Trackle_Prop_updateString(Trackle_PropID_t propID, const char *newValue)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
-        if (props[propIndex].stringValue != NULL && newValue != NULL && strcmp(props[propIndex].stringValue, newValue) != 0)
+        if (props[propIndex].setStringValue != NULL && newValue != NULL && strcmp(props[propIndex].setStringValue, newValue) != 0)
         {
-            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %s, new: %s", props[propIndex].key, props[propIndex].stringValue, newValue);
+            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %s, new: %s", props[propIndex].key, props[propIndex].setStringValue, newValue);
             props[propIndex].changed = true;
-            strncpy(props[propIndex].stringValue, newValue, props[propIndex].stringValueMaxLength);
-            props[propIndex].stringValue[props[propIndex].stringValueMaxLength] = '\0';
+            strncpy(props[propIndex].setStringValue, newValue, props[propIndex].stringValueMaxLength);
+            props[propIndex].setStringValue[props[propIndex].stringValueMaxLength] = '\0';
             return true;
         }
     }
@@ -381,7 +410,7 @@ int32_t Trackle_Prop_getValue(Trackle_PropID_t propID)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
-        return props[propIndex].value;
+        return props[propIndex].setValue;
     }
     return -1;
 }
@@ -391,9 +420,9 @@ bool Trackle_Prop_getStringValue(Trackle_PropID_t propID, char *retValue, int re
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
-        if (props[propIndex].stringValue != NULL)
+        if (props[propIndex].setStringValue != NULL)
         {
-            strncpy(retValue, props[propIndex].stringValue, retValueMaxLen);
+            strncpy(retValue, props[propIndex].setStringValue, retValueMaxLen);
             retValue[retValueMaxLen] = '\0';
             return true;
         }
