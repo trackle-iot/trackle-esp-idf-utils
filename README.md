@@ -1,6 +1,6 @@
 # Trackle Utils Features
 
-Complete documentation can be found at [https://trackle-iot.github.io/trackle-utils-esp-idf/](https://trackle-iot.github.io/trackle-utils-esp-idf/)
+Complete documentation can be found [here](https://trackle-iot.github.io/trackle-utils-esp-idf/).
 
 ## Properties
 
