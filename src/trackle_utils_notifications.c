@@ -11,7 +11,7 @@
 #define MESSAGE_BUFFER_LEN 1024 // Length of the buffer that holds the string of the notification while it's being built.
 
 #define TRACKLE_NOTIFICATIONS_TASK_NAME "trackle_utils_notifications"
-#define TRACKLE_NOTIFICATIONS_TASK_STACK_SIZE 4096
+#define TRACKLE_NOTIFICATIONS_TASK_STACK_SIZE 8192
 #define TRACKLE_NOTIFICATIONS_TASK_PRIORITY (tskIDLE_PRIORITY + 10)
 #define TRACKLE_NOTIFICATIONS_TASK_CORE_ID 1
 #define TRACKLE_NOTIFICATIONS_TASK_PERIOD_MS 1000
