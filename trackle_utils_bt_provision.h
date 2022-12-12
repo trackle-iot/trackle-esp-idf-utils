@@ -38,6 +38,33 @@ int prov_retry_num = 0;
 
 static const char *BT_TAG = "trackle-utils-bt-provision";
 
+/**
+ * @brief Set BLE device name. Max length is 20 characters.
+ *
+ * If \ref deviceName is longer than that, only first 20 characters are considered.
+ *
+ * @param deviceName Name to set for the device.
+ */
+void trackle_utils_bt_provision_set_device_name(const char *deviceName);
+
+/**
+ * @brief Set BLE device service UUID.
+ *
+ * @param uuid UUID to set for BLE service (16 bytes).
+ */
+void trackle_utils_bt_provision_set_uuid(const uint8_t uuid[16]);
+
+/**
+ * @brief Set manufacturer specific data (MSD) to be sent with advertisement packet.
+ *
+ * The payload field is allowed to contain a max of 4 bytes. If more are provided, the others are ignored.
+ *
+ * @param cic Bluetooth SIG assigned Company Identifier Code
+ * @param payload MSD payload bytes
+ * @param payloadLen Number of bytes in \ref payload
+ */
+void trackle_utils_bt_provision_set_msd(uint16_t cic, const uint8_t *payload, size_t payloadLen);
+
 /* Event handler for catching system events */
 static void bt_event_handler(void *arg, esp_event_base_t event_base,
                              int32_t event_id, void *event_data)
@@ -112,15 +139,17 @@ static void bt_event_handler(void *arg, esp_event_base_t event_base,
 /**
  * @brief Get the device's name as seen during a scan.
  *
+ * This function is kept for retrocompatibility.
+ *
  * @param service_name Buffer where to save the retrieved device name.
  * @param max Max length of the device name to store in the buffer (if longer, it will be truncated to this length)
  */
 static void get_device_service_name(char *service_name, size_t max)
 {
-    uint8_t eth_mac[6];
-    const char *ssid_prefix = "DEVICE_";
-    esp_wifi_get_mac(WIFI_IF_STA, eth_mac);
-    snprintf(service_name, max, "%s%02X%02X%02X", ssid_prefix, eth_mac[3], eth_mac[4], eth_mac[5]);
+    if (max > 21)
+        max = 21;
+    strncpy(service_name, bleProvDeviceName, max);
+    bleProvDeviceName[max - 1] = '\0';
 }
 
 static int btPostCbClaimCode(const char *args)
@@ -157,6 +186,8 @@ void trackle_utils_bt_provision_init()
 
 /**
  * @brief Function that must be called periodically during BT provisioning.
+ *
+ * If no name is provided to bluetooth device, a default one will be generated from its MAC address.
  */
 void trackle_utils_bt_provision_loop()
 {
@@ -189,37 +220,19 @@ void trackle_utils_bt_provision_loop()
             ESP_LOGE("", "ERROR REG ADV: %s", esp_err_to_name(e));
         }
 
+        if (strlen(bleProvDeviceName) == 0)
+        {
+            uint8_t eth_mac[6];
+            char default_name[20];
+            esp_wifi_get_mac(WIFI_IF_STA, eth_mac);
+            snprintf(default_name, 20, "DEVICE_%02X%02X%02X", eth_mac[3], eth_mac[4], eth_mac[5]);
+            trackle_utils_bt_provision_set_device_name(default_name);
+        }
+
         esp_err_t prov_err = wifi_prov_mgr_start_provisioning(WIFI_PROV_SECURITY_1, NULL, bleProvDeviceName, NULL);
         ESP_LOGI(BT_TAG, "wifi_prov_mgr_start_provisioning %d", prov_err);
         btFunctionsEndpointsRegister();
     }
 }
-
-/**
- * @brief Set BLE device name. Max length is 20 characters.
- *
- * If \ref deviceName is longer than that, only first 20 characters are considered.
- *
- * @param deviceName Name to set for the device.
- */
-void trackle_utils_bt_provision_set_device_name(const char *deviceName);
-
-/**
- * @brief Set BLE device service UUID.
- *
- * @param uuid UUID to set for BLE service (16 bytes).
- */
-void trackle_utils_bt_provision_set_uuid(const uint8_t uuid[16]);
-
-/**
- * @brief Set manufacturer specific data (MSD) to be sent with advertisement packet.
- *
- * The payload field is allowed to contain a max of 4 bytes. If more are provided, the others are ignored.
- *
- * @param cic Bluetooth SIG assigned Company Identifier Code
- * @param payload MSD payload bytes
- * @param payloadLen Number of bytes in \ref payload
- */
-void trackle_utils_bt_provision_set_msd(uint16_t cic, const uint8_t *payload, size_t payloadLen);
 
 #endif
