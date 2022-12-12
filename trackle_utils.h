@@ -87,4 +87,14 @@ bool isValid(char *input, const char *op, int b);
  */
 time_t getGmTimestamp();
 
+/**
+ * The function takes in an RSSI value and returns a percentage value that represents the signal
+ * quality
+ *
+ * @param rssi The signal strength of the WiFi network.
+ *
+ * @return The percentage of signal quality.
+ */
+int rssiToPercentage(int rssi);
+
 #endif

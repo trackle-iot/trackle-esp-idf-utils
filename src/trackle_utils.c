@@ -137,3 +137,21 @@ time_t getGmTimestamp()
 
     return result;
 }
+
+int rssiToPercentage(int rssi)
+{
+    int signalQualityPercent = 0;
+    if (rssi <= -100)
+    {
+        signalQualityPercent = 0;
+    }
+    else if (rssi >= -50)
+    {
+        signalQualityPercent = 100;
+    }
+    else
+    {
+        signalQualityPercent = 2 * (rssi + 100);
+    }
+    return signalQualityPercent;
+}

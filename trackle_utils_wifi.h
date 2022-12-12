@@ -17,6 +17,11 @@ esp_netif_t *sta_netif;
 
 static const char *WIFI_TAG = "trackle-utils-wifi";
 
+// for diagnostics
+#define UTILITY_DIAGNOSTIC_TIME 5000
+system_tick_t utility_check_diagnostic_millis = 0;
+wifi_ap_record_t ap;
+
 /**
  * @brief Tells if WiFi credentials have been set.
  * @return ESP_OK if credentials set, ESP_FAIL otherwise
@@ -43,6 +48,8 @@ esp_err_t wifi_is_provisioned()
 static void event_handler(void *arg, esp_event_base_t event_base,
                           int32_t event_id, void *event_data)
 {
+    EventBits_t bits = xEventGroupGetBits(s_wifi_event_group);
+
     if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START)
     {
         ESP_LOGI(WIFI_TAG, "Wifi started.....");
@@ -65,7 +72,11 @@ static void event_handler(void *arg, esp_event_base_t event_base,
     {
         wifi_event_sta_disconnected_t *event = (wifi_event_sta_disconnected_t *)event_data;
         ESP_LOGW(WIFI_TAG, "Wifi disconnection event: %d...", event->reason);
-        // wifi_err_reason_t
+
+        if (bits & WIFI_CONNECTED_BIT)
+        {
+            trackleDiagnosticNetwork(trackle_s, NETWORK_DISCONNECTS, 1);
+        }
 
         timeout_connect_wifi = millis() + CHECK_WIFI_TIMEOUT;
         xEventGroupClearBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
@@ -75,6 +86,10 @@ static void event_handler(void *arg, esp_event_base_t event_base,
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
         ESP_LOGW(WIFI_TAG, "Got ip:" IPSTR, IP2STR(&event->ip_info.ip));
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
+
+        // diagnostic
+        trackleDiagnosticNetwork(trackle_s, NETWORK_IPV4_ADDRESS, event->ip_info.ip.addr);
+        trackleDiagnosticNetwork(trackle_s, NETWORK_IPV4_GATEWAY, event->ip_info.gw.addr);
     }
 }
 
@@ -100,21 +115,6 @@ void wifi_init()
     ESP_ERROR_CHECK(esp_wifi_init(&cfg));
     esp_wifi_set_storage(WIFI_STORAGE_FLASH);
 }
-
-/*static void reinit_wifi()
-{
-    ESP_LOGI(WIFI_TAG, "esp_wifi_deinit.....");
-    //disconnect_cb();
-
-    xEventGroupClearBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
-    xEventGroupClearBits(s_wifi_event_group, WIFI_TO_CONNECT_BIT);
-
-    esp_wifi_stop();
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
-    ESP_LOGI(WIFI_TAG, "esp_wifi_stop.....");
-    esp_wifi_start();
-    ESP_LOGI(WIFI_TAG, "esp_wifi_start.....");
-}*/
 
 /**
  * @brief Initialize Wi-Fi station mode in order to be able to connect to an AP.
@@ -143,6 +143,20 @@ void trackle_utils_wifi_loop()
         {
             ESP_LOGI(WIFI_TAG, "Trying to connect to the AP...");
             esp_wifi_connect();
+
+            trackleDiagnosticNetwork(trackle_s, NETWORK_CONNECTION_ATTEMPTS, 1);
+        }
+    }
+
+    // updating diagnostic
+    if (getMillis() - utility_check_diagnostic_millis >= UTILITY_DIAGNOSTIC_TIME)
+    {
+        utility_check_diagnostic_millis = getMillis();
+        if (bits & WIFI_CONNECTED_BIT)
+        {
+            esp_wifi_sta_get_ap_info(&ap);
+            trackleDiagnosticNetwork(trackle_s, NETWORK_RSSI, ap.rssi);
+            trackleDiagnosticNetwork(trackle_s, NETWORK_SIGNAL_STRENGTH, rssiToPercentage(ap.rssi));
         }
     }
 }
