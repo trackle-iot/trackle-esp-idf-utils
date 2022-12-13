@@ -27,16 +27,30 @@ struct ota_data
     esp_err_t ota_finish_err;
 } ota_data;
 
-const char *createEventData(const char *data)
+const char *createEventData(const char *data, esp_err_t error)
 {
     memset(ota_data.event_data, 0, 256);
     sprintf(ota_data.event_data, "%s", data);
 
+    // if job_id, append it to event_data
     if (strlen(ota_data.job_id) > 0)
     {
         ota_data.event_data[strlen(data)] = ',';
-        ESP_LOGI(OTA_TAG, "%s", ota_data.event_data);
         memcpy(ota_data.event_data + strlen(data) + 1, ota_data.job_id, strlen(ota_data.job_id));
+
+        // if error, append it to event_data
+        if (error != ESP_OK)
+        {
+            char error_code[10];
+            memset(error_code, 0, 10);
+            sprintf(error_code, "%d", error);
+
+            uint8_t len = strlen(data) + 1 + strlen(ota_data.job_id);
+            ota_data.event_data[len] = ',';
+            memcpy(ota_data.event_data + len + 1, error_code, strlen(error_code));
+        }
+
+        ESP_LOGI(OTA_TAG, "%s", ota_data.event_data);
     }
 
     ESP_LOGI(OTA_TAG, "createEventData ota_data.event_data %s", ota_data.event_data);
@@ -77,7 +91,7 @@ void simple_ota_task(void *pvParameter)
 {
     ESP_LOGW(OTA_TAG, "Starting OTA %s", ota_data.url);
 
-    tracklePublishSecure(OTA_EVENT_NAME, createEventData("started"));
+    tracklePublishSecure(OTA_EVENT_NAME, createEventData("started", ESP_OK));
 
     xEventGroupSetBits(s_wifi_event_group, OTA_UPDATING); // updating
     vTaskDelay(1000 / portTICK_PERIOD_MS);
@@ -124,7 +138,7 @@ void simple_ota_task(void *pvParameter)
             if ((err == ESP_OK) && (ota_data.ota_finish_err == ESP_OK))
             {
                 ESP_LOGW(OTA_TAG, "OTA completed, now restarting....");
-                tracklePublishSecure(OTA_EVENT_NAME, createEventData("success"));
+                tracklePublishSecure(OTA_EVENT_NAME, createEventData("success", ESP_OK));
                 vTaskDelay(1000 / portTICK_PERIOD_MS);
                 esp_restart();
             }
@@ -138,7 +152,7 @@ void simple_ota_task(void *pvParameter)
     if (ota_data.ota_finish_err != ESP_OK)
     {
         ESP_LOGE(OTA_TAG, "ESP_HTTPS_OTA upgrade failed 0x%x", ota_data.ota_finish_err);
-        tracklePublishSecure(OTA_EVENT_NAME, createEventData("failed"));
+        tracklePublishSecure(OTA_EVENT_NAME, createEventData("failed", ota_data.ota_finish_err));
         xEventGroupClearBits(s_wifi_event_group, OTA_UPDATING); // stop updating
         vTaskDelete(NULL);
     }
