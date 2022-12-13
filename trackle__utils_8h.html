@@ -101,6 +101,8 @@ Functions</h2></td></tr>
 <tr class="memitem:aba0bed0e1689801a1985fab37e0d6602"><td class="memItemLeft" align="right" valign="top">time_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils_8h.html#aba0bed0e1689801a1985fab37e0d6602">getGmTimestamp</a> ()</td></tr>
 <tr class="memdesc:aba0bed0e1689801a1985fab37e0d6602"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current UNIX epoch in seconds.  <a href="trackle__utils_8h.html#aba0bed0e1689801a1985fab37e0d6602">More...</a><br /></td></tr>
 <tr class="separator:aba0bed0e1689801a1985fab37e0d6602"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa50ac73ca5fcb2410725def91f76cb11"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="trackle__utils_8h.html#aa50ac73ca5fcb2410725def91f76cb11">rssiToPercentage</a> (int rssi)</td></tr>
+<tr class="separator:aa50ac73ca5fcb2410725def91f76cb11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utility functions. </p>
@@ -249,6 +251,32 @@ false Expression evaluates to FALSE </dd></dl>
 
 <p>Returns milliseconds elapsed since boot. </p>
 <dl class="section return"><dt>Returns</dt><dd>Time elapsed in milliseconds. </dd></dl>
+
+</div>
+</div>
+<a id="aa50ac73ca5fcb2410725def91f76cb11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa50ac73ca5fcb2410725def91f76cb11">&#9670;&nbsp;</a></span>rssiToPercentage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rssiToPercentage </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>rssi</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The function takes in an RSSI value and returns a percentage value that represents the signal quality</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rssi</td><td>The signal strength of the WiFi network.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The percentage of signal quality. </dd></dl>
 
 </div>
 </div>
