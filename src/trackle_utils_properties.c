@@ -369,11 +369,11 @@ bool Trackle_Prop_update(Trackle_PropID_t propID, int newValue)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
-        props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS; // Necessary even if value is not set
         if (props[propIndex].setValue != newValue)
         {
             ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %d, new: %d", props[propIndex].key, props[propIndex].setValue, newValue);
             props[propIndex].debouncing = true;
+            props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS;
             props[propIndex].setValue = newValue;
             return true;
         }
@@ -386,11 +386,11 @@ bool Trackle_Prop_updateString(Trackle_PropID_t propID, const char *newValue)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
-        props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS; // Necessary even if value is not set
         if (props[propIndex].setStringValue != NULL && newValue != NULL && strcmp(props[propIndex].setStringValue, newValue) != 0)
         {
             ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %s, new: %s", props[propIndex].key, props[propIndex].setStringValue, newValue);
             props[propIndex].debouncing = true;
+            props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS;
             strncpy(props[propIndex].setStringValue, newValue, props[propIndex].stringValueMaxLength);
             props[propIndex].setStringValue[props[propIndex].stringValueMaxLength] = '\0';
             return true;
