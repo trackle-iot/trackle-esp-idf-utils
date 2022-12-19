@@ -14,7 +14,7 @@
  * @brief Utility functions
  */
 
-#define TRACKLE_UTILS_VERSION "3.1.5"
+#define TRACKLE_UTILS_VERSION "3.2.0"
 
 // commons bits definitions
 extern EventGroupHandle_t s_wifi_event_group;

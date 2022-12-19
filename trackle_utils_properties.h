@@ -130,6 +130,14 @@ bool Trackle_Prop_updateString(Trackle_PropID_t propID, const char *newValue);
 bool Trackle_Prop_setDisabled(Trackle_PropID_t propID, bool isDisabled);
 
 /**
+ * @brief Set delay that must pass between last set of value and the publishing. A call to \ref Trackle_Prop_update within this delay resets the count.
+ * @param propID ID of the property.
+ * @param debounceDelayMs Milliseconds of the delay.
+ * @return If true, debounce delay set successfully, else false.
+ */
+bool Trackle_Prop_setDebounceDelay(Trackle_PropID_t propID, uint32_t debounceDelayMs);
+
+/**
  * @brief Get abilitation of a property.
  * @param propID ID of the property.
  * @return true if property is disabled, false otherwise.

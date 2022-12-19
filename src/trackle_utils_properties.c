@@ -34,6 +34,12 @@ typedef struct
     char *lastPubStringValue;               // String value
     char *setStringValue;                   // If this is not NULL, property is a string property and this is its value
     int stringValueMaxLength;               // Max length of the string contained in \ref stringValue field
+
+    // Debounce
+    bool debouncing;          // Set to true if a value was set with debouncing
+    uint32_t latestSetTimeMs; // Latest time the property was set
+    uint32_t debounceDelayMs; // Delay to wait before setting the property to changed
+
 } Prop_t;
 
 // Property group data structure
@@ -52,8 +58,8 @@ static int numPropGroupsCreated = 0;                             // Number of th
 static Prop_t props[TRACKLE_MAX_PROPS_NUM] = {0}; // Array holding the properties created by the user.
 static int numPropsCreated = 0;                   // Number of the properties created (aka next property ID available)
 
-int32_t defaultValue = 0;   //  Default value of a new property
-bool defaultChanged = true; // Default changed value of a property
+static int32_t defaultValue = 0;   //  Default value of a new property
+static bool defaultChanged = true; // Default changed value of a property
 
 Trackle_PropGroupID_t Trackle_PropGroup_create(uint32_t periodMs, bool onlyIfChanged)
 {
@@ -144,6 +150,13 @@ static void updateLastSentToSetValue(int propIndex)
         props[propIndex].lastPubValue = props[propIndex].setValue;
 }
 
+static bool isMsElapsed(uint32_t now, uint32_t start, uint32_t delay)
+{
+    if (now < start)
+        return (now + UINT32_MAX - start + 1) >= delay;
+    return now - start >= delay;
+}
+
 static void tracklePropertiesTaskCode(void *arg)
 {
 
@@ -176,9 +189,7 @@ static void tracklePropertiesTaskCode(void *arg)
                 const bool onlyIfChanged = propGroups[pgIdx].onlyIfChanged;
 
                 // ... if its period is elapsed ...
-                if ((nowMs >= propGroups[pgIdx].latestWakeTimeMs && nowMs - propGroups[pgIdx].latestWakeTimeMs >= propGroups[pgIdx].periodMs) ||
-                    (nowMs < propGroups[pgIdx].latestWakeTimeMs && UINT32_MAX - propGroups[pgIdx].latestWakeTimeMs + nowMs >= propGroups[pgIdx].periodMs) ||
-                    first_run)
+                if (isMsElapsed(nowMs, propGroups[pgIdx].latestWakeTimeMs, propGroups[pgIdx].periodMs) || first_run)
                 {
 
                     propGroups[pgIdx].latestWakeTimeMs = nowMs;
@@ -187,6 +198,12 @@ static void tracklePropertiesTaskCode(void *arg)
                     for (int i = 0; i < propsWithin; i++)
                     {
                         const int propIdx = propGroups[pgIdx].propsIndexes[i];
+
+                        if (props[propIdx].debouncing && isMsElapsed(nowMs, props[propIdx].latestSetTimeMs, props[propIdx].debounceDelayMs))
+                        {
+                            props[propIdx].debouncing = false;
+                            props[propIdx].changed = true;
+                        }
 
                         // ... if it's changed or it must be published anyway ...
                         if (!props[propIdx].disabled && ((props[propIdx].changed && !isSetValueEqualToLastSent(propIdx)) || !onlyIfChanged))
@@ -292,6 +309,9 @@ Trackle_PropID_t Trackle_Prop_create(const char *name, uint16_t scale, uint8_t n
         props[newPropIndex].lastPubStringValue = NULL;
         props[newPropIndex].setStringValue = NULL;
         props[newPropIndex].stringValueMaxLength = 0;
+        props[newPropIndex].debouncing = false;
+        props[newPropIndex].latestSetTimeMs = 0;
+        props[newPropIndex].debounceDelayMs = 0;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
     }
@@ -335,6 +355,9 @@ Trackle_PropID_t Trackle_Prop_createString(const char *name, int maxLength)
             return Trackle_PropID_ERROR;
         props[newPropIndex].setStringValue[0] = '\0';
         props[newPropIndex].stringValueMaxLength = maxLength;
+        props[newPropIndex].debouncing = false;
+        props[newPropIndex].latestSetTimeMs = 0;
+        props[newPropIndex].debounceDelayMs = 0;
         numPropsCreated++;
         return newPropIndex + 1; // Convert internal property index to property ID by incrementing it.
     }
@@ -346,10 +369,11 @@ bool Trackle_Prop_update(Trackle_PropID_t propID, int newValue)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
+        props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS; // Necessary even if value is not set
         if (props[propIndex].setValue != newValue)
         {
             ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %d, new: %d", props[propIndex].key, props[propIndex].setValue, newValue);
-            props[propIndex].changed = true;
+            props[propIndex].debouncing = true;
             props[propIndex].setValue = newValue;
             return true;
         }
@@ -362,10 +386,11 @@ bool Trackle_Prop_updateString(Trackle_PropID_t propID, const char *newValue)
     const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
+        props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS; // Necessary even if value is not set
         if (props[propIndex].setStringValue != NULL && newValue != NULL && strcmp(props[propIndex].setStringValue, newValue) != 0)
         {
             ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %s, new: %s", props[propIndex].key, props[propIndex].setStringValue, newValue);
-            props[propIndex].changed = true;
+            props[propIndex].debouncing = true;
             strncpy(props[propIndex].setStringValue, newValue, props[propIndex].stringValueMaxLength);
             props[propIndex].setStringValue[props[propIndex].stringValueMaxLength] = '\0';
             return true;
@@ -380,6 +405,17 @@ bool Trackle_Prop_setDisabled(Trackle_PropID_t propID, bool isDisabled)
     if (propIndex >= 0 && propIndex < numPropsCreated)
     {
         props[propIndex].disabled = isDisabled;
+        return true;
+    }
+    return false;
+}
+
+bool Trackle_Prop_setDebounceDelay(Trackle_PropID_t propID, uint32_t debounceDelayMs)
+{
+    const int propIndex = propID - 1; // Convert property ID to internal property index by decrementing it.
+    if (propIndex >= 0 && propIndex < numPropsCreated)
+    {
+        props[propIndex].debounceDelayMs = debounceDelayMs;
         return true;
     }
     return false;
