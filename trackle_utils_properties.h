@@ -27,7 +27,7 @@
  *
  * Then, in order to create properties, one must follow these steps:
  *  1. Declare a variable of type \ref Trackle_PropID_t;
- *  2. Assign the result of \ref Trackle_Prop_create to this variable;
+ *  2. Assign the result of \ref Trackle_Prop_create or \ref Trackle_Prop_createString to this variable;
  *  3. Add the created property to one or more groups with \ref Trackle_PropGroup_addProp;
  *  4. Repeat the steps from 1 to 3 for all the properties that must be created;
  *  5. Call \ref Trackle_Props_startTask to start the properties task.
