@@ -49,7 +49,7 @@
 /**
  * @brief Max number of properties that can be created.
  */
-#define TRACKLE_MAX_PROPS_NUM 30
+#define TRACKLE_MAX_PROPS_NUM 40
 
 /**
  * @brief Value returned on error by functions returning \ref Trackle_PropGroupID_t
