@@ -206,7 +206,7 @@ static void tracklePropertiesTaskCode(void *arg)
                         }
 
                         // ... if it's changed or it must be published anyway ...
-                        if (!props[propIdx].disabled && ((props[propIdx].changed && !isSetValueEqualToLastSent(propIdx)) || !onlyIfChanged))
+                        if (!props[propIdx].disabled && ((props[propIdx].changed && !isSetValueEqualToLastSent(propIdx)) || !onlyIfChanged || first_run))
                         {
                             // ... add it to JSON string to publish.
                             if (!propsToPublish)
