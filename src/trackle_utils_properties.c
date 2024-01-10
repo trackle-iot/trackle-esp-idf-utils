@@ -1,6 +1,7 @@
 #include <trackle_utils_properties.h>
 
 #include <string.h>
+#include <inttypes.h>
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -117,11 +118,11 @@ static void appendPropertyToJsonString(char *jsonBuffer, int propIndex)
     { // integer
         if (props[propIndex].sign)
         { // uint, remove sign
-            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%d", props[propIndex].key, props[propIndex].setValue);
+            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%" PRIu32, props[propIndex].key, (uint32_t)props[propIndex].setValue);
         }
         else
         {
-            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%u", props[propIndex].key, props[propIndex].setValue);
+            jsonBufferTail += sprintf(jsonBufferTail, "\"%s\":%" PRIi32, props[propIndex].key, props[propIndex].setValue);
         }
     }
     else
@@ -371,7 +372,7 @@ bool Trackle_Prop_update(Trackle_PropID_t propID, int newValue)
     {
         if (props[propIndex].setValue != newValue)
         {
-            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %d, new: %d", props[propIndex].key, props[propIndex].setValue, newValue);
+            ESP_LOGD(TAG, "PROP CHANGED ---- %s: old: %" PRIi32 ", new: %d", props[propIndex].key, props[propIndex].setValue, newValue);
             props[propIndex].debouncing = true;
             props[propIndex].latestSetTimeMs = xTaskGetTickCount() * portTICK_PERIOD_MS;
             props[propIndex].setValue = newValue;

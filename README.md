@@ -1,4 +1,4 @@
-# Trackle Utils Features
+# Trackle Utils Features v4.0.3
 
 Complete documentation can be found [here](https://trackle-iot.github.io/trackle-utils-esp-idf/).
 

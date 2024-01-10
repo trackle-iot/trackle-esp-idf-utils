@@ -1,6 +1,7 @@
 #include <trackle_utils_notifications.h>
 
 #include <string.h>
+#include <inttypes.h>
 
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
@@ -49,11 +50,11 @@ static bool makeMessageStringFromNotification(char *messageBuffer, int notificat
     { // integer
         if (notifications[notificationIndex].sign)
         { // uint, remove sign
-            sprintf(valueBuffer, "%d", notifications[notificationIndex].value);
+            sprintf(valueBuffer, "%" PRIi32, notifications[notificationIndex].value);
         }
         else
         {
-            sprintf(valueBuffer, "%u", notifications[notificationIndex].value);
+            sprintf(valueBuffer, "%" PRIu32, (uint32_t)notifications[notificationIndex].value);
         }
     }
     else
